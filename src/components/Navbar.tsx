@@ -6,9 +6,6 @@ import Logo from './Logo';
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
-  { name: 'FAQ', path: '/faq' },
   { name: 'Contact', path: '/contact' }
 ];
 
@@ -32,25 +29,14 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Quick Links Header */}
-      <div className="bg-dark-800 text-light-300 py-3 w-full z-50">
-        <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between items-center">
-          <div className="flex items-center space-x-6 text-sm">
-            {/* Removed phone and email elements */}
-          </div>
-          <div className="flex items-center space-x-6 text-sm">
-            {/* Removed address element and business hours */}
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation */}
-      <nav className={`w-full z-50 transition-all duration-300 ${scrolled ? 'bg-dark-900/90 backdrop-blur-sm shadow-lg' : 'bg-dark-900'}`}>
+      <nav className={`w-full z-50 transition-all duration-300 ${scrolled ? 'bg-tech-darker/95 backdrop-blur-sm shadow-lg' : 'bg-tech-darker'}`}>
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-24">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-4">
-                <span className="text-3xl font-bodoni font-bold text-light-50 tracking-wider letter-spacing-wide">PATEK<span className="text-bronze-400">Global</span></span>
+              <Link to="/" className="flex flex-col items-start">
+                <span className="text-3xl font-bold text-tech-accent tracking-wider">PATEK Global</span>
+                <span className="text-xs text-tech-blue-light tracking-wide mt-1">Patented Technologies Global</span>
               </Link>
             </div>
             
@@ -83,7 +69,7 @@ const Navbar = () => {
         
         {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="md:hidden bg-dark-800/95 backdrop-blur-sm border-t border-dark-600">
+          <div className="md:hidden bg-tech-dark/95 backdrop-blur-sm border-t border-tech-gray-dark">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link

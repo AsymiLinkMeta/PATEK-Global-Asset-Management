@@ -30,6 +30,21 @@ export default {
           800: '#121212',
           700: '#1a1a1a',
           600: '#222222',
+        },
+        tech: {
+          dark: '#0f1419',
+          darker: '#0a0e13',
+          accent: '#00d4ff',
+          blue: {
+            light: '#4a9eff',
+            DEFAULT: '#2563eb',
+            dark: '#1e40af',
+          },
+          gray: {
+            light: '#94a3b8',
+            DEFAULT: '#64748b',
+            dark: '#475569',
+          }
         }
       },
       fontFamily: {

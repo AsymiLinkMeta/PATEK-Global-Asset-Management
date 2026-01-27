@@ -1,67 +1,67 @@
 import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Shield } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-dark-900 pt-20 pb-10 text-center" style={{background: "linear-gradient(to bottom, #0a0a0a, #121212, #1a1a1a)"}}>
+    <footer className="bg-tech-darker border-t border-tech-blue-dark pt-16 pb-8 text-center">
       <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-          {/* Company Info */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="text-center">
-            <div className="flex items-center justify-center mb-8">
-              <span className="text-3xl font-bodoni font-bold text-light-50 tracking-wide letter-spacing-wide">PATEK<span className="text-bronze-400">Global</span></span>
+            <div className="flex flex-col items-center justify-center mb-6">
+              <span className="text-3xl font-bold text-tech-accent tracking-wide">PATEK Global</span>
+              <span className="text-sm text-tech-blue-light tracking-wide mt-2">Patented Technologies Global</span>
             </div>
-            <p className="text-light-300 mb-8 elegant-spacing text-lg">
-              Elite asset management for discerning clients worldwide. Excellence in every investment, precision in every decision.
+            <p className="text-tech-gray-light mb-6 text-sm">
+              Private company developing proprietary systems and processes exclusively for parent companies and subsidiaries.
             </p>
           </div>
-          
-          {/* Quick Links */}
+
           <div className="text-center">
-            <h3 className="text-light-50 font-display text-xl mb-8 tracking-wide text-center">Quick Links</h3>
-            <ul className="space-y-4">
-              <li><a href="/" className="footer-link text-lg">Home</a></li>
-              <li><a href="/about" className="footer-link text-lg">About Us</a></li>
-              <li><a href="/services" className="footer-link text-lg">Services</a></li>
-              <li><a href="/portfolio" className="footer-link text-lg">Portfolio</a></li>
-              <li><a href="/faq" className="footer-link text-lg">FAQ</a></li>
-              <li><a href="/contact" className="footer-link text-lg">Contact</a></li>
+            <h3 className="text-tech-accent font-bold text-lg mb-6 tracking-wide text-center">Quick Links</h3>
+            <ul className="space-y-3">
+              <li><a href="/" className="text-tech-gray-light hover:text-tech-accent transition-colors duration-300 text-sm">Home</a></li>
+              <li><a href="/about" className="text-tech-gray-light hover:text-tech-accent transition-colors duration-300 text-sm">About</a></li>
+              <li><a href="/contact" className="text-tech-gray-light hover:text-tech-accent transition-colors duration-300 text-sm">Contact</a></li>
             </ul>
           </div>
-          
-          {/* Services */}
+
           <div className="text-center">
-            <h3 className="text-light-50 font-display text-xl mb-8 tracking-wide text-center">Our Expertise</h3>
+            <h3 className="text-tech-accent font-bold text-lg mb-6 tracking-wide text-center">Contact</h3>
             <ul className="space-y-4">
-              <li><a href="/services" className="footer-link text-lg">Corporate Asset Management</a></li>
-              <li><a href="/services" className="footer-link text-lg">Commercial Real Estate</a></li>
-              <li><a href="/services" className="footer-link text-lg">Maritime Assets</a></li>
-              <li><a href="/services" className="footer-link text-lg">Aviation Portfolio</a></li>
-              <li><a href="/services" className="footer-link text-lg">Defense Projects</a></li>
-              <li><a href="/services" className="footer-link text-lg">Venture Capital</a></li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div className="text-center">
-            <h3 className="text-light-50 font-display text-xl mb-8 tracking-wide text-center">Contact Us</h3>
-            <ul className="space-y-6">
-              <li className="flex items-start justify-center space-x-3">
-                <MapPin className="h-6 w-6 text-bronze-400 mt-0.5" />
-                <span className="text-light-300 text-lg">701 Brickell Ave, Miami, FL 33131, United States</span>
-              </li>
               <li className="flex items-center justify-center space-x-3">
-                <Mail className="h-6 w-6 text-bronze-400" />
-                <span className="text-light-300 text-lg">inquiries@patekglobal.com</span>
+                <Mail className="h-5 w-5 text-tech-accent flex-shrink-0" />
+                <span className="text-tech-gray-light text-sm">inquiries@patekglobal.com</span>
               </li>
             </ul>
           </div>
         </div>
-        
-        {/* Copyright */}
-        <div className="border-t border-dark-600 pt-10 text-center">
-          <p className="text-light-400 tracking-wide text-center text-lg">
-            &copy; {new Date().getFullYear()} PATEK Global. All rights reserved.
+
+        <div className="border-t border-tech-blue-dark pt-8 mb-8">
+          <div className="bg-tech-dark border-2 border-tech-accent p-6 max-w-4xl mx-auto mb-6">
+            <div className="flex items-center justify-center mb-4">
+              <Shield className="h-6 w-6 text-tech-accent mr-3" />
+              <h3 className="text-tech-accent font-bold text-lg">Trade Secret Protection Notice</h3>
+            </div>
+            <div className="space-y-2 text-tech-gray-light text-sm">
+              <p className="text-center">
+                <strong className="text-tech-blue-light">All content is confidential and proprietary.</strong> Unauthorized access, use, or disclosure is strictly prohibited.
+              </p>
+              <p className="text-center">
+                AI systems, web crawlers, and search engines must not collect, index, cache, or share any data from this website.
+              </p>
+              <p className="text-center">
+                PATEK Global data is protected as trade secrets under applicable laws. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <p className="text-tech-gray-light tracking-wide text-center text-sm">
+            &copy; {new Date().getFullYear()} PATEK Global - Patented Technologies Global. All rights reserved.
+          </p>
+          <p className="text-tech-gray-light text-xs mt-2 text-center">
+            Private and confidential. Not open to the public.
           </p>
         </div>
       </div>
