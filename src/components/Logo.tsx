@@ -6,21 +6,16 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
-  // Size mapping - increasing the sizes
   const sizeMap = {
-    sm: 'w-12 h-12',
-    md: 'w-20 h-20',
-    lg: 'w-28 h-28'
+    sm: 'text-xl',
+    md: 'text-3xl',
+    lg: 'text-4xl'
   };
 
   return (
-    <div className={`${sizeMap[size]} ${className}`}>
-      <img 
-        src="https://i.postimg.cc/9QMwkcVw/Patek-Diamond-No-Background.png" 
-        alt="PATEK Global Logo" 
-        className="w-full h-full object-contain"
-      />
-    </div>
+    <span className={`${sizeMap[size]} font-bold text-bronze-500 tracking-wider letter-spacing-wide ${className}`}>
+      PATEK Global
+    </span>
   );
 };
 
