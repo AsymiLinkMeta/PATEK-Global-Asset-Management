@@ -6,7 +6,10 @@ import Logo from './Logo';
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
-  { name: 'Contact', path: '/contact' }
+  { name: 'Services', path: '/services' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Contact', path: '/contact' },
+  { name: 'FAQ', path: '/faq' }
 ];
 
 const Navbar = () => {
@@ -29,18 +32,15 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navigation */}
-      <nav className={`w-full z-50 transition-all duration-300 ${scrolled ? 'bg-tech-darker/95 backdrop-blur-sm shadow-lg' : 'bg-tech-darker'}`}>
+      <nav className={`w-full z-50 transition-all duration-300 ${scrolled ? 'bg-dark-800/95 backdrop-blur-sm shadow-lg' : 'bg-dark-900'}`}>
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-24">
             <div className="flex items-center">
-              <Link to="/" className="flex flex-col items-start">
-                <span className="text-3xl font-bold text-tech-accent tracking-wider">PATEK Global</span>
-                <span className="text-xs text-tech-blue-light tracking-wide mt-1">Patented Technologies Global</span>
+              <Link to="/" className="flex items-center">
+                <Logo />
               </Link>
             </div>
-            
-            {/* Desktop Navigation */}
+
             <div className="hidden md:flex items-center justify-end space-x-10 flex-1">
               {navItems.map((item) => (
                 <Link
@@ -54,8 +54,7 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
-            
-            {/* Mobile Navigation Button */}
+
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -66,10 +65,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        
-        {/* Mobile Navigation Menu */}
+
         {isOpen && (
-          <div className="md:hidden bg-tech-dark/95 backdrop-blur-sm border-t border-tech-gray-dark">
+          <div className="md:hidden bg-dark-800/95 backdrop-blur-sm border-t border-dark-600">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link
