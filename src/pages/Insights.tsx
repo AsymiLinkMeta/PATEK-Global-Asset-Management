@@ -41,7 +41,7 @@ const Insights: React.FC = () => {
       {/* Hero Section */}
       <Hero
         title="Insights & Perspectives"
-        subtitle="Expert analysis and thought leadership on market trends, investment strategies, and asset management best practices."
+        subtitle="Expert analysis and thought leadership on technology trends, innovation strategies, and patented technologies development best practices."
         backgroundClass="bg-insights-pattern"
       />
 

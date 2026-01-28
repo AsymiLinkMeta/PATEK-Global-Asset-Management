@@ -8,8 +8,8 @@ const Home: React.FC = () => {
   return (
     <div>
       <Hero
-        title="Excellence in Global Asset Management"
-        subtitle="PATEK Global delivers proven wealth management strategies with precision and expertise, serving accomplished individuals worldwide."
+        title="Excellence in Patented Technologies"
+        subtitle="PATEK Global develops proprietary systems and processes exclusively for parent companies and subsidiaries, delivering innovative solutions with precision and expertise."
         ctaText="Learn More"
         ctaLink="/services"
         backgroundClass="bg-hero-pattern"
@@ -19,12 +19,12 @@ const Home: React.FC = () => {
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
             <div className="text-center max-w-4xl">
-              <h2 className="text-3xl md:text-4xl font-display font-semibold text-dark-900 mb-6 leading-tight">Unrivaled Expertise in Asset Management</h2>
+              <h2 className="text-3xl md:text-4xl font-display font-semibold text-dark-900 mb-6 leading-tight">Unrivaled Expertise in Patented Technologies</h2>
               <p className="text-dark-800 mb-6 elegant-spacing">
-                PATEK Global represents excellence in asset management, where exceptional wealth flourishes under the guidance of experienced professionals. Our approach combines proven market insight with effective investment strategies.
+                PATEK Global represents excellence in developing patented technologies, where proprietary innovation drives competitive advantage for our parent companies and subsidiaries. Our approach combines proven technical expertise with strategic implementation.
               </p>
               <p className="text-dark-800 mb-8 elegant-spacing">
-                Through strategic planning and careful execution, we help preserve and grow our clients' legacies with the confidence that comes from decades of successful service. It is this commitment to excellence that has earned us the trust of accomplished investors worldwide.
+                Through meticulous research and precise execution, we create proprietary systems that transform business operations with the confidence that comes from decades of successful innovation. It is this commitment to excellence that has earned us recognition as leaders in patented technologies development.
               </p>
               <div>
                 <a href="/about" className="btn-secondary inline-flex items-center">
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-semibold text-light-50 mb-6 leading-tight">Build Your Legacy</h2>
           <p className="text-light-300 mb-10 max-w-3xl mx-auto elegant-spacing">
-            Discover how PATEK Global's professional approach to asset management can help secure and enhance your legacy for generations to come.
+            Discover how PATEK Global's proprietary patented technologies can help transform your business operations and secure your competitive advantage for generations to come.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" className="btn-primary">

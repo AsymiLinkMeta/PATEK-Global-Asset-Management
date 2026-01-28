@@ -18,7 +18,7 @@ const Contact: React.FC = () => {
             <div className="text-center">
               <h2 className="text-3xl font-display font-semibold text-dark-900 mb-6 text-center">Get in Touch</h2>
               <p className="text-dark-800 mb-8 elegant-spacing text-center">
-                Our team of experts is ready to discuss your asset management needs and how PATEK Global can help you achieve exceptional results.
+                Our team of experts is ready to discuss your patented technologies needs and how PATEK Global can help you achieve exceptional results.
               </p>
 
               <div className="space-y-6 mb-12">
@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
             <div className="text-center">
               <h2 className="text-3xl font-display font-semibold text-dark-900 mb-6 text-center">Inquiry Form</h2>
               <p className="text-dark-800 mb-8 elegant-spacing text-center">
-                Complete the form below to discuss your asset management needs with our team of experts.
+                Complete the form below to discuss your patented technologies needs with our team of experts.
               </p>
               <ContactForm />
             </div>

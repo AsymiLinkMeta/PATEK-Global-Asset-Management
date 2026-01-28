@@ -30,8 +30,8 @@ const FAQ: React.FC = () => {
       category: "General"
     },
     {
-      question: "What differentiates PATEK Global from other asset management firms?",
-      answer: "PATEK Global's distinctive advantage lies in our sector-specific expertise across diverse asset classes, our global network of industry relationships, and our proven track record of delivering exceptional results for elite clients worldwide.",
+      question: "What differentiates PATEK Global from other technology development firms?",
+      answer: "PATEK Global's distinctive advantage lies in our sector-specific expertise in developing patented technologies, our global network of industry relationships, and our proven track record of delivering exceptional proprietary solutions for our parent companies and subsidiaries worldwide.",
       category: "General"
     },
     {
@@ -48,7 +48,7 @@ const FAQ: React.FC = () => {
     // Process FAQs - 6 items
     {
       question: "How does the client onboarding process work?",
-      answer: "Our onboarding process begins with an initial consultation to understand your objectives, followed by a comprehensive assessment of your current portfolio. We then develop a tailored asset management strategy, which is presented and refined before implementation.",
+      answer: "Our onboarding process begins with an initial consultation to understand your objectives, followed by a comprehensive assessment of your current systems. We then develop a tailored patented technologies strategy, which is presented and refined before implementation.",
       category: "Process"
     },
     {
@@ -62,7 +62,7 @@ const FAQ: React.FC = () => {
       category: "Process"
     },
     {
-      question: "How frequently will I meet with my asset management team?",
+      question: "How frequently will I meet with my technologies development team?",
       answer: "We schedule formal quarterly review meetings with all clients, but the frequency of interaction is tailored to each client's preferences. Some clients prefer monthly check-ins, while others may request more frequent communication during periods of significant market volatility or when executing complex transactions. Your dedicated relationship manager is available whenever needed.",
       category: "Process"
     },
@@ -190,13 +190,13 @@ const FAQ: React.FC = () => {
       category: "Services"
     },
     {
-      question: "What services does PATEK Global offer for maritime asset management?",
-      answer: "Our maritime asset management services include acquisition and sale of luxury yachts, operational management, crew selection and management, maintenance program development, charter revenue optimization, regulatory compliance, and flag state administration. We provide comprehensive oversight of all aspects of maritime asset ownership.",
+      question: "What services does PATEK Global offer for maritime technologies?",
+      answer: "Our maritime technologies services include development of proprietary navigation systems, operational optimization platforms, crew management solutions, predictive maintenance technologies, charter revenue optimization tools, compliance automation, and fleet management systems. We provide comprehensive patented technologies for all aspects of maritime operations.",
       category: "Services"
     },
     {
       question: "What services does PATEK Global offer for aviation assets?",
-      answer: "Our aviation asset management services encompass aircraft acquisition and disposition, operational oversight, crew management, maintenance program administration, charter revenue optimization, regulatory compliance, and hangarage arrangements. We manage all aspects of aircraft ownership to maximize utility while minimizing operational complexities.",
+      answer: "Our aviation technologies services encompass proprietary flight operations systems, operational oversight platforms, crew management solutions, predictive maintenance technologies, charter revenue optimization tools, compliance automation systems, and hangar management platforms. We develop patented technologies for all aspects of aviation operations to maximize efficiency while minimizing operational complexities.",
       category: "Services"
     },
     {
@@ -289,7 +289,7 @@ const FAQ: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="section-title">Common Questions</h2>
             <p className="section-subtitle elegant-spacing">
-              Browse through our comprehensive FAQ to learn more about PATEK Global's approach to asset management.
+              Browse through our comprehensive FAQ to learn more about PATEK Global's approach to patented technologies development.
             </p>
           </div>
           

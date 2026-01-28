@@ -7,7 +7,7 @@ const About: React.FC = () => {
     <div>
       <Hero
         title="About Us"
-        subtitle="A legacy of excellence in global asset management, built on expertise, innovation, and unwavering commitment to client success."
+        subtitle="A legacy of excellence in patented technologies development, built on expertise, innovation, and unwavering commitment to creating proprietary solutions for our parent companies and subsidiaries."
         backgroundClass="bg-about-pattern"
       />
 
@@ -16,7 +16,7 @@ const About: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="section-title">Our Core Values</h2>
             <p className="section-subtitle elegant-spacing">
-              The principles that guide our decisions and shape our approach to asset management.
+              The principles that guide our decisions and shape our approach to developing patented technologies.
             </p>
           </div>
 
@@ -62,7 +62,7 @@ const About: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-display font-semibold text-light-50 mb-6">Global Presence</h2>
             <div className="w-24 h-1 bg-bronze-400 mx-auto mb-8"></div>
             <p className="text-xl text-light-200 mb-12 max-w-3xl mx-auto elegant-spacing">
-              Strategic locations across major financial centers, enabling comprehensive global asset management capabilities.
+              Strategic locations across major business centers, enabling comprehensive patented technologies development capabilities.
             </p>
           </div>
 
@@ -99,7 +99,7 @@ const About: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="section-title">Diverse Investment Profile</h2>
             <p className="section-subtitle elegant-spacing">
-              Our comprehensive approach to asset management spans multiple sectors and investment strategies.
+              Our comprehensive approach to patented technologies development spans multiple sectors and proprietary innovation strategies.
             </p>
           </div>
 
@@ -212,7 +212,7 @@ const About: React.FC = () => {
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-semibold text-light-50 mb-6">Join Our Exclusive Network of Distinguished Clients</h2>
           <p className="text-light-200 mb-10 max-w-3xl mx-auto elegant-spacing">
-            Experience the PATEK Global difference with bespoke asset management strategies meticulously tailored to your unique portfolio.
+            Experience the PATEK Global difference with bespoke patented technologies meticulously tailored to your unique business requirements.
           </p>
           <a href="/contact" className="inline-flex items-center px-8 py-4 bg-bronze-500 text-light-50 font-medium tracking-wide transition-all duration-300 hover:bg-bronze-600 border border-bronze-400/50 shadow-lg">
             Arrange a Private Consultation

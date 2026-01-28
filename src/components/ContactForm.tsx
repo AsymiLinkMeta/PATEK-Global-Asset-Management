@@ -96,7 +96,7 @@ const ContactForm: React.FC = () => {
           className="w-full px-4 py-3 bg-light-200 text-dark-900 border border-light-400 focus:border-bronze-500 focus:outline-none text-center"
         >
           <option value="">Select a Service</option>
-          <option value="corporate">Corporate Asset Management</option>
+          <option value="corporate">Patented Technologies Development</option>
           <option value="realestate">Commercial Real Estate</option>
           <option value="maritime">Maritime Assets</option>
           <option value="aviation">Aviation Portfolio</option>

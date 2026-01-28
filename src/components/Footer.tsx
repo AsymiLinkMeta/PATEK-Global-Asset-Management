@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               <Logo />
             </div>
             <p className="text-light-300 mb-6 text-sm">
-              Excellence in global asset management, delivering proven strategies with precision and expertise.
+              Excellence in patented technologies development, delivering proprietary solutions with precision and expertise.
             </p>
             <div className="flex justify-center space-x-4">
               <a href="#" className="text-light-300 hover:text-bronze-400 transition-colors duration-300">
@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
           <div className="text-center">
             <h3 className="text-light-50 font-bold text-lg mb-6 tracking-wide text-center">Services</h3>
             <ul className="space-y-3">
-              <li><a href="/services" className="footer-link text-sm">Corporate Asset Management</a></li>
+              <li><a href="/services" className="footer-link text-sm">Patented Technologies Development</a></li>
               <li><a href="/services" className="footer-link text-sm">Commercial Real Estate</a></li>
               <li><a href="/services" className="footer-link text-sm">Maritime Assets</a></li>
               <li><a href="/services" className="footer-link text-sm">Aviation Portfolio</a></li>
