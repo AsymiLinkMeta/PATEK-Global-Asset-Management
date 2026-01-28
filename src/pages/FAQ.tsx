@@ -31,7 +31,7 @@ const FAQ: React.FC = () => {
     },
     {
       question: "What differentiates PATEK Global from other technology development firms?",
-      answer: "PATEK Global's distinctive advantage lies in our sector-specific expertise in developing patented technologies, our global network of industry relationships, and our proven track record of delivering exceptional proprietary solutions for our parent companies and subsidiaries worldwide.",
+      answer: "PATEK Global's distinctive advantage lies in our sector-specific expertise in asset management, our global network of industry relationships, and our proven track record of delivering exceptional investment results for our distinguished clients worldwide.",
       category: "General"
     },
     {
@@ -48,7 +48,7 @@ const FAQ: React.FC = () => {
     // Process FAQs - 6 items
     {
       question: "How does the client onboarding process work?",
-      answer: "Our onboarding process begins with an initial consultation to understand your objectives, followed by a comprehensive assessment of your current systems. We then develop a tailored patented technologies strategy, which is presented and refined before implementation.",
+      answer: "Our onboarding process begins with an initial consultation to understand your objectives, followed by a comprehensive assessment of your current portfolio. We then develop a tailored investment strategy, which is presented and refined before implementation.",
       category: "Process"
     },
     {
@@ -191,12 +191,12 @@ const FAQ: React.FC = () => {
     },
     {
       question: "What services does PATEK Global offer for maritime technologies?",
-      answer: "Our maritime technologies services include development of proprietary navigation systems, operational optimization platforms, crew management solutions, predictive maintenance technologies, charter revenue optimization tools, compliance automation, and fleet management systems. We provide comprehensive patented technologies for all aspects of maritime operations.",
+      answer: "Our maritime asset management services include yacht and vessel acquisition, crew management and staffing, maintenance oversight, charter operations, compliance management, and comprehensive fleet administration. We provide end-to-end management solutions for all aspects of maritime asset ownership.",
       category: "Services"
     },
     {
       question: "What services does PATEK Global offer for aviation assets?",
-      answer: "Our aviation technologies services encompass proprietary flight operations systems, operational oversight platforms, crew management solutions, predictive maintenance technologies, charter revenue optimization tools, compliance automation systems, and hangar management platforms. We develop patented technologies for all aspects of aviation operations to maximize efficiency while minimizing operational complexities.",
+      answer: "Our aviation asset management services encompass aircraft acquisition and sales, flight operations oversight, crew management and training, maintenance coordination, charter operations, regulatory compliance, and hangar management. We provide comprehensive solutions for all aspects of private aviation to maximize efficiency and value.",
       category: "Services"
     },
     {
@@ -289,7 +289,7 @@ const FAQ: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="section-title">Common Questions</h2>
             <p className="section-subtitle elegant-spacing">
-              Browse through our comprehensive FAQ to learn more about PATEK Global's approach to patented technologies development.
+              Browse through our comprehensive FAQ to learn more about PATEK Global's approach to asset management.
             </p>
           </div>
           

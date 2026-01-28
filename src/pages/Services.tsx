@@ -9,7 +9,7 @@ const Services: React.FC = () => {
       {/* Hero Section */}
       <Hero
         title="Our Services"
-        subtitle="Comprehensive patented technologies solutions developed exclusively for parent companies and subsidiaries across diverse sectors."
+        subtitle="Comprehensive wealth management solutions and strategic advisory services tailored to sophisticated investors across diverse sectors."
         backgroundClass="bg-services-pattern"
       />
 
@@ -17,7 +17,7 @@ const Services: React.FC = () => {
       <section className="py-20 bg-light-100">
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Comprehensive Patented Technologies</h2>
+            <h2 className="section-title">Comprehensive Wealth Management</h2>
             <p className="section-subtitle">
               Delivering sophisticated investment solutions through strategic expertise and meticulous portfolio management, crafted for our distinguished clientele.
             </p>
@@ -144,7 +144,7 @@ const Services: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="section-title">Client Benefits</h2>
             <p className="section-subtitle">
-              The advantages of partnering with PATEK Global for your patented technologies development needs.
+              The advantages of partnering with PATEK Global for your asset management needs.
             </p>
           </div>
 
@@ -223,7 +223,7 @@ const Services: React.FC = () => {
               </div>
               <h3 className="text-xl font-display font-semibold text-dark-900 mb-4 mt-6">Strategy Development</h3>
               <p className="text-dark-800 elegant-spacing">
-                Creation of a tailored patented technologies strategy aligned with your objectives and innovation opportunities.
+                Creation of a tailored investment strategy aligned with your objectives and risk tolerance.
               </p>
             </div>
             
@@ -233,7 +233,7 @@ const Services: React.FC = () => {
               </div>
               <h3 className="text-xl font-display font-semibold text-dark-900 mb-4 mt-6">Implementation</h3>
               <p className="text-dark-800 elegant-spacing">
-                Precise execution of your patented technologies strategy with meticulous attention to detail and timing.
+                Precise execution of your investment strategy with meticulous attention to detail and timing.
               </p>
             </div>
             
@@ -371,7 +371,7 @@ const Services: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-semibold text-light-50 mb-6">Ready to Optimize Your Asset Portfolio?</h2>
             <p className="text-light-200 mb-10 max-w-3xl mx-auto elegant-spacing text-lg">
-              Contact our team of experts to discuss how PATEK Global can elevate your innovation strategy through patented technologies development.
+              Contact our team of experts to discuss how PATEK Global can elevate your wealth management strategy.
             </p>
             <a href="/contact" className="inline-flex items-center px-8 py-4 bg-bronze-500 text-light-50 font-medium tracking-wide transition-all duration-300 hover:bg-bronze-600 border border-bronze-400/50 shadow-lg text-lg">
               Schedule a Consultation <ArrowRight className="ml-2 h-5 w-5" />
@@ -386,7 +386,7 @@ const Services: React.FC = () => {
 // Helper function to get service-specific features
 const getServiceFeatures = (serviceTitle: string): string[] => {
   const features: Record<string, string[]> = {
-    "Patented Technologies Development": [
+    "Corporate Advisory Services": [
       "Strategic corporate restructuring",
       "Mergers and acquisitions advisory",
       "Operational efficiency optimization",

@@ -5,8 +5,8 @@ import { ServiceItem, PortfolioItem, TeamMember, InsightItem, Testimonial, Partn
 export const services: ServiceItem[] = [
   {
     icon: <Building2 className="w-10 h-10 text-bronze-500" />,
-    title: "Patented Technologies Development",
-    description: "Proprietary systems and processes developed exclusively for parent companies and subsidiaries, delivering innovative solutions that drive competitive advantage and operational excellence."
+    title: "Corporate Advisory Services",
+    description: "Strategic guidance for corporate restructuring, mergers and acquisitions, and operational optimization, delivering transformative solutions that drive long-term value creation."
   },
   {
     icon: <Building className="w-10 h-10 text-bronze-500" />,
@@ -63,7 +63,7 @@ export const portfolio = [
     title: "Meridian Global",
     category: "Corporate",
     image: "https://cdn.midjourney.com/e3eefa8c-f0a0-4889-a38d-ad44584b4a81/0_0.png",
-    description: "Strategic development of patented technologies focused on operational excellence, market positioning, and sustainable growth through proprietary innovation."
+    description: "Strategic corporate development focused on operational excellence, market positioning, and sustainable growth through innovation and best practices."
   },
   {
     id: 3,
@@ -101,7 +101,7 @@ export const team = [
     name: "Patrick Topalov",
     position: "President & Founder",
     image: "https://cdn.midjourney.com/8e71b64c-14a5-4629-8774-6b98555f48ee/0_1.png",
-    bio: "A visionary leader in patented technologies development with an extraordinary track record of creating proprietary systems and delivering innovative solutions that transform business operations."
+    bio: "A visionary leader in global asset management with an extraordinary track record of delivering exceptional investment results and innovative wealth management solutions."
   },
   {
     id: 2,
@@ -191,18 +191,18 @@ export const insights = [
   },
   {
     id: 4,
-    title: "Operational Excellence: The Cornerstone of Patented Technologies",
+    title: "Operational Excellence: The Cornerstone of Corporate Success",
     category: "Corporate",
     date: "March 22, 2025",
     image: "https://cdn.midjourney.com/e3eefa8c-f0a0-4889-a38d-ad44584b4a81/0_0.png",
-    excerpt: "How proprietary operational frameworks and patented technologies can transform corporate performance and drive exceptional results in competitive global markets.",
+    excerpt: "How operational frameworks and strategic initiatives can transform corporate performance and drive exceptional results in competitive global markets.",
     author: "Georgie Emerson",
-    tags: ["Corporate", "Operations", "Patented Technologies"],
+    tags: ["Corporate", "Operations", "Strategy"],
     readTime: "7 min read"
   },
   {
     id: 5,
-    title: "Legal Frameworks for Protecting Patented Technologies",
+    title: "Legal Frameworks for Protecting Intellectual Property",
     category: "Legal",
     date: "February 18, 2025",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
@@ -236,11 +236,11 @@ export const insights = [
   },
   {
     id: 8,
-    title: "Digital Transformation Through Patented Technologies: Beyond the Hype",
+    title: "Digital Transformation in Asset Management: Beyond the Hype",
     category: "Technology",
     date: "November 20, 2024",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80",
-    excerpt: "A strategic examination of how proprietary patented technologies are revolutionizing business operations and creating competitive advantages for early adopters.",
+    excerpt: "A strategic examination of how digital technologies are revolutionizing asset management and creating competitive advantages for early adopters.",
     author: "Georgie Emerson",
     tags: ["Technology", "Digital Transformation", "Innovation"],
     readTime: "9 min read"
@@ -326,7 +326,7 @@ export const testimonials = [
   },
   {
     id: 2,
-    quote: "The unparalleled expertise and meticulous attention to detail that PATEK brings to developing patented aviation technologies is simply unmatched in the industry. They've transformed our fleet operations.",
+    quote: "The unparalleled expertise and meticulous attention to detail that PATEK brings to aviation asset management is simply unmatched in the industry. They've transformed our fleet operations.",
     author: "Elizabeth Winters",
     position: "Chairman",
     company: "Altitude Aviation Group"
