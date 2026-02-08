@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, Briefcase, Building2, Home } from 'lucide-react';
+import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, Briefcase, Building2, Home, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Account {
@@ -115,8 +115,14 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white px-6 pt-12 pb-4">
-        <div className="flex items-center justify-center gap-2 mb-6">
+        <div className="flex items-center justify-between mb-6">
+          <Link to="/accounts" className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <CreditCard className="w-6 h-6 text-gray-700" />
+          </Link>
           <img src="/chase-bank.jpg" alt="Patek Global" className="h-12 w-12 rounded-lg" />
+          <Link to="/profile" className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <User className="w-6 h-6 text-gray-700" />
+          </Link>
         </div>
 
         <div className="flex items-center justify-center gap-0 mb-6">
