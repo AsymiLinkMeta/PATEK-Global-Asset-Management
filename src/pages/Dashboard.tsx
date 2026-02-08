@@ -299,7 +299,7 @@ export default function Dashboard() {
                     }`}
                   >
                     {card.accountNumber === '9933' && (
-                      <div className="flex flex-col items-center justify-center mr-3 flex-shrink-0">
+                      <div className="flex flex-col items-start mr-3 flex-shrink-0">
                         <p className="text-sm text-gray-700 mb-2">
                           {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                         </p>
