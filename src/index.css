@@ -21,4 +21,11 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .balance-display {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-size: 3.15rem;
+    letter-spacing: -0.02em;
+  }
 }
