@@ -126,27 +126,34 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <div className="flex items-center justify-center gap-0 mb-6">
-          <button
-            onClick={() => setAccountType('personal')}
-            className={`px-6 py-2 rounded-l-full transition-colors ${
-              accountType === 'personal'
-                ? 'bg-gray-200 text-gray-900'
-                : 'bg-white text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            Personal
-          </button>
-          <button
-            onClick={() => setAccountType('business')}
-            className={`px-6 py-2 rounded-r-full transition-colors ${
-              accountType === 'business'
-                ? 'bg-gray-500 text-white'
-                : 'bg-gray-400 text-white hover:bg-gray-500'
-            }`}
-          >
-            Business
-          </button>
+        <div className="flex items-center justify-center mb-6">
+          <div className="relative bg-white rounded-full p-1 shadow-sm border border-gray-200">
+            <div
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-gray-900 rounded-full transition-all duration-300 ease-in-out ${
+                accountType === 'personal' ? 'left-1' : 'left-[calc(50%+2px)]'
+              }`}
+            />
+            <button
+              onClick={() => setAccountType('personal')}
+              className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
+                accountType === 'personal'
+                  ? 'text-white'
+                  : 'text-gray-600'
+              }`}
+            >
+              Personal
+            </button>
+            <button
+              onClick={() => setAccountType('business')}
+              className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
+                accountType === 'business'
+                  ? 'text-white'
+                  : 'text-gray-600'
+              }`}
+            >
+              Business
+            </button>
+          </div>
         </div>
 
         <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
