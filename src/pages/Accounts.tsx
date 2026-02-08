@@ -72,7 +72,7 @@ export default function Accounts() {
   const getAccountColor = (type: string) => {
     switch (type) {
       case 'checking':
-        return 'bg-blue-500';
+        return 'bg-primary-600';
       case 'savings':
         return 'bg-green-500';
       case 'credit':

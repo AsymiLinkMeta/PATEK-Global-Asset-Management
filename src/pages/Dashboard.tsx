@@ -226,7 +226,7 @@ export default function Dashboard() {
               onClick={() => setBankAccountsExpanded(!bankAccountsExpanded)}
               className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
                 bankAccountsExpanded
-                  ? 'bg-gradient-to-br from-[#005EB8] to-blue-500 text-white'
+                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
                   : 'hover:bg-gray-50'
               }`}
             >
