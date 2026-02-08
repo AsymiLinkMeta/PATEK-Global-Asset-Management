@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { CreditCard, ChevronRight, Plus } from 'lucide-react';
@@ -109,9 +110,10 @@ export default function Accounts() {
           ) : (
             <div className="space-y-3">
               {accounts.map((account) => (
-                <div
+                <Link
                   key={account.id}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer"
+                  to={`/account/${account.id}`}
+                  className="block bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center justify-between">
                     <div>
@@ -125,7 +127,7 @@ export default function Accounts() {
                       <ChevronRight className="w-5 h-5 text-gray-400 ml-auto mt-1" />
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

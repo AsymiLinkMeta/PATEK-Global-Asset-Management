@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Accounts from './pages/Accounts';
+import AccountDetail from './pages/AccountDetail';
 import Transactions from './pages/Transactions';
 import Transfer from './pages/Transfer';
 import Profile from './pages/Profile';
@@ -64,6 +65,7 @@ function AppRoutes() {
               <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/accounts" element={<Accounts />} />
+                <Route path="/account/:accountId" element={<AccountDetail />} />
                 <Route path="/transactions" element={<Transactions />} />
                 <Route path="/transfer" element={<Transfer />} />
                 <Route path="/profile" element={<Profile />} />
