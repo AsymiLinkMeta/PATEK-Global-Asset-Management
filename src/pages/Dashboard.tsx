@@ -262,6 +262,7 @@ export default function Dashboard() {
                         {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
                       </p>
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(account.balance)}</p>
+                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
                     <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
                   </Link>
@@ -302,6 +303,7 @@ export default function Dashboard() {
                         {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                       </p>
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(Math.abs(card.balance))}</p>
+                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
                     <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
                   </Link>
