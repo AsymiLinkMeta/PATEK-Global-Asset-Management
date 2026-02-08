@@ -145,24 +145,33 @@ export default function Accounts() {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full -ml-12 -mb-12" />
 
-                  <div className="relative z-10">
-                    <div className="flex justify-between items-start mb-12">
-                      <CreditCard className="w-10 h-10 text-white/80" />
-                      <div className="text-sm font-medium uppercase tracking-wider opacity-90">{card.card_network}</div>
+                  <div className="relative z-10 flex gap-4">
+                    <div className="flex-shrink-0">
+                      <img
+                        src="/freedom_unlimited-removebg-preview.png"
+                        alt="Card"
+                        className="w-16 h-16 object-contain rounded-lg"
+                      />
                     </div>
-                    <div className="mb-6">
-                      <div className="text-2xl tracking-widest font-mono">
-                        •••• •••• •••• {card.card_number}
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-12">
+                        <div></div>
+                        <div className="text-sm font-medium uppercase tracking-wider opacity-90">{card.card_network}</div>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <div className="text-xs text-white/60 mb-1">VALID THRU</div>
-                        <div className="text-sm font-medium">{card.expiry_date}</div>
+                      <div className="mb-6">
+                        <div className="text-2xl tracking-widest font-mono">
+                          •••• •••• •••• {card.card_number}
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-xs text-white/60 mb-1">TYPE</div>
-                        <div className="text-sm font-medium capitalize">{card.card_type}</div>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <div className="text-xs text-white/60 mb-1">VALID THRU</div>
+                          <div className="text-sm font-medium">{card.expiry_date}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs text-white/60 mb-1">TYPE</div>
+                          <div className="text-sm font-medium capitalize">{card.card_type}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
