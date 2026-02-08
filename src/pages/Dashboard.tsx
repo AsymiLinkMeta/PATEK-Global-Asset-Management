@@ -224,33 +224,39 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <button
               onClick={() => setBankAccountsExpanded(!bankAccountsExpanded)}
-              className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
+              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+                bankAccountsExpanded
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                  : 'hover:bg-gray-50'
+              }`}
             >
-              <span className="font-medium text-gray-900">Bank accounts ({specificBankAccounts.length})</span>
+              <span className={`font-medium ${bankAccountsExpanded ? 'text-white' : 'text-gray-900'}`}>
+                Bank accounts ({specificBankAccounts.length})
+              </span>
               {bankAccountsExpanded ? (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
+                <ChevronDown className="w-5 h-5 text-white" />
               ) : (
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               )}
             </button>
 
             {bankAccountsExpanded && (
-              <div className="bg-gray-50">
+              <div className="bg-gradient-to-b from-blue-50 to-blue-100">
                 {specificBankAccounts.map((account, index) => (
                   <Link
                     key={account.accountNumber}
                     to={`/account/${account.accountNumber}`}
-                    className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-100 transition-colors ${
-                      index < specificBankAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                    className={`flex items-center justify-between p-4 pl-8 hover:bg-blue-200/50 transition-colors ${
+                      index < specificBankAccounts.length - 1 ? 'border-b border-blue-200' : ''
                     }`}
                   >
                     <div className="flex-1">
-                      <p className="text-sm text-gray-700 mb-1">
-                        {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
+                      <p className="text-sm text-blue-900 mb-1">
+                        {account.name} <span className="text-blue-700">(...{account.accountNumber})</span>
                       </p>
-                      <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(account.balance)}</p>
+                      <p className="text-2xl font-semibold text-blue-900 text-right">{formatCurrency(account.balance)}</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
+                    <ChevronRight className="w-5 h-5 text-blue-600 flex-shrink-0 ml-3" />
                   </Link>
                 ))}
               </div>
