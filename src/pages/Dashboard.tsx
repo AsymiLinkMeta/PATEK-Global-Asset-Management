@@ -127,9 +127,9 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center justify-center mb-6">
-          <div className="relative bg-white rounded-full p-1 shadow-sm border border-gray-200">
+          <div className="relative bg-gray-200 rounded-full p-1">
             <div
-              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-gray-900 rounded-full transition-all duration-300 ease-in-out ${
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full transition-all duration-300 ease-in-out shadow-sm ${
                 accountType === 'personal' ? 'left-1' : 'left-[calc(50%+2px)]'
               }`}
             />
@@ -137,7 +137,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('personal')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'personal'
-                  ? 'text-white'
+                  ? 'text-gray-900'
                   : 'text-gray-600'
               }`}
             >
@@ -147,7 +147,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('business')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'business'
-                  ? 'text-white'
+                  ? 'text-gray-900'
                   : 'text-gray-600'
               }`}
             >
