@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText } from 'lucide-react';
+import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, Briefcase, Building2, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Account {
@@ -34,6 +34,7 @@ export default function Dashboard() {
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
   const [showBalance, setShowBalance] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
 
   useEffect(() => {
     loadData();
@@ -108,150 +109,177 @@ export default function Dashboard() {
     );
   }
 
+  const bankAccounts = accounts.filter(acc => acc.account_type === 'checking' || acc.account_type === 'savings');
+  const creditCards = accounts.filter(acc => acc.account_type === 'credit');
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <p className="text-gray-600 text-base mb-1">{getGreeting()},</p>
-            <h1 className="text-2xl font-semibold text-gray-900">{getFirstName()}</h1>
-          </div>
+      <div className="bg-white px-6 pt-12 pb-4">
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <img src="/chase-bank.jpg" alt="Patek Global" className="h-12 w-12 rounded-lg" />
+        </div>
+
+        <div className="flex items-center justify-center gap-0 mb-6">
           <button
-            onClick={() => setShowBalance(!showBalance)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            onClick={() => setAccountType('personal')}
+            className={`px-6 py-2 rounded-l-full transition-colors ${
+              accountType === 'personal'
+                ? 'bg-gray-200 text-gray-900'
+                : 'bg-white text-gray-600 hover:bg-gray-100'
+            }`}
           >
-            {showBalance ? <Eye className="w-6 h-6 text-gray-600" /> : <EyeOff className="w-6 h-6 text-gray-600" />}
+            Personal
           </button>
+          <button
+            onClick={() => setAccountType('business')}
+            className={`px-6 py-2 rounded-r-full transition-colors ${
+              accountType === 'business'
+                ? 'bg-gray-500 text-white'
+                : 'bg-gray-400 text-white hover:bg-gray-500'
+            }`}
+          >
+            Business
+          </button>
+        </div>
+
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
+          <Link
+            to="/accounts"
+            className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
+          >
+            <Plus className="w-5 h-5 text-primary-600" />
+          </Link>
+          <Link
+            to="/transfer"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <Send className="w-4 h-4 text-gray-700" />
+            <span className="text-sm font-medium text-gray-900">Send | Zelle®</span>
+          </Link>
+          <Link
+            to="/accounts"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <span className="text-sm font-medium text-gray-900">Deposit checks</span>
+          </Link>
+          <Link
+            to="/transactions"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <span className="text-sm font-medium text-gray-900">Pay bills</span>
+          </Link>
         </div>
       </div>
 
       <div className="px-6 py-6">
-        <div className="mb-6">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Accounts</h2>
-          {accounts.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
-              <p className="text-gray-500">No accounts yet</p>
+        <Link
+          to="/transactions"
+          className="block bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                <Wallet className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
+                <p className="text-sm text-gray-600">
+                  Your spending this week: {formatCurrency(totalBalance * 0.05)}
+                </p>
+              </div>
             </div>
-          ) : (
-            <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
-              {accounts.map((account) => (
-                <Link
-                  key={account.id}
-                  to="/accounts"
-                  className="flex-shrink-0 w-80 bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl shadow-lg p-6 text-white"
-                >
-                  <div className="flex items-start justify-between mb-8">
-                    <div>
-                      <p className="text-primary-100 text-sm mb-1">{account.account_name}</p>
-                      <p className="text-xs text-primary-200">
-                        •••• {account.account_number.slice(-4)}
-                      </p>
-                    </div>
-                    <CreditCard className="w-8 h-8 text-white/80" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-primary-100 mb-1">Available balance</p>
-                    <p className="text-3xl font-semibold">
-                      {showBalance ? formatCurrency(account.balance) : '••••••'}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+            <ChevronRight className="w-5 h-5 text-gray-400" />
+          </div>
+        </Link>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-4 gap-4">
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xl font-semibold text-gray-900">Accounts</h2>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <span className="text-gray-600">•••</span>
+            </button>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <Link
-              to="/transfer"
-              className="flex flex-col items-center justify-center"
+              to="/accounts"
+              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
             >
-              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
-                <ArrowLeftRight className="w-6 h-6 text-primary-600" />
-              </div>
-              <span className="text-xs text-gray-700 text-center">Transfer</span>
-            </Link>
-            <Link
-              to="/transactions"
-              className="flex flex-col items-center justify-center"
-            >
-              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
-                <DollarSign className="w-6 h-6 text-primary-600" />
-              </div>
-              <span className="text-xs text-gray-700 text-center">Pay</span>
+              <span className="font-medium text-gray-900">Bank accounts ({bankAccounts.length})</span>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
             <Link
               to="/accounts"
-              className="flex flex-col items-center justify-center"
+              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
             >
-              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
-                <PiggyBank className="w-6 h-6 text-primary-600" />
-              </div>
-              <span className="text-xs text-gray-700 text-center">Save</span>
+              <span className="font-medium text-gray-900">Credit cards ({creditCards.length})</span>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
             <Link
-              to="/transactions"
-              className="flex flex-col items-center justify-center"
+              to="/accounts"
+              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
             >
-              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
-                <FileText className="w-6 h-6 text-primary-600" />
-              </div>
-              <span className="text-xs text-gray-700 text-center">Statements</span>
+              <span className="font-medium text-gray-900">Link external accounts</span>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Activity</h2>
-            <Link to="/transactions" className="text-primary-600 text-sm font-medium">
-              See all
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Explore more products</h2>
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6 mb-4">
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <CreditCard className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Credit cards</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <Wallet className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Checking</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <PiggyBank className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Savings & CDs</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <Briefcase className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Work with advisors</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <Building2 className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Business</p>
             </Link>
           </div>
-          {recentTransactions.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No transactions yet</p>
-          ) : (
-            <div className="divide-y divide-gray-100">
-              {recentTransactions.map((transaction) => (
-                <div key={transaction.id} className="flex items-center justify-between py-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        transaction.transaction_type === 'credit'
-                          ? 'bg-green-50'
-                          : 'bg-gray-100'
-                      }`}
-                    >
-                      {transaction.transaction_type === 'credit' ? (
-                        <TrendingUp className="w-5 h-5 text-green-600" />
-                      ) : (
-                        <TrendingDown className="w-5 h-5 text-gray-600" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">{transaction.merchant}</p>
-                      <p className="text-sm text-gray-500 capitalize">{transaction.category}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p
-                      className={`font-semibold ${
-                        transaction.transaction_type === 'credit'
-                          ? 'text-green-600'
-                          : 'text-gray-900'
-                      }`}
-                    >
-                      {transaction.transaction_type === 'credit' ? '+' : '-'}
-                      {formatCurrency(transaction.amount)}
-                    </p>
-                    <p className="text-xs text-gray-500">{formatDate(transaction.transaction_date)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <Link
+            to="/accounts"
+            className="block text-center py-3 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
+          >
+            Explore products
+          </Link>
         </div>
       </div>
     </div>
