@@ -63,22 +63,22 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-primary-500 text-white px-6 pt-12 pb-16">
-        <h1 className="text-2xl font-bold mb-6">Profile</h1>
+      <div className="bg-white px-6 pt-12 pb-8 border-b border-gray-200">
+        <h1 className="text-2xl font-semibold text-gray-900 mb-6">Profile</h1>
         <div className="flex items-center gap-4">
-          <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-            <User className="w-10 h-10 text-white" />
+          <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center">
+            <User className="w-10 h-10 text-primary-600" />
           </div>
           <div>
-            <h2 className="text-xl font-bold">{profile?.full_name}</h2>
-            <p className="text-primary-100">{profile?.email}</p>
+            <h2 className="text-xl font-semibold text-gray-900">{profile?.full_name}</h2>
+            <p className="text-gray-600">{profile?.email}</p>
           </div>
         </div>
       </div>
 
-      <div className="px-6 -mt-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
+      <div className="px-6 py-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Personal Information</h3>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-primary-50 rounded-full flex items-center justify-center">
@@ -133,8 +133,8 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Settings</h3>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Settings</h3>
           <div className="space-y-2">
             <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
               <div className="flex items-center gap-3">

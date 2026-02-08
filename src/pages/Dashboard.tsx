@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet } from 'lucide-react';
+import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Account {
@@ -89,6 +89,17 @@ export default function Dashboard() {
     }).format(date);
   };
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
+  const getFirstName = () => {
+    return profile?.full_name?.split(' ')[0] || 'User';
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -99,108 +110,144 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-primary-500 text-white px-6 pt-12 pb-32">
-        <div className="flex items-center justify-between mb-8">
+      <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-primary-100 text-sm">Welcome back,</p>
-            <h1 className="text-2xl font-bold">{profile?.full_name || 'User'}</h1>
+            <p className="text-gray-600 text-base mb-1">{getGreeting()},</p>
+            <h1 className="text-2xl font-semibold text-gray-900">{getFirstName()}</h1>
           </div>
-          <img src="/chase-bank.jpg" alt="Patek Global" className="h-12 w-12 rounded-lg" />
-        </div>
-
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-primary-100 text-sm">Total Balance</p>
-            <button
-              onClick={() => setShowBalance(!showBalance)}
-              className="text-white hover:text-primary-100"
-            >
-              {showBalance ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
-            </button>
-          </div>
-          <p className="text-4xl font-bold mb-4">
-            {showBalance ? formatCurrency(totalBalance) : '••••••'}
-          </p>
-          <div className="flex gap-3">
-            <Link
-              to="/transfer"
-              className="flex-1 bg-white text-primary-500 py-2 px-4 rounded-lg font-medium text-center hover:bg-primary-50 transition-colors"
-            >
-              Transfer
-            </Link>
-            <Link
-              to="/accounts"
-              className="flex-1 bg-white/20 text-white py-2 px-4 rounded-lg font-medium text-center hover:bg-white/30 transition-colors"
-            >
-              Accounts
-            </Link>
-          </div>
+          <button
+            onClick={() => setShowBalance(!showBalance)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            {showBalance ? <Eye className="w-6 h-6 text-gray-600" /> : <EyeOff className="w-6 h-6 text-gray-600" />}
+          </button>
         </div>
       </div>
 
-      <div className="px-6 -mt-20">
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 gap-3">
+      <div className="px-6 py-6">
+        <div className="mb-6">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Accounts</h2>
+          {accounts.length === 0 ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center">
+              <p className="text-gray-500">No accounts yet</p>
+            </div>
+          ) : (
+            <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
+              {accounts.map((account) => (
+                <Link
+                  key={account.id}
+                  to="/accounts"
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl shadow-lg p-6 text-white"
+                >
+                  <div className="flex items-start justify-between mb-8">
+                    <div>
+                      <p className="text-primary-100 text-sm mb-1">{account.account_name}</p>
+                      <p className="text-xs text-primary-200">
+                        •••• {account.account_number.slice(-4)}
+                      </p>
+                    </div>
+                    <CreditCard className="w-8 h-8 text-white/80" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-primary-100 mb-1">Available balance</p>
+                    <p className="text-3xl font-semibold">
+                      {showBalance ? formatCurrency(account.balance) : '••••••'}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-4 gap-4">
             <Link
               to="/transfer"
-              className="flex flex-col items-center justify-center p-4 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors"
+              className="flex flex-col items-center justify-center"
             >
-              <Wallet className="w-8 h-8 text-primary-500 mb-2" />
-              <span className="text-sm font-medium text-gray-700">Send Money</span>
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
+                <ArrowLeftRight className="w-6 h-6 text-primary-600" />
+              </div>
+              <span className="text-xs text-gray-700 text-center">Transfer</span>
+            </Link>
+            <Link
+              to="/transactions"
+              className="flex flex-col items-center justify-center"
+            >
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
+                <DollarSign className="w-6 h-6 text-primary-600" />
+              </div>
+              <span className="text-xs text-gray-700 text-center">Pay</span>
             </Link>
             <Link
               to="/accounts"
-              className="flex flex-col items-center justify-center p-4 bg-primary-50 rounded-xl hover:bg-primary-100 transition-colors"
+              className="flex flex-col items-center justify-center"
             >
-              <CreditCard className="w-8 h-8 text-primary-500 mb-2" />
-              <span className="text-sm font-medium text-gray-700">My Cards</span>
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
+                <PiggyBank className="w-6 h-6 text-primary-600" />
+              </div>
+              <span className="text-xs text-gray-700 text-center">Save</span>
+            </Link>
+            <Link
+              to="/transactions"
+              className="flex flex-col items-center justify-center"
+            >
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-2 hover:bg-primary-100 transition-colors">
+                <FileText className="w-6 h-6 text-primary-600" />
+              </div>
+              <span className="text-xs text-gray-700 text-center">Statements</span>
             </Link>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Recent Activity</h2>
-            <Link to="/transactions" className="text-primary-500 text-sm font-medium">
+            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Activity</h2>
+            <Link to="/transactions" className="text-primary-600 text-sm font-medium">
               See all
             </Link>
           </div>
           {recentTransactions.length === 0 ? (
             <p className="text-gray-500 text-center py-8">No transactions yet</p>
           ) : (
-            <div className="space-y-3">
+            <div className="divide-y divide-gray-100">
               {recentTransactions.map((transaction) => (
-                <div key={transaction.id} className="flex items-center justify-between">
+                <div key={transaction.id} className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         transaction.transaction_type === 'credit'
-                          ? 'bg-green-100'
-                          : 'bg-red-100'
+                          ? 'bg-green-50'
+                          : 'bg-gray-100'
                       }`}
                     >
                       {transaction.transaction_type === 'credit' ? (
                         <TrendingUp className="w-5 h-5 text-green-600" />
                       ) : (
-                        <TrendingDown className="w-5 h-5 text-red-600" />
+                        <TrendingDown className="w-5 h-5 text-gray-600" />
                       )}
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">{transaction.merchant}</p>
-                      <p className="text-sm text-gray-500">{formatDate(transaction.transaction_date)}</p>
+                      <p className="text-sm text-gray-500 capitalize">{transaction.category}</p>
                     </div>
                   </div>
-                  <p
-                    className={`font-semibold ${
-                      transaction.transaction_type === 'credit'
-                        ? 'text-green-600'
-                        : 'text-gray-900'
-                    }`}
-                  >
-                    {transaction.transaction_type === 'credit' ? '+' : '-'}
-                    {formatCurrency(transaction.amount)}
-                  </p>
+                  <div className="text-right">
+                    <p
+                      className={`font-semibold ${
+                        transaction.transaction_type === 'credit'
+                          ? 'text-green-600'
+                          : 'text-gray-900'
+                      }`}
+                    >
+                      {transaction.transaction_type === 'credit' ? '+' : '-'}
+                      {formatCurrency(transaction.amount)}
+                    </p>
+                    <p className="text-xs text-gray-500">{formatDate(transaction.transaction_date)}</p>
+                  </div>
                 </div>
               ))}
             </div>

@@ -91,17 +91,17 @@ export default function Accounts() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-primary-500 text-white px-6 pt-12 pb-8">
-        <h1 className="text-2xl font-bold">My Accounts</h1>
+      <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
+        <h1 className="text-2xl font-semibold text-gray-900">Accounts & Cards</h1>
       </div>
 
       <div className="px-6 py-6">
         <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-4">Bank Accounts</h2>
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Accounts</h2>
           {accounts.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
               <p className="text-gray-500 mb-4">No accounts found</p>
-              <button className="bg-primary-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-600 transition-colors inline-flex items-center gap-2">
+              <button className="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors inline-flex items-center gap-2">
                 <Plus className="w-5 h-5" />
                 Add Account
               </button>
@@ -111,21 +111,17 @@ export default function Accounts() {
               {accounts.map((account) => (
                 <div
                   key={account.id}
-                  className="bg-white rounded-2xl shadow-lg p-5 hover:shadow-xl transition-shadow cursor-pointer"
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className={`${getAccountColor(account.account_type)} w-12 h-12 rounded-xl flex items-center justify-center text-white`}>
-                        {getAccountIcon(account.account_type)}
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900">{account.account_name}</p>
-                        <p className="text-sm text-gray-500">••••{account.account_number.slice(-4)}</p>
-                        <p className="text-xs text-gray-400 capitalize mt-1">{account.account_type}</p>
-                      </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 mb-1">{account.account_name}</p>
+                      <p className="text-sm text-gray-500">
+                        <span className="capitalize">{account.account_type}</span> •••• {account.account_number.slice(-4)}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-gray-900">{formatCurrency(Number(account.balance))}</p>
+                      <p className="text-xl font-semibold text-gray-900">{formatCurrency(Number(account.balance))}</p>
                       <ChevronRight className="w-5 h-5 text-gray-400 ml-auto mt-1" />
                     </div>
                   </div>
@@ -137,31 +133,35 @@ export default function Accounts() {
 
         {cards.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-4">My Cards</h2>
+            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Cards</h2>
             <div className="space-y-3">
               {cards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl shadow-lg p-6 text-white"
+                  className="relative bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl shadow-lg p-6 text-white overflow-hidden"
                 >
-                  <div className="flex justify-between items-start mb-8">
-                    <div className="text-sm opacity-90 uppercase">{card.card_network}</div>
-                    <div className="text-sm capitalize">{card.card_type}</div>
-                  </div>
-                  <div className="mb-6">
-                    <div className="text-xl tracking-wider font-mono">
-                      •••• •••• •••• {card.card_number}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full -ml-12 -mb-12" />
+
+                  <div className="relative z-10">
+                    <div className="flex justify-between items-start mb-12">
+                      <CreditCard className="w-10 h-10 text-white/80" />
+                      <div className="text-sm font-medium uppercase tracking-wider opacity-90">{card.card_network}</div>
                     </div>
-                  </div>
-                  <div className="flex justify-between">
-                    <div>
-                      <div className="text-xs opacity-75 mb-1">Expires</div>
-                      <div className="font-medium">{card.expiry_date}</div>
+                    <div className="mb-6">
+                      <div className="text-2xl tracking-widest font-mono">
+                        •••• •••• •••• {card.card_number}
+                      </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs ${
-                      card.status === 'active' ? 'bg-green-500/20' : 'bg-red-500/20'
-                    }`}>
-                      {card.status}
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <div className="text-xs text-white/60 mb-1">VALID THRU</div>
+                        <div className="text-sm font-medium">{card.expiry_date}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-white/60 mb-1">TYPE</div>
+                        <div className="text-sm font-medium capitalize">{card.card_type}</div>
+                      </div>
                     </div>
                   </div>
                 </div>

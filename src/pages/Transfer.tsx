@@ -130,23 +130,23 @@ export default function Transfer() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-primary-500 text-white px-6 pt-12 pb-8">
-        <h1 className="text-2xl font-bold">Send Money</h1>
+      <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
+        <h1 className="text-2xl font-semibold text-gray-900">Transfer Money</h1>
       </div>
 
       <div className="px-6 py-6">
         {beneficiaries.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-sm font-semibold text-gray-700 mb-3">Recent Recipients</h2>
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Recent Recipients</h2>
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
               {beneficiaries.map((beneficiary) => (
                 <button
                   key={beneficiary.id}
                   onClick={() => selectBeneficiary(beneficiary)}
-                  className="flex flex-col items-center min-w-[80px] p-3 bg-white rounded-xl shadow hover:shadow-md transition-shadow"
+                  className="flex flex-col items-center min-w-[80px] p-3 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
                 >
-                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mb-2">
-                    <User className="w-6 h-6 text-primary-500" />
+                  <div className="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center mb-2">
+                    <User className="w-6 h-6 text-primary-600" />
                   </div>
                   <span className="text-xs font-medium text-gray-700 text-center truncate w-full">
                     {beneficiary.name}
@@ -157,15 +157,15 @@ export default function Transfer() {
           </div>
         )}
 
-        <form onSubmit={handleTransfer} className="bg-white rounded-2xl shadow-lg p-6">
-          <div className="mb-4">
+        <form onSubmit={handleTransfer} className="space-y-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               From Account
             </label>
             <select
               value={selectedAccount}
               onChange={(e) => setSelectedAccount(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white"
               required
             >
               {accounts.map((account) => (
@@ -176,87 +176,90 @@ export default function Transfer() {
             </select>
           </div>
 
-          <div className="mb-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Amount
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg">$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl">$</span>
               <input
                 type="number"
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                className="w-full pl-10 pr-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-2xl font-semibold"
                 placeholder="0.00"
                 required
               />
             </div>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Recipient Name
-            </label>
-            <input
-              type="text"
-              value={recipientName}
-              onChange={(e) => setRecipientName(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="John Doe"
-              required
-            />
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Recipient Name
+              </label>
+              <input
+                type="text"
+                value={recipientName}
+                onChange={(e) => setRecipientName(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Account Number
+              </label>
+              <input
+                type="text"
+                value={recipientAccount}
+                onChange={(e) => setRecipientAccount(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="1234567890"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Bank Name
+              </label>
+              <input
+                type="text"
+                value={recipientBank}
+                onChange={(e) => setRecipientBank(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Bank Name"
+                required
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Recipient Account Number
-            </label>
-            <input
-              type="text"
-              value={recipientAccount}
-              onChange={(e) => setRecipientAccount(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="1234567890"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Recipient Bank
-            </label>
-            <input
-              type="text"
-              value={recipientBank}
-              onChange={(e) => setRecipientBank(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="Bank Name"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Description (Optional)
+              Memo (Optional)
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="Add a note..."
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+              placeholder="What's this transfer for?"
               rows={3}
             />
           </div>
 
           {error && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="mb-4 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+              <ArrowRight className="w-4 h-4" />
               Transfer successful!
             </div>
           )}
@@ -264,10 +267,9 @@ export default function Transfer() {
           <button
             type="submit"
             disabled={loading || accounts.length === 0}
-            className="w-full bg-primary-500 text-white py-3 rounded-lg font-medium hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-primary-600 text-white py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Processing...' : 'Send Money'}
-            {!loading && <ArrowRight className="w-5 h-5" />}
+            {loading ? 'Processing Transfer...' : 'Continue'}
           </button>
         </form>
       </div>

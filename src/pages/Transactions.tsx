@@ -124,18 +124,18 @@ export default function Transactions() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-primary-500 text-white px-6 pt-12 pb-6">
-        <h1 className="text-2xl font-bold mb-4">Activity</h1>
+      <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
+        <h1 className="text-2xl font-semibold text-gray-900 mb-4">Activity</h1>
 
         {accounts.length > 0 && (
           <select
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value)}
-            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
-            <option value="all" className="text-gray-900">All Accounts</option>
+            <option value="all">All Accounts</option>
             {accounts.map((account) => (
-              <option key={account.id} value={account.id} className="text-gray-900">
+              <option key={account.id} value={account.id}>
                 {account.account_name}
               </option>
             ))}
@@ -145,15 +145,15 @@ export default function Transactions() {
 
       <div className="px-6 py-6">
         {transactions.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <p className="text-gray-500">No transactions found</p>
           </div>
         ) : (
           <div className="space-y-6">
             {Object.entries(groupedTransactions).map(([date, transactions]) => (
               <div key={date}>
-                <h3 className="text-sm font-semibold text-gray-500 mb-3 px-2">{date}</h3>
-                <div className="bg-white rounded-2xl shadow-lg divide-y divide-gray-100">
+                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 px-1">{date}</h3>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 divide-y divide-gray-100">
                   {transactions.map((transaction) => (
                     <div key={transaction.id} className="p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center justify-between">
@@ -161,14 +161,14 @@ export default function Transactions() {
                           <div
                             className={`w-10 h-10 rounded-full flex items-center justify-center ${
                               transaction.transaction_type === 'credit'
-                                ? 'bg-green-100'
-                                : 'bg-red-100'
+                                ? 'bg-green-50'
+                                : 'bg-gray-100'
                             }`}
                           >
                             {transaction.transaction_type === 'credit' ? (
                               <TrendingUp className="w-5 h-5 text-green-600" />
                             ) : (
-                              <TrendingDown className="w-5 h-5 text-red-600" />
+                              <TrendingDown className="w-5 h-5 text-gray-600" />
                             )}
                           </div>
                           <div>
@@ -190,8 +190,8 @@ export default function Transactions() {
                             {transaction.transaction_type === 'credit' ? '+' : '-'}
                             {formatCurrency(transaction.amount)}
                           </p>
-                          <p className={`text-xs mt-1 ${
-                            transaction.status === 'completed' ? 'text-green-600' :
+                          <p className={`text-xs mt-1 capitalize ${
+                            transaction.status === 'completed' ? 'text-gray-500' :
                             transaction.status === 'pending' ? 'text-yellow-600' : 'text-red-600'
                           }`}>
                             {transaction.status}
