@@ -348,27 +348,40 @@ export default function AccountDetail() {
         </div>
 
         <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl p-6 text-white">
-          {account.account_type === 'credit' ? (
-            <>
-              <p className="text-primary-100 text-sm mb-6">Current Balance</p>
-              <p className="balance-display mb-4">{formatCurrency(Math.abs(account.balance))}</p>
-              <div className="flex justify-between mb-6 text-sm">
-                <div>
-                  <p className="text-primary-100">Available Credit</p>
-                  <p className="font-semibold">{formatCurrency((account.creditLimit || 0) - Math.abs(account.balance))}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-primary-100">Credit Limit</p>
-                  <p className="font-semibold">{formatCurrency(account.creditLimit || 0)}</p>
-                </div>
+          <div className="flex gap-4 mb-4">
+            {account.account_number === '9933' && (
+              <div className="flex-shrink-0">
+                <img
+                  src="/freedom_unlimited-removebg-preview.png"
+                  alt="Freedom Unlimited"
+                  className="w-12 h-12 object-contain"
+                />
               </div>
-            </>
-          ) : (
-            <>
-              <p className="text-primary-100 text-sm mb-6">Available Balance</p>
-              <p className="balance-display mb-6">{formatCurrency(account.balance)}</p>
-            </>
-          )}
+            )}
+            <div className="flex-1">
+              {account.account_type === 'credit' ? (
+                <>
+                  <p className="text-primary-100 text-sm mb-2">Current Balance</p>
+                  <p className="balance-display mb-4">{formatCurrency(Math.abs(account.balance))}</p>
+                  <div className="flex justify-between mb-2 text-sm">
+                    <div>
+                      <p className="text-primary-100">Available Credit</p>
+                      <p className="font-semibold">{formatCurrency((account.creditLimit || 0) - Math.abs(account.balance))}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-primary-100">Credit Limit</p>
+                      <p className="font-semibold">{formatCurrency(account.creditLimit || 0)}</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-primary-100 text-sm mb-2">Available Balance</p>
+                  <p className="balance-display mb-2">{formatCurrency(account.balance)}</p>
+                </>
+              )}
+            </div>
+          </div>
 
           <div className="flex gap-3">
             <Link
