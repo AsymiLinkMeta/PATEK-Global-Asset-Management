@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { Pause } from 'lucide-react';
 
 const ReturnToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +34,7 @@ const ReturnToTop: React.FC = () => {
           className="fixed bottom-8 right-8 p-3 bg-bronze-500 text-light-50 rounded-full shadow-lg hover:bg-bronze-600 transition-all duration-300 z-50 border border-bronze-400/50"
           aria-label="Return to top"
         >
-          <ArrowUp className="h-6 w-6" />
+          <Pause className="h-6 w-6" />
         </button>
       )}
     </>
