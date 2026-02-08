@@ -302,7 +302,7 @@ export default function Dashboard() {
                       <img
                         src="/freedom_unlimited-removebg-preview.png"
                         alt="Freedom Unlimited"
-                        className="w-10 h-10 object-contain mr-3 flex-shrink-0"
+                        className="w-40 h-40 object-contain mr-3 flex-shrink-0"
                       />
                     )}
                     <div className="flex-1">
