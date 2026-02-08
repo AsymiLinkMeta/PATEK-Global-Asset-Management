@@ -310,8 +310,20 @@ export default function Dashboard() {
                         />
                       </div>
                     )}
+                    {card.accountNumber === '2464' && (
+                      <div className="flex flex-col items-start mr-3 flex-shrink-0">
+                        <p className="text-sm text-gray-700 mb-2">
+                          {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
+                        </p>
+                        <img
+                          src="/chase_sapphire_reserve_06_24_25-removebg-preview.png"
+                          alt="Sapphire Reserve"
+                          className="w-40 h-25 object-contain"
+                        />
+                      </div>
+                    )}
                     <div className="flex-1">
-                      {card.accountNumber !== '9933' && (
+                      {card.accountNumber !== '9933' && card.accountNumber !== '2464' && (
                         <p className="text-sm text-gray-700 mb-4">
                           {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                         </p>
