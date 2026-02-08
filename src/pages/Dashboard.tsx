@@ -144,7 +144,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('personal')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'personal'
-                  ? 'text-primary-600'
+                  ? 'text-gray-900'
                   : 'text-gray-600'
               }`}
             >
@@ -154,7 +154,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('business')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'business'
-                  ? 'text-primary-600'
+                  ? 'text-gray-900'
                   : 'text-gray-600'
               }`}
             >
@@ -174,20 +174,20 @@ export default function Dashboard() {
             to="/transfer"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
-            <Send className="w-4 h-4 text-gray-700" />
-            <span className="text-sm font-medium text-gray-900">Send | Zelle®</span>
+            <Send className="w-4 h-4 text-primary-600" />
+            <span className="text-sm font-medium text-primary-600">Send | Zelle®</span>
           </Link>
           <Link
             to="/accounts"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
-            <span className="text-sm font-medium text-gray-900">Deposit checks</span>
+            <span className="text-sm font-medium text-primary-600">Deposit checks</span>
           </Link>
           <Link
             to="/transactions"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
-            <span className="text-sm font-medium text-gray-900">Pay bills</span>
+            <span className="text-sm font-medium text-primary-600">Pay bills</span>
           </Link>
         </div>
       </div>
