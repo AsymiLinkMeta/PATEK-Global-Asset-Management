@@ -244,13 +244,15 @@ export default function Dashboard() {
                       index < specificBankAccounts.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
-                    <div className="flex-1">
+                    <div>
                       <p className="text-sm text-gray-700 mb-1">
                         {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
                       </p>
-                      <p className="text-2xl font-semibold text-gray-900">{formatCurrency(account.balance)}</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    <div className="flex items-center gap-3">
+                      <p className="text-2xl font-semibold text-gray-900">{formatCurrency(account.balance)}</p>
+                      <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    </div>
                   </Link>
                 ))}
               </div>
