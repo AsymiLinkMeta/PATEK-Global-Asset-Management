@@ -298,6 +298,13 @@ export default function Dashboard() {
                       index < specificCreditCards.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
+                    {card.accountNumber === '9933' && (
+                      <img
+                        src="/freedom_unlimited-removebg-preview.png"
+                        alt="Freedom Unlimited"
+                        className="w-10 h-10 object-contain mr-3 flex-shrink-0"
+                      />
+                    )}
                     <div className="flex-1">
                       <p className="text-sm text-gray-700 mb-4">
                         {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
