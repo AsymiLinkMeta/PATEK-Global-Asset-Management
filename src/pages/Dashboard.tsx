@@ -258,7 +258,7 @@ export default function Dashboard() {
                     }`}
                   >
                     <div className="flex-1">
-                      <p className="text-sm text-gray-700 mb-1">
+                      <p className="text-sm text-gray-700 mb-4">
                         {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
                       </p>
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(account.balance)}</p>
@@ -298,7 +298,7 @@ export default function Dashboard() {
                     }`}
                   >
                     <div className="flex-1">
-                      <p className="text-sm text-gray-700 mb-1">
+                      <p className="text-sm text-gray-700 mb-4">
                         {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                       </p>
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(Math.abs(card.balance))}</p>
