@@ -1,0 +1,22 @@
+{
+  "name": "Patek Global",
+  "short_name": "Patek",
+  "description": "Patek Global mobile banking app",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#117ACA",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/chase-bank.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/chase-bank.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
