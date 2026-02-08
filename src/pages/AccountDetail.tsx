@@ -32,31 +32,118 @@ export default function AccountDetail() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const specificAccounts = {
+    '5201': {
+      id: '1',
+      account_number: '5201',
+      account_type: 'checking',
+      account_name: 'SAPPHIRE CHECKING',
+      balance: 15234.50,
+      currency: 'USD',
+      status: 'active'
+    },
+    '9030': {
+      id: '2',
+      account_number: '9030',
+      account_type: 'savings',
+      account_name: 'PREMIER SAVINGS',
+      balance: 48752.30,
+      currency: 'USD',
+      status: 'active'
+    },
+    '5900': {
+      id: '3',
+      account_number: '5900',
+      account_type: 'checking',
+      account_name: 'CPC CHECKING',
+      balance: 3421.75,
+      currency: 'USD',
+      status: 'active'
+    }
+  };
+
+  const mockTransactions: { [key: string]: Transaction[] } = {
+    '5201': [
+      {
+        id: '1',
+        transaction_type: 'debit',
+        category: 'shopping',
+        amount: 127.45,
+        description: 'Purchase',
+        merchant: 'Amazon',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '2',
+        transaction_type: 'debit',
+        category: 'dining',
+        amount: 45.20,
+        description: 'Dinner',
+        merchant: 'Olive Garden',
+        transaction_date: new Date(Date.now() - 86400000).toISOString()
+      },
+      {
+        id: '3',
+        transaction_type: 'credit',
+        category: 'income',
+        amount: 2500.00,
+        description: 'Salary',
+        merchant: 'Employer Direct Deposit',
+        transaction_date: new Date(Date.now() - 172800000).toISOString()
+      }
+    ],
+    '9030': [
+      {
+        id: '4',
+        transaction_type: 'credit',
+        category: 'transfer',
+        amount: 500.00,
+        description: 'Transfer from checking',
+        merchant: 'Internal Transfer',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '5',
+        transaction_type: 'credit',
+        category: 'income',
+        amount: 15.30,
+        description: 'Interest',
+        merchant: 'Interest Payment',
+        transaction_date: new Date(Date.now() - 2592000000).toISOString()
+      }
+    ],
+    '5900': [
+      {
+        id: '6',
+        transaction_type: 'debit',
+        category: 'services',
+        amount: 89.99,
+        description: 'Software subscription',
+        merchant: 'Adobe',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '7',
+        transaction_type: 'debit',
+        category: 'utilities',
+        amount: 125.50,
+        description: 'Electric bill',
+        merchant: 'Power Company',
+        transaction_date: new Date(Date.now() - 86400000).toISOString()
+      }
+    ]
+  };
+
   useEffect(() => {
     loadData();
   }, [accountId, user]);
 
   const loadData = async () => {
-    if (!user || !accountId) return;
+    if (!accountId) return;
 
-    const { data: accountData } = await supabase
-      .from('accounts')
-      .select('*')
-      .eq('id', accountId)
-      .eq('user_id', user.id)
-      .maybeSingle();
-
-    if (accountData) {
-      setAccount(accountData);
-
-      const { data: transactionsData } = await supabase
-        .from('transactions')
-        .select('*')
-        .eq('account_id', accountId)
-        .order('transaction_date', { ascending: false })
-        .limit(20);
-
-      if (transactionsData) setTransactions(transactionsData);
+    if (specificAccounts[accountId as keyof typeof specificAccounts]) {
+      setAccount(specificAccounts[accountId as keyof typeof specificAccounts]);
+      setTransactions(mockTransactions[accountId] || []);
     }
 
     setLoading(false);
@@ -126,7 +213,7 @@ export default function AccountDetail() {
       <div className="bg-white px-6 pt-12 pb-6 border-b border-gray-200">
         <div className="flex items-center gap-4 mb-6">
           <button
-            onClick={() => navigate('/accounts')}
+            onClick={() => navigate('/dashboard')}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
             <ArrowLeft className="w-6 h-6 text-gray-700" />

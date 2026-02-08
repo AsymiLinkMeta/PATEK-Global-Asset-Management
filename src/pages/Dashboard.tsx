@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, Briefcase, Building2, Home, User } from 'lucide-react';
+import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Account {
@@ -35,6 +35,7 @@ export default function Dashboard() {
   const [showBalance, setShowBalance] = useState(true);
   const [loading, setLoading] = useState(true);
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
+  const [bankAccountsExpanded, setBankAccountsExpanded] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -111,6 +112,12 @@ export default function Dashboard() {
 
   const bankAccounts = accounts.filter(acc => acc.account_type === 'checking' || acc.account_type === 'savings');
   const creditCards = accounts.filter(acc => acc.account_type === 'credit');
+
+  const specificBankAccounts = [
+    { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 15234.50 },
+    { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 48752.30 },
+    { name: 'CPC CHECKING', accountNumber: '5900', balance: 3421.75 }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -215,13 +222,41 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <Link
-              to="/accounts"
-              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
+            <button
+              onClick={() => setBankAccountsExpanded(!bankAccountsExpanded)}
+              className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
             >
-              <span className="font-medium text-gray-900">Bank accounts ({bankAccounts.length})</span>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </Link>
+              <span className="font-medium text-gray-900">Bank accounts ({specificBankAccounts.length})</span>
+              {bankAccountsExpanded ? (
+                <ChevronDown className="w-5 h-5 text-gray-400" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {bankAccountsExpanded && (
+              <div className="bg-gray-50">
+                {specificBankAccounts.map((account, index) => (
+                  <Link
+                    key={account.accountNumber}
+                    to={`/account/${account.accountNumber}`}
+                    className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-100 transition-colors ${
+                      index < specificBankAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    <div>
+                      <p className="font-medium text-gray-900">{account.name}</p>
+                      <p className="text-sm text-gray-600">...{account.accountNumber}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-gray-900">{formatCurrency(account.balance)}</p>
+                      <ChevronRight className="w-4 h-4 text-gray-400 ml-auto mt-1" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
             <Link
               to="/accounts"
               className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
