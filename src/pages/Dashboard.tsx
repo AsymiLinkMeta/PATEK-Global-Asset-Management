@@ -36,6 +36,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
   const [bankAccountsExpanded, setBankAccountsExpanded] = useState(false);
+  const [creditCardsExpanded, setCreditCardsExpanded] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -117,6 +118,12 @@ export default function Dashboard() {
     { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 15234.50 },
     { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 48752.30 },
     { name: 'CPC CHECKING', accountNumber: '5900', balance: 3421.75 }
+  ];
+
+  const specificCreditCards = [
+    { name: 'FREEDOM UNLIMITED', accountNumber: '9933', balance: -1234.50, creditLimit: 10000 },
+    { name: 'SAPPHIRE PREFERRED', accountNumber: '2456', balance: -2567.80, creditLimit: 15000 },
+    { name: 'SAPPHIRE RESERVED', accountNumber: '2464', balance: -890.25, creditLimit: 25000 }
   ];
 
   return (
@@ -262,13 +269,46 @@ export default function Dashboard() {
               </div>
             )}
 
-            <Link
-              to="/accounts"
-              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors border-b border-gray-200"
+            <button
+              onClick={() => setCreditCardsExpanded(!creditCardsExpanded)}
+              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+                creditCardsExpanded
+                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
+                  : 'hover:bg-gray-50'
+              }`}
             >
-              <span className="font-medium text-gray-900">Credit cards ({creditCards.length})</span>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </Link>
+              <span className={`font-medium ${creditCardsExpanded ? 'text-white' : 'text-gray-900'}`}>
+                Credit cards ({specificCreditCards.length})
+              </span>
+              {creditCardsExpanded ? (
+                <ChevronDown className="w-5 h-5 text-white" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {creditCardsExpanded && (
+              <div className="bg-white border-b border-gray-200">
+                {specificCreditCards.map((card, index) => (
+                  <Link
+                    key={card.accountNumber}
+                    to={`/account/${card.accountNumber}`}
+                    className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
+                      index < specificCreditCards.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-700 mb-1">
+                        {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
+                      </p>
+                      <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(Math.abs(card.balance))}</p>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
+                  </Link>
+                ))}
+              </div>
+            )}
+
             <Link
               to="/accounts"
               className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"

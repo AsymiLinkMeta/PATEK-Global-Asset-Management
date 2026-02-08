@@ -12,6 +12,7 @@ interface Account {
   balance: number;
   currency: string;
   status: string;
+  creditLimit?: number;
 }
 
 interface Transaction {
@@ -59,6 +60,36 @@ export default function AccountDetail() {
       balance: 3421.75,
       currency: 'USD',
       status: 'active'
+    },
+    '9933': {
+      id: '4',
+      account_number: '9933',
+      account_type: 'credit',
+      account_name: 'FREEDOM UNLIMITED',
+      balance: -1234.50,
+      currency: 'USD',
+      status: 'active',
+      creditLimit: 10000
+    },
+    '2456': {
+      id: '5',
+      account_number: '2456',
+      account_type: 'credit',
+      account_name: 'SAPPHIRE PREFERRED',
+      balance: -2567.80,
+      currency: 'USD',
+      status: 'active',
+      creditLimit: 15000
+    },
+    '2464': {
+      id: '6',
+      account_number: '2464',
+      account_type: 'credit',
+      account_name: 'SAPPHIRE RESERVED',
+      balance: -890.25,
+      currency: 'USD',
+      status: 'active',
+      creditLimit: 25000
     }
   };
 
@@ -130,6 +161,93 @@ export default function AccountDetail() {
         description: 'Electric bill',
         merchant: 'Power Company',
         transaction_date: new Date(Date.now() - 86400000).toISOString()
+      }
+    ],
+    '9933': [
+      {
+        id: '8',
+        transaction_type: 'debit',
+        category: 'shopping',
+        amount: 234.99,
+        description: 'Online purchase',
+        merchant: 'Amazon',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '9',
+        transaction_type: 'debit',
+        category: 'dining',
+        amount: 67.50,
+        description: 'Dinner',
+        merchant: 'Restaurant',
+        transaction_date: new Date(Date.now() - 86400000).toISOString()
+      },
+      {
+        id: '10',
+        transaction_type: 'debit',
+        category: 'groceries',
+        amount: 156.78,
+        description: 'Groceries',
+        merchant: 'Whole Foods',
+        transaction_date: new Date(Date.now() - 172800000).toISOString()
+      }
+    ],
+    '2456': [
+      {
+        id: '11',
+        transaction_type: 'debit',
+        category: 'travel',
+        amount: 567.00,
+        description: 'Flight booking',
+        merchant: 'United Airlines',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '12',
+        transaction_type: 'debit',
+        category: 'dining',
+        amount: 125.30,
+        description: 'Fine dining',
+        merchant: 'The Capital Grille',
+        transaction_date: new Date(Date.now() - 86400000).toISOString()
+      },
+      {
+        id: '13',
+        transaction_type: 'debit',
+        category: 'shopping',
+        amount: 89.99,
+        description: 'Online purchase',
+        merchant: 'Best Buy',
+        transaction_date: new Date(Date.now() - 172800000).toISOString()
+      }
+    ],
+    '2464': [
+      {
+        id: '14',
+        transaction_type: 'debit',
+        category: 'travel',
+        amount: 450.00,
+        description: 'Hotel stay',
+        merchant: 'Marriott',
+        transaction_date: new Date().toISOString()
+      },
+      {
+        id: '15',
+        transaction_type: 'debit',
+        category: 'dining',
+        amount: 78.50,
+        description: 'Lunch',
+        merchant: 'Local Bistro',
+        transaction_date: new Date(Date.now() - 86400000).toISOString()
+      },
+      {
+        id: '16',
+        transaction_type: 'credit',
+        category: 'refund',
+        amount: 125.00,
+        description: 'Purchase return',
+        merchant: 'Nordstrom',
+        transaction_date: new Date(Date.now() - 172800000).toISOString()
       }
     ]
   };
@@ -230,8 +348,27 @@ export default function AccountDetail() {
         </div>
 
         <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl p-6 text-white">
-          <p className="text-primary-100 text-sm mb-2">Available Balance</p>
-          <p className="text-4xl font-semibold mb-6">{formatCurrency(account.balance)}</p>
+          {account.account_type === 'credit' ? (
+            <>
+              <p className="text-primary-100 text-sm mb-2">Current Balance</p>
+              <p className="text-4xl font-semibold mb-4">{formatCurrency(Math.abs(account.balance))}</p>
+              <div className="flex justify-between mb-6 text-sm">
+                <div>
+                  <p className="text-primary-100">Available Credit</p>
+                  <p className="font-semibold">{formatCurrency((account.creditLimit || 0) - Math.abs(account.balance))}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-primary-100">Credit Limit</p>
+                  <p className="font-semibold">{formatCurrency(account.creditLimit || 0)}</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="text-primary-100 text-sm mb-2">Available Balance</p>
+              <p className="text-4xl font-semibold mb-6">{formatCurrency(account.balance)}</p>
+            </>
+          )}
 
           <div className="flex gap-3">
             <Link
@@ -239,14 +376,14 @@ export default function AccountDetail() {
               className="flex-1 bg-white text-primary-600 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors flex items-center justify-center gap-2"
             >
               <ArrowLeftRight className="w-5 h-5" />
-              Transfer
+              {account.account_type === 'credit' ? 'Pay' : 'Transfer'}
             </Link>
             <Link
               to="/transactions"
               className="flex-1 bg-white/20 text-white py-3 rounded-lg font-medium hover:bg-white/30 transition-colors flex items-center justify-center gap-2"
             >
               <DollarSign className="w-5 h-5" />
-              Pay
+              {account.account_type === 'credit' ? 'Transactions' : 'Pay'}
             </Link>
           </div>
         </div>
