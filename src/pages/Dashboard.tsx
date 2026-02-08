@@ -144,7 +144,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('personal')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'personal'
-                  ? 'text-gray-900'
+                  ? 'text-primary-600'
                   : 'text-gray-600'
               }`}
             >
@@ -154,7 +154,7 @@ export default function Dashboard() {
               onClick={() => setAccountType('business')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'business'
-                  ? 'text-gray-900'
+                  ? 'text-primary-600'
                   : 'text-gray-600'
               }`}
             >
