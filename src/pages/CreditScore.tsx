@@ -6,6 +6,24 @@ export default function CreditScore() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'credit' | 'alerts' | 'offers'>('credit');
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    return date.toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: '2-digit'
+    });
+  };
+
+  const getCurrentDateLong = () => {
+    const date = new Date();
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
   return (
     <div className="min-h-screen bg-[#003e7e] pb-0">
       <div className="px-5 pt-6 pb-6">
@@ -59,7 +77,7 @@ export default function CreditScore() {
         </div>
 
         <div className="flex items-center justify-between mb-6">
-          <p className="text-white/80 text-sm">As of 11/02/25</p>
+          <p className="text-white/80 text-sm">As of {getCurrentDate()}</p>
           <button className="flex items-center gap-0.5 text-white/80 text-sm hover:text-white transition-colors">
             See score history
             <ChevronRight className="w-4 h-4" />
@@ -140,7 +158,7 @@ export default function CreditScore() {
 
           <div className="text-center">
             <p className="font-bold text-gray-900 leading-none mb-6" style={{ fontSize: '8rem' }}>841</p>
-            <p className="text-gray-600 text-base">Updated on November 7, 2025</p>
+            <p className="text-gray-600 text-base">Updated on {getCurrentDateLong()}</p>
           </div>
         </div>
       </div>
