@@ -370,7 +370,7 @@ export default function AccountDetail() {
             {account.account_number === '2456' && (
               <div className="flex-shrink-0">
                 <img
-                  src="/chase-sapphire-preferred-lead-removebg-preview_(1).png"
+                  src="/chase-sapphire-preferred-lead.jpg"
                   alt="Sapphire Preferred"
                   className="w-12 h-12 object-contain"
                 />

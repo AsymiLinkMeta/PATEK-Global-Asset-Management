@@ -328,7 +328,7 @@ export default function Dashboard() {
                           {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                         </p>
                         <img
-                          src="/chase-sapphire-preferred-lead-removebg-preview_(1).png"
+                          src="/chase-sapphire-preferred-lead.jpg"
                           alt="Sapphire Preferred"
                           className="w-40 h-24 object-contain"
                         />
