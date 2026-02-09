@@ -473,7 +473,7 @@ export default function Dashboard() {
                 </div>
                 <div className="border-l border-gray-200"></div>
                 <div className="flex-1">
-                  <div className="text-4xl font-bold text-gray-900 mb-1">0</div>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">41,492</div>
                   <div className="text-sm text-gray-600">Pending points</div>
                 </div>
               </div>
