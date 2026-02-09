@@ -150,7 +150,7 @@ export default function Accounts() {
                       <img
                         src="/freedom_unlimited-removebg-preview_(1).png"
                         alt="Card"
-                        className="w-16 h-16 object-contain rounded-lg"
+                        className="w-8 h-8 object-contain rounded-lg"
                       />
                     </div>
                     <div className="flex-1">
