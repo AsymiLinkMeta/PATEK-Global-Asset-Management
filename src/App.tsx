@@ -9,6 +9,7 @@ import Transactions from './pages/Transactions';
 import Transfer from './pages/Transfer';
 import Profile from './pages/Profile';
 import Business from './pages/Business';
+import CreditScore from './pages/CreditScore';
 import MobileLayout from './components/MobileLayout';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -71,6 +72,7 @@ function AppRoutes() {
                 <Route path="/transactions" element={<Transactions />} />
                 <Route path="/transfer" element={<Transfer />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/credit-score" element={<CreditScore />} />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
               </Routes>
             </MobileLayout>

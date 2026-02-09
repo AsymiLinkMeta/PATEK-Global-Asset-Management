@@ -566,7 +566,10 @@ export default function Dashboard() {
               </button>
             </div>
 
-            <div className="bg-primary-600 rounded-xl shadow-sm p-6 text-white mb-4">
+            <Link
+              to="/credit-score"
+              className="block bg-primary-600 rounded-xl shadow-sm p-6 text-white mb-4 hover:bg-primary-700 transition-colors"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <h2 className="text-xl font-semibold mb-3">See your free credit score</h2>
@@ -603,7 +606,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
               <h2 className="text-lg font-semibold text-gray-900 px-6 pt-6 pb-4">Visit us</h2>
