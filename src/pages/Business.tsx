@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, ChevronDown, User, CreditCard, Plus, Send, Building2 } from 'lucide-react';
+import { ChevronRight, ChevronDown, User, CreditCard, Plus, Send, Building2, PiggyBank, Users, Home as HomeIcon, Briefcase } from 'lucide-react';
 
 interface BusinessAccount {
   name: string;
@@ -22,28 +22,18 @@ export default function Business() {
   const businesses: Business[] = [
     {
       id: '1',
-      name: 'Patek Global Enterprises',
+      name: 'PATEK GLOBAL ASSET MANAGEMENT LLC.',
       accounts: [
-        { name: 'BUSINESS CHECKING', accountNumber: '7401', balance: 1845623.89 },
-        { name: 'PAYROLL ACCOUNT', accountNumber: '7402', balance: 284512.45 },
-        { name: 'BUSINESS SAVINGS', accountNumber: '7403', balance: 5621847.33 }
+        { name: 'BUS COMPLETE CHK', accountNumber: '8335', balance: 0 },
+        { name: 'BUS PLATNIUM CHK', accountNumber: '2176', balance: 0 }
       ]
     },
     {
       id: '2',
-      name: 'Millennium Holdings LLC',
+      name: 'ASSYMILINK META LLLP',
       accounts: [
-        { name: 'OPERATING ACCOUNT', accountNumber: '8501', balance: 3247891.12 },
-        { name: 'RESERVE ACCOUNT', accountNumber: '8502', balance: 1928456.78 }
-      ]
-    },
-    {
-      id: '3',
-      name: 'Crown Properties Group',
-      accounts: [
-        { name: 'MAIN CHECKING', accountNumber: '9601', balance: 892345.67 },
-        { name: 'ESCROW ACCOUNT', accountNumber: '9602', balance: 456789.23 },
-        { name: 'INVESTMENT ACCOUNT', accountNumber: '9603', balance: 2134567.89 }
+        { name: 'BUS COMPLETE CHK', accountNumber: '3989', balance: 0 },
+        { name: 'BUS PLATNIUM CHK', accountNumber: '1557', balance: 0 }
       ]
     }
   ];
@@ -107,70 +97,42 @@ export default function Business() {
           </div>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
-          <Link
-            to="/accounts"
-            className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
-          >
-            <Plus className="w-5 h-5 text-primary-600" />
-          </Link>
-          <Link
-            to="/transfer"
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
-          >
-            <Send className="w-4 h-4 text-primary-600" />
-            <span className="text-sm font-medium text-primary-600">Wire transfer</span>
-          </Link>
-          <Link
-            to="/accounts"
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
-          >
-            <span className="text-sm font-medium text-primary-600">Deposit checks</span>
-          </Link>
-          <Link
-            to="/transactions"
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
-          >
-            <span className="text-sm font-medium text-primary-600">Pay vendors</span>
-          </Link>
-        </div>
       </div>
 
       <div className="px-6 py-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <CreditCard className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">Snapshot</h3>
+              <p className="text-gray-600 text-sm">Your money in this month is <span className="font-semibold">$0</span></p>
+            </div>
+          </div>
+          <ChevronRight className="w-6 h-6 text-gray-400" />
+        </div>
+
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Accounts</h2>
         {businesses.map((business) => (
           <div key={business.id} className="mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Building2 className="w-6 h-6 text-primary-600" />
-                <h2 className="text-xl font-semibold text-gray-900">{business.name}</h2>
-              </div>
-              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <span className="text-gray-600">•••</span>
-              </button>
-            </div>
+            <h3 className="text-base font-normal text-gray-900 mb-3">{business.name}</h3>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <button
                 onClick={() => toggleBusiness(business.id)}
                 className={`w-full flex items-center justify-between p-4 transition-colors ${
                   expandedBusiness === business.id
-                    ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
-                    : 'hover:bg-gray-50'
+                    ? 'bg-gradient-to-br from-[#005EB8] to-[#0071CE] text-white'
+                    : 'hover:bg-gray-50 bg-white'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <span className={`font-medium ${expandedBusiness === business.id ? 'text-white' : 'text-gray-900'}`}>
-                    Bank accounts ({business.accounts.length})
-                  </span>
-                  <span className={`text-sm ${expandedBusiness === business.id ? 'text-white/90' : 'text-gray-500'}`}>
-                    Total: {formatCurrency(getTotalBalance(business))}
-                  </span>
-                </div>
-                {expandedBusiness === business.id ? (
-                  <ChevronDown className="w-5 h-5 text-white" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
+                <span className={`font-medium ${expandedBusiness === business.id ? 'text-white' : 'text-gray-900'}`}>
+                  Bank accounts ({business.accounts.length})
+                </span>
+                <span className={`text-base ${expandedBusiness === business.id ? 'text-white' : 'text-gray-900'}`}>
+                  {formatCurrency(getTotalBalance(business))}
+                </span>
               </button>
 
               {expandedBusiness === business.id && (
@@ -179,16 +141,19 @@ export default function Business() {
                     <Link
                       key={account.accountNumber}
                       to={`/account/${account.accountNumber}`}
-                      className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
-                        index < business.accounts.length - 1 ? 'border-b border-gray-200' : ''
+                      className={`flex items-center justify-between p-4 hover:bg-gray-50 transition-colors ${
+                        index < business.accounts.length - 1 ? 'border-b border-gray-100' : ''
                       }`}
                     >
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-700 mb-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-900">
                           {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
-                        </p>
-                        <p className="balance-display text-right">{formatCurrency(account.balance)}</p>
-                        <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-normal text-gray-900">{formatCurrency(account.balance)}</p>
+                        <p className="text-xs text-gray-500 mt-1">Available balance</p>
                       </div>
                     </Link>
                   ))}
@@ -198,13 +163,71 @@ export default function Business() {
           </div>
         ))}
 
+        <Link
+          to="/accounts"
+          className="flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-200 p-4 hover:bg-gray-50 transition-colors mt-6"
+        >
+          <span className="text-gray-900 font-medium">Link external accounts</span>
+          <ChevronRight className="w-5 h-5 text-gray-400" />
+        </Link>
+
         <div className="mt-8">
-          <Link
-            to="/accounts"
-            className="block text-center py-3 bg-white border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors shadow-sm"
-          >
-            Open new business account
-          </Link>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Explore more products</h2>
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              to="/accounts"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                <CreditCard className="w-8 h-8 text-blue-600" />
+              </div>
+              <span className="text-sm font-medium text-blue-600">Credit cards</span>
+            </Link>
+
+            <Link
+              to="/accounts"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                <CreditCard className="w-8 h-8 text-blue-600" />
+              </div>
+              <span className="text-sm font-medium text-blue-600">Checking</span>
+            </Link>
+
+            <Link
+              to="/accounts"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-3">
+                <PiggyBank className="w-8 h-8 text-orange-500" />
+              </div>
+              <span className="text-sm font-medium text-blue-600">Savings & CDs</span>
+            </Link>
+
+            <Link
+              to="/accounts"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                <Users className="w-8 h-8 text-blue-600" />
+              </div>
+              <span className="text-sm font-medium text-blue-600">Work with our advisors</span>
+            </Link>
+
+            <Link
+              to="/business"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
+            >
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                <Briefcase className="w-8 h-8 text-blue-600" />
+              </div>
+              <span className="text-sm font-medium text-blue-600">Business</span>
+            </Link>
+          </div>
+
+          <button className="w-full mt-6 py-3 bg-white border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50 transition-colors">
+            Explore products
+          </button>
         </div>
       </div>
     </div>
