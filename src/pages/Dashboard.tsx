@@ -327,7 +327,7 @@ export default function Dashboard() {
 
                         <div className="flex-1 text-right">
                           <p className="balance-display">{formatCurrency(Math.abs(card.balance))}</p>
-                          <p className="text-xs text-gray-500 mt-1">Available balance</p>
+                          <p className="text-xs text-gray-500 mt-1">Current balance</p>
                         </div>
                       </div>
                     </div>
