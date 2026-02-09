@@ -354,7 +354,7 @@ export default function AccountDetail() {
                 <img
                   src="/freedom_unlimited-removebg-preview_(1).png"
                   alt="Freedom Unlimited"
-                  className="w-12 h-12 object-contain"
+                  className="w-6 h-6 object-contain"
                 />
               </div>
             )}
@@ -363,7 +363,7 @@ export default function AccountDetail() {
                 <img
                   src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
                   alt="Sapphire Reserve"
-                  className="w-12 h-12 object-contain"
+                  className="w-6 h-6 object-contain"
                 />
               </div>
             )}
@@ -372,7 +372,7 @@ export default function AccountDetail() {
                 <img
                   src="/chase-sapphire-preferred-lead.jpg"
                   alt="Sapphire Preferred"
-                  className="w-12 h-12 object-contain"
+                  className="w-6 h-6 object-contain"
                 />
               </div>
             )}

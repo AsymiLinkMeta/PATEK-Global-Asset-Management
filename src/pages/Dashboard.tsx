@@ -305,7 +305,7 @@ export default function Dashboard() {
                         <img
                           src="/freedom_unlimited-removebg-preview_(1).png"
                           alt="Freedom Unlimited"
-                          className="w-40 h-24 object-contain"
+                          className="w-20 h-12 object-contain"
                         />
                       </div>
                     )}
@@ -317,7 +317,7 @@ export default function Dashboard() {
                         <img
                           src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
                           alt="Sapphire Reserve"
-                          className="w-40 h-24 object-contain"
+                          className="w-20 h-12 object-contain"
                         />
                       </div>
                     )}
@@ -329,7 +329,7 @@ export default function Dashboard() {
                         <img
                           src="/chase-sapphire-preferred-lead.jpg"
                           alt="Sapphire Preferred"
-                          className="w-40 h-24 object-contain"
+                          className="w-20 h-12 object-contain"
                         />
                       </div>
                     )}
