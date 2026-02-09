@@ -324,8 +324,8 @@ export default function Dashboard() {
                         />
                       )}
 
-                      <p className="balance-display">{formatCurrency(Math.abs(card.balance))}</p>
-                      <p className="text-xs text-gray-500 mt-1">Available balance</p>
+                      <p className="balance-display text-right">{formatCurrency(Math.abs(card.balance))}</p>
+                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
                   </Link>
                 ))}

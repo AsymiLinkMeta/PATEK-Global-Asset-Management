@@ -380,7 +380,7 @@ export default function AccountDetail() {
               {account.account_type === 'credit' ? (
                 <>
                   <p className="text-primary-100 text-sm mb-2">Current Balance</p>
-                  <p className="balance-display mb-4">{formatCurrency(Math.abs(account.balance))}</p>
+                  <p className="balance-display text-right mb-4">{formatCurrency(Math.abs(account.balance))}</p>
                   <div className="flex justify-between mb-2 text-sm">
                     <div>
                       <p className="text-primary-100">Available Credit</p>
@@ -395,7 +395,7 @@ export default function AccountDetail() {
               ) : (
                 <>
                   <p className="text-primary-100 text-sm mb-2">Available Balance</p>
-                  <p className="balance-display mb-2">{formatCurrency(account.balance)}</p>
+                  <p className="balance-display text-right mb-2">{formatCurrency(account.balance)}</p>
                 </>
               )}
             </div>
