@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, CreditCard, ArrowLeftRight, User, Receipt } from 'lucide-react';
+import { Home, CreditCard, ArrowLeftRight, User, Receipt, Briefcase } from 'lucide-react';
 
 interface MobileLayoutProps {
   children: ReactNode;
@@ -37,6 +37,18 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
           >
             <CreditCard className="w-6 h-6 mb-1" />
             <span className="text-xs">Accounts</span>
+          </NavLink>
+
+          <NavLink
+            to="/business"
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center flex-1 h-full ${
+                isActive ? 'text-primary-500' : 'text-gray-600'
+              }`
+            }
+          >
+            <Briefcase className="w-6 h-6 mb-1" />
+            <span className="text-xs">Business</span>
           </NavLink>
 
           <NavLink

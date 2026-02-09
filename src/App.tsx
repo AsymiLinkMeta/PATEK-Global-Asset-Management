@@ -8,6 +8,7 @@ import AccountDetail from './pages/AccountDetail';
 import Transactions from './pages/Transactions';
 import Transfer from './pages/Transfer';
 import Profile from './pages/Profile';
+import Business from './pages/Business';
 import MobileLayout from './components/MobileLayout';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -64,6 +65,7 @@ function AppRoutes() {
             <MobileLayout>
               <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/business" element={<Business />} />
                 <Route path="/accounts" element={<Accounts />} />
                 <Route path="/account/:accountId" element={<AccountDetail />} />
                 <Route path="/transactions" element={<Transactions />} />
