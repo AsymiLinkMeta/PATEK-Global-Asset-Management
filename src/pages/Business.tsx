@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, ChevronDown, User, CreditCard, Plus, Send, Building2 } from 'lucide-react';
 
 interface BusinessAccount {
@@ -15,7 +15,9 @@ interface Business {
 }
 
 export default function Business() {
+  const navigate = useNavigate();
   const [expandedBusiness, setExpandedBusiness] = useState<string | null>(null);
+  const [accountType, setAccountType] = useState<'personal' | 'business'>('business');
 
   const businesses: Business[] = [
     {
@@ -75,9 +77,34 @@ export default function Business() {
           </Link>
         </div>
 
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Business Banking</h1>
-          <p className="text-gray-600">Manage your business accounts</p>
+        <div className="flex items-center justify-center mb-6">
+          <div className="relative bg-gray-200 rounded-full p-1">
+            <div
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full transition-all duration-300 ease-in-out shadow-sm ${
+                accountType === 'personal' ? 'left-1' : 'left-[calc(50%+2px)]'
+              }`}
+            />
+            <button
+              onClick={() => navigate('/dashboard')}
+              className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
+                accountType === 'personal'
+                  ? 'text-gray-900'
+                  : 'text-gray-600'
+              }`}
+            >
+              Personal
+            </button>
+            <button
+              onClick={() => setAccountType('business')}
+              className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
+                accountType === 'business'
+                  ? 'text-gray-900'
+                  : 'text-gray-600'
+              }`}
+            >
+              Business
+            </button>
+          </div>
         </div>
 
         <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">

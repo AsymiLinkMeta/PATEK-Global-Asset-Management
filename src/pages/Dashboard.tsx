@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Account {
   id: string;
@@ -29,6 +29,7 @@ interface Profile {
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
@@ -158,7 +159,7 @@ export default function Dashboard() {
               Personal
             </button>
             <button
-              onClick={() => setAccountType('business')}
+              onClick={() => navigate('/business')}
               className={`relative z-10 px-8 py-2 rounded-full transition-colors ${
                 accountType === 'business'
                   ? 'text-gray-900'
