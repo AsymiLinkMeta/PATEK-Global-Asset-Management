@@ -298,34 +298,38 @@ export default function Dashboard() {
                     }`}
                   >
                     <div className="flex flex-col">
-                      <p className="text-sm text-gray-700 mb-2">
+                      <p className="text-sm text-gray-700 mb-3">
                         {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                       </p>
 
-                      {card.accountNumber === '9933' && (
-                        <img
-                          src="/freedom_unlimited-removebg-preview_(1).png"
-                          alt="Freedom Unlimited"
-                          className="w-20 h-12 object-contain mb-2"
-                        />
-                      )}
-                      {card.accountNumber === '2464' && (
-                        <img
-                          src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
-                          alt="Sapphire Reserve"
-                          className="w-20 h-12 object-contain mb-2"
-                        />
-                      )}
-                      {card.accountNumber === '2456' && (
-                        <img
-                          src="/chase-sapphire-preferred-lead.jpg"
-                          alt="Sapphire Preferred"
-                          className="w-20 h-12 object-contain mb-2"
-                        />
-                      )}
+                      <div className="flex items-center gap-4">
+                        {card.accountNumber === '9933' && (
+                          <img
+                            src="/freedom_unlimited-removebg-preview_(1).png"
+                            alt="Freedom Unlimited"
+                            className="w-20 h-12 object-contain"
+                          />
+                        )}
+                        {card.accountNumber === '2464' && (
+                          <img
+                            src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
+                            alt="Sapphire Reserve"
+                            className="w-20 h-12 object-contain"
+                          />
+                        )}
+                        {card.accountNumber === '2456' && (
+                          <img
+                            src="/chase-sapphire-preferred-lead.jpg"
+                            alt="Sapphire Preferred"
+                            className="w-20 h-12 object-contain"
+                          />
+                        )}
 
-                      <p className="balance-display text-right">{formatCurrency(Math.abs(card.balance))}</p>
-                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
+                        <div className="flex-1 text-right">
+                          <p className="balance-display">{formatCurrency(Math.abs(card.balance))}</p>
+                          <p className="text-xs text-gray-500 mt-1">Available balance</p>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}
