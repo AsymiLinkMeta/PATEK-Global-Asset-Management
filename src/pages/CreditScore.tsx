@@ -100,7 +100,7 @@ export default function CreditScore() {
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center pt-16">
-              <p className="text-white font-bold leading-none mb-1" style={{ fontSize: '6rem' }}>823</p>
+              <p className="text-white font-bold leading-none mb-1" style={{ fontSize: '5.4rem' }}>823</p>
               <p className="text-white/90 text-sm">No Change</p>
             </div>
           </div>
