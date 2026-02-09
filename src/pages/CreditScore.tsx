@@ -7,8 +7,8 @@ export default function CreditScore() {
   const [activeTab, setActiveTab] = useState<'credit' | 'alerts' | 'offers'>('credit');
 
   return (
-    <div className="min-h-screen bg-[#003e7e]">
-      <div className="px-6 pt-8 pb-6">
+    <div className="min-h-screen bg-[#003e7e] pb-0">
+      <div className="px-6 pt-8 pb-8">
         <div className="flex items-center mb-8">
           <button
             onClick={() => navigate('/dashboard')}
@@ -66,10 +66,8 @@ export default function CreditScore() {
           </button>
         </div>
 
-        <div className="flex flex-col items-center mb-8">
-          <p className="text-white text-lg mb-4">Excellent</p>
-
-          <div className="relative w-72 h-56 mb-4">
+        <div className="flex flex-col items-center mb-6">
+          <div className="relative w-80 h-60">
             <svg viewBox="0 0 200 120" className="w-full h-full">
               <defs>
                 <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -99,51 +97,56 @@ export default function CreditScore() {
               />
             </svg>
 
-            <div className="absolute top-0 right-8 flex flex-col items-end gap-3 text-white/70 text-xs font-medium">
+            <div className="absolute top-4 right-4 flex flex-col items-end gap-4 text-white/70 text-sm font-medium">
               <div>660</div>
               <div>720</div>
               <div>780</div>
               <div>850</div>
             </div>
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center pt-8">
-              <p className="text-white text-7xl font-bold mb-1">823</p>
-              <p className="text-white/80 text-sm">No Change</p>
+            <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
+              <p className="text-white text-xl mb-3">Excellent</p>
+              <p className="text-white text-8xl font-bold leading-none mb-2">823</p>
+              <p className="text-white/90 text-base">No Change</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 text-white/70 text-xs">
+          <div className="flex items-center justify-center gap-1.5 text-white/70 text-xs">
             <span>VantageScore® 3.0 provided by Experian™</span>
-            <button className="hover:bg-white/10 rounded-full p-1">
-              <HelpCircle className="w-4 h-4" />
+            <button className="hover:bg-white/10 rounded-full p-0.5">
+              <div className="w-4 h-4 border border-white/70 rounded-full flex items-center justify-center">
+                <span className="text-white/70 text-[10px] font-semibold">?</span>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="bg-[#0d8bb5] px-6 py-8">
-        <div className="text-white text-4xl font-bold mb-2">CreditWise®</div>
+      <div className="bg-gradient-to-r from-[#0d8bb5] to-[#0ca6d1] px-6 py-12">
+        <div className="text-white text-4xl font-bold">CreditWise®</div>
       </div>
 
-      <div className="bg-white rounded-t-3xl pt-8 pb-12">
+      <div className="bg-white pt-10 pb-16">
         <div className="px-6">
-          <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="flex items-center justify-center gap-2 mb-10">
             <h2 className="text-2xl font-bold text-gray-900">FICO® SCORE 8</h2>
-            <button className="hover:bg-gray-100 rounded-full p-1">
-              <HelpCircle className="w-5 h-5 text-gray-700" />
+            <button className="hover:bg-gray-100 rounded-full transition-colors">
+              <div className="w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">i</span>
+              </div>
             </button>
           </div>
 
-          <div className="text-center mb-4">
-            <p className="text-xl font-semibold text-gray-700 mb-4">Exceptional</p>
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
-              <div className="bg-green-600 h-2 rounded-full" style={{ width: '95%' }}></div>
+          <div className="text-center mb-10">
+            <p className="text-2xl font-semibold text-gray-700 mb-8">Exceptional</p>
+            <div className="w-full bg-gray-200 h-2.5">
+              <div className="bg-green-600 h-2.5" style={{ width: '100%' }}></div>
             </div>
           </div>
 
           <div className="text-center">
-            <p className="text-8xl font-bold text-gray-900 mb-4">841</p>
-            <p className="text-gray-600">Updated on November 7, 2025</p>
+            <p className="text-9xl font-bold text-gray-900 leading-none mb-6">841</p>
+            <p className="text-gray-600 text-lg">Updated on November 7, 2025</p>
           </div>
         </div>
       </div>
