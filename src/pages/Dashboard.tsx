@@ -204,7 +204,7 @@ export default function Dashboard() {
             <Plus className="w-5 h-5 text-primary-600" />
           </Link>
           <Link
-            to="/transfer"
+            to="/zelle"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
             <Send className="w-4 h-4 text-primary-600" />
@@ -221,6 +221,12 @@ export default function Dashboard() {
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
             <span className="text-sm font-medium text-primary-600">Pay bills</span>
+          </Link>
+          <Link
+            to="/wire-transfer"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <span className="text-sm font-medium text-primary-600">Wire transfer</span>
           </Link>
         </div>
       </div>
@@ -635,13 +641,20 @@ export default function Dashboard() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
               <h2 className="text-lg font-semibold text-gray-900 px-6 pt-6 pb-4">Visit us</h2>
-              <button className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors border-t border-gray-200">
+              <Link to="/atm-locator" className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors border-t border-gray-200">
+                <div className="flex items-center gap-4">
+                  <Calendar className="w-6 h-6 text-gray-700" />
+                  <span className="text-gray-900">Find ATM & branch</span>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </Link>
+              <Link to="/atm-locator" className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors border-t border-gray-200">
                 <div className="flex items-center gap-4">
                   <Calendar className="w-6 h-6 text-gray-700" />
                   <span className="text-gray-900">Schedule a meeting</span>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
-              </button>
+              </Link>
             </div>
           </>
         )}

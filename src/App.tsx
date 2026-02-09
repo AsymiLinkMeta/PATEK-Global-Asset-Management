@@ -18,6 +18,16 @@ import SpendingInsights from './pages/SpendingInsights';
 import CardControls from './pages/CardControls';
 import Security from './pages/Security';
 import PersonalDetails from './pages/PersonalDetails';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
+import ConsumerPrivacy from './pages/ConsumerPrivacy';
+import SecurityCenter from './pages/SecurityCenter';
+import Accessibility from './pages/Accessibility';
+import Statements from './pages/Statements';
+import WireTransfer from './pages/WireTransfer';
+import ZelleSend from './pages/ZelleSend';
+import ATMLocator from './pages/ATMLocator';
+import HelpSupport from './pages/HelpSupport';
 import MobileLayout from './components/MobileLayout';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -90,6 +100,16 @@ function AppRoutes() {
                 <Route path="/card-controls/:cardId" element={<CardControls />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/personal-details" element={<PersonalDetails />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                <Route path="/consumer-privacy" element={<ConsumerPrivacy />} />
+                <Route path="/security-center" element={<SecurityCenter />} />
+                <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/statements" element={<Statements />} />
+                <Route path="/wire-transfer" element={<WireTransfer />} />
+                <Route path="/zelle" element={<ZelleSend />} />
+                <Route path="/atm-locator" element={<ATMLocator />} />
+                <Route path="/help" element={<HelpSupport />} />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
               </Routes>
             </MobileLayout>

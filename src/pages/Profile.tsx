@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { User, Shield, Lock, Building2, Bell, MessageSquare, FileText, ChevronRight, ArrowLeft, CreditCard, BarChart3 } from 'lucide-react';
+import { User, Shield, Lock, Building2, Bell, MessageSquare, FileText, ChevronRight, ArrowLeft, CreditCard, BarChart3, MapPin, Send, HelpCircle, Award, Scale, Eye, Accessibility } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Profile() {
@@ -49,10 +49,12 @@ export default function Profile() {
     { id: 'cards', icon: CreditCard, label: 'Card controls', route: '/card-controls' },
     { id: 'spending', icon: BarChart3, label: 'Spending insights', route: '/spending-insights' },
     { id: 'alerts', icon: Bell, label: 'Alerts & messages', route: '/notifications', badge: notifCount },
-    { id: 'signin', icon: Lock, label: 'Sign-in preferences', route: '/security' },
-    { id: 'account', icon: Building2, label: 'Account settings', route: '/accounts' },
-    { id: 'help', icon: MessageSquare, label: 'Help & support' },
-    { id: 'documents', icon: FileText, label: 'Document manager' },
+    { id: 'rewards', icon: Award, label: 'Rewards', route: '/rewards' },
+    { id: 'statements', icon: FileText, label: 'Statements & documents', route: '/statements' },
+    { id: 'zelle', icon: Send, label: 'Send with Zelle', route: '/zelle' },
+    { id: 'wire', icon: Building2, label: 'Wire transfer', route: '/wire-transfer' },
+    { id: 'atm', icon: MapPin, label: 'Find ATM & branch', route: '/atm-locator' },
+    { id: 'help', icon: HelpCircle, label: 'Help & support', route: '/help' },
   ];
 
   return (
@@ -123,15 +125,38 @@ export default function Profile() {
           })}
         </div>
 
-        <div className="mt-8 mb-6 flex items-center justify-between">
-          <button className="text-blue-600 font-normal text-base flex items-center gap-1">
-            Give us feedback
-            <ChevronRight className="w-4 h-4" />
-          </button>
-          <button className="text-blue-600 font-normal text-base flex items-center gap-1">
-            Legal Information
-            <ChevronRight className="w-4 h-4" />
-          </button>
+        <div className="mt-6 mb-2">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal & Privacy</h2>
+          <div className="space-y-2">
+            {[
+              { icon: Eye, label: 'Privacy Policy', route: '/privacy-policy' },
+              { icon: Scale, label: 'Terms of Use', route: '/terms-of-use' },
+              { icon: Shield, label: 'Consumer Privacy Notice', route: '/consumer-privacy' },
+              { icon: Lock, label: 'Security Center', route: '/security-center' },
+              { icon: Accessibility, label: 'Accessibility', route: '/accessibility' },
+            ].map(item => (
+              <Link key={item.route} to={item.route} className="block">
+                <div className="w-full bg-white border border-gray-200 rounded-lg p-3 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <item.icon className="w-5 h-5 text-gray-500" strokeWidth={1.5} />
+                    <span className="text-sm text-gray-700">{item.label}</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 mb-6 pb-4">
+          <div className="bg-gray-100 rounded-xl p-4">
+            <p className="text-[10px] text-gray-400 leading-relaxed text-center">
+              JPMorgan Chase Bank, N.A. Member FDIC. Equal Housing Lender.
+            </p>
+            <p className="text-[10px] text-gray-400 text-center mt-1">
+              &copy; {new Date().getFullYear()} JPMorgan Chase & Co.
+            </p>
+          </div>
         </div>
       </div>
     </div>
