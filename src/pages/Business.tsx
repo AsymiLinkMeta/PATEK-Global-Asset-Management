@@ -133,10 +133,10 @@ export default function Business() {
             </button>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
             <button
               onClick={() => setExpandedPatek(!expandedPatek)}
-              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+              className={`w-full flex items-center justify-between p-4 transition-colors ${
                 expandedPatek
                   ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
                   : 'hover:bg-gray-50'
@@ -153,7 +153,7 @@ export default function Business() {
             </button>
 
             {expandedPatek && (
-              <div className="bg-white border-b border-gray-200">
+              <div className="bg-white border-t border-gray-200">
                 {patekAccounts.map((account, index) => (
                   <Link
                     key={account.accountNumber}
@@ -173,10 +173,12 @@ export default function Business() {
                 ))}
               </div>
             )}
+          </div>
 
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
             <button
               onClick={() => setExpandedAssymilink(!expandedAssymilink)}
-              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+              className={`w-full flex items-center justify-between p-4 transition-colors ${
                 expandedAssymilink
                   ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
                   : 'hover:bg-gray-50'
@@ -193,7 +195,7 @@ export default function Business() {
             </button>
 
             {expandedAssymilink && (
-              <div className="bg-white border-b border-gray-200">
+              <div className="bg-white border-t border-gray-200">
                 {assymilinkAccounts.map((account, index) => (
                   <Link
                     key={account.accountNumber}
@@ -213,7 +215,9 @@ export default function Business() {
                 ))}
               </div>
             )}
+          </div>
 
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <Link
               to="/accounts"
               className="flex items-center justify-center p-4 hover:bg-gray-50 transition-colors"
@@ -274,7 +278,7 @@ export default function Business() {
           </div>
           <Link
             to="/accounts"
-            className="block text-center py-3 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
+            className="block text-left py-3 px-6 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
           >
             Explore products
           </Link>

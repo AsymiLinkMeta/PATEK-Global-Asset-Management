@@ -397,7 +397,7 @@ export default function Dashboard() {
           </div>
           <Link
             to="/accounts"
-            className="block text-center py-3 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
+            className="block text-left py-3 px-6 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
           >
             Explore products
           </Link>
