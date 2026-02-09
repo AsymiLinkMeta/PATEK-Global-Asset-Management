@@ -352,7 +352,7 @@ export default function AccountDetail() {
             {account.account_number === '9933' && (
               <div className="flex-shrink-0">
                 <img
-                  src="/freedom_unlimited-removebg-preview.png"
+                  src="/freedom_unlimited-removebg-preview_(1).png"
                   alt="Freedom Unlimited"
                   className="w-12 h-12 object-contain"
                 />

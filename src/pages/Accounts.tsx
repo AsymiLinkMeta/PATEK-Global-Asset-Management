@@ -148,7 +148,7 @@ export default function Accounts() {
                   <div className="relative z-10 flex gap-4">
                     <div className="flex-shrink-0">
                       <img
-                        src="/freedom_unlimited-removebg-preview.png"
+                        src="/freedom_unlimited-removebg-preview_(1).png"
                         alt="Card"
                         className="w-16 h-16 object-contain rounded-lg"
                       />
