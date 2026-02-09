@@ -117,7 +117,7 @@ export default function Business() {
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
                 <p className="text-sm text-gray-600">
-                  Your money in this month is {formatCurrency(0)}
+                  Your money in this month is {formatCurrency(411947.03)}
                 </p>
               </div>
             </div>
