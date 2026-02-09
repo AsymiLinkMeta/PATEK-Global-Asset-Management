@@ -264,7 +264,6 @@ export default function Dashboard() {
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(account.balance)}</p>
                       <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
                   </Link>
                 ))}
               </div>
@@ -343,7 +342,6 @@ export default function Dashboard() {
                       <p className="text-2xl font-semibold text-gray-900 text-right">{formatCurrency(Math.abs(card.balance))}</p>
                       <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 ml-3" />
                   </Link>
                 ))}
               </div>
@@ -351,10 +349,9 @@ export default function Dashboard() {
 
             <Link
               to="/accounts"
-              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-center p-4 hover:bg-gray-50 transition-colors"
             >
               <span className="font-medium text-gray-900">Link external accounts</span>
-              <ChevronRight className="w-5 h-5 text-gray-400" />
             </Link>
           </div>
         </div>
