@@ -126,14 +126,9 @@ export default function Business() {
         </Link>
 
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xl font-semibold text-gray-900">Accounts</h2>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <span className="text-gray-600">•••</span>
-            </button>
-          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">PATEK GLOBAL ASSET MANAGEMENT LLC.</h2>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
             <button
               onClick={() => setExpandedPatek(!expandedPatek)}
               className={`w-full flex items-center justify-between p-4 transition-colors ${
@@ -143,7 +138,7 @@ export default function Business() {
               }`}
             >
               <span className={`font-medium ${expandedPatek ? 'text-white' : 'text-gray-900'}`}>
-                PATEK GLOBAL ASSET MANAGEMENT LLC. ({patekAccounts.length})
+                Bank accounts ({patekAccounts.length})
               </span>
               {expandedPatek ? (
                 <ChevronDown className="w-5 h-5 text-white" />
@@ -175,6 +170,8 @@ export default function Business() {
             )}
           </div>
 
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">ASSYMILINK META LLLP</h2>
+
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
             <button
               onClick={() => setExpandedAssymilink(!expandedAssymilink)}
@@ -185,7 +182,7 @@ export default function Business() {
               }`}
             >
               <span className={`font-medium ${expandedAssymilink ? 'text-white' : 'text-gray-900'}`}>
-                ASSYMILINK META LLLP ({assymilinkAccounts.length})
+                Bank accounts ({assymilinkAccounts.length})
               </span>
               {expandedAssymilink ? (
                 <ChevronDown className="w-5 h-5 text-white" />
