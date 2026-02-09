@@ -12,7 +12,6 @@ import Business from './pages/Business';
 import CreditScore from './pages/CreditScore';
 import PayBills from './pages/PayBills';
 import DepositCheck from './pages/DepositCheck';
-import Notifications from './pages/Notifications';
 import Rewards from './pages/Rewards';
 import SpendingInsights from './pages/SpendingInsights';
 import CardControls from './pages/CardControls';
@@ -93,7 +92,6 @@ function AppRoutes() {
                 <Route path="/credit-score" element={<CreditScore />} />
                 <Route path="/pay-bills" element={<PayBills />} />
                 <Route path="/deposit-check" element={<DepositCheck />} />
-                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/rewards" element={<Rewards />} />
                 <Route path="/spending-insights" element={<SpendingInsights />} />
                 <Route path="/card-controls" element={<CardControls />} />

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { User, Shield, Lock, Building2, Bell, MessageSquare, FileText, ChevronRight, ArrowLeft, CreditCard, BarChart3, MapPin, Send, HelpCircle, Award, Scale, Eye, Accessibility } from 'lucide-react';
+import { User, Shield, Lock, Building2, MessageSquare, FileText, ChevronRight, ArrowLeft, CreditCard, BarChart3, MapPin, Send, HelpCircle, Award, Scale, Eye, Accessibility } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Profile() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [profileName, setProfileName] = useState('');
-  const [notifCount, setNotifCount] = useState(0);
 
   useEffect(() => {
     if (!user) return;
@@ -19,13 +18,6 @@ export default function Profile() {
         .eq('id', user.id)
         .maybeSingle();
       if (data?.full_name) setProfileName(data.full_name);
-
-      const { count } = await supabase
-        .from('notifications')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', user.id)
-        .eq('is_read', false);
-      if (count) setNotifCount(count);
     })();
   }, [user]);
 
@@ -48,7 +40,6 @@ export default function Profile() {
     { id: 'personal', icon: User, label: 'Personal details', route: '/personal-details' },
     { id: 'cards', icon: CreditCard, label: 'Card controls', route: '/card-controls' },
     { id: 'spending', icon: BarChart3, label: 'Spending insights', route: '/spending-insights' },
-    { id: 'alerts', icon: Bell, label: 'Alerts & messages', route: '/notifications', badge: notifCount },
     { id: 'rewards', icon: Award, label: 'Rewards', route: '/rewards' },
     { id: 'statements', icon: FileText, label: 'Statements & documents', route: '/statements' },
     { id: 'zelle', icon: Send, label: 'Send with Zelle', route: '/zelle' },

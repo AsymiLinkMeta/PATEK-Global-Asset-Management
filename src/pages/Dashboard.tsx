@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User, Calendar, Bell } from 'lucide-react';
+import { TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User, Calendar } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface Account {
@@ -38,7 +38,6 @@ export default function Dashboard() {
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
   const [bankAccountsExpanded, setBankAccountsExpanded] = useState(false);
   const [creditCardsExpanded, setCreditCardsExpanded] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
     loadData();
@@ -73,13 +72,6 @@ export default function Dashboard() {
 
       if (transactionsData) setRecentTransactions(transactionsData);
     }
-
-    const { count } = await supabase
-      .from('notifications')
-      .select('*', { count: 'exact', head: true })
-      .eq('user_id', user.id)
-      .eq('is_read', false);
-    if (count) setNotificationCount(count);
 
     setLoading(false);
   };
@@ -151,19 +143,9 @@ export default function Dashboard() {
             <Plus className="w-3 h-3 text-gray-700 absolute top-1 right-1 bg-white rounded-full" />
           </Link>
           <img src="/chase-bank.jpg" alt="Chase" className="h-12 w-12 rounded-lg" />
-          <div className="flex items-center gap-2">
-            <Link to="/notifications" className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
-              <Bell className="w-6 h-6 text-gray-700" />
-              {notificationCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] font-bold w-4.5 h-4.5 min-w-[18px] min-h-[18px] rounded-full flex items-center justify-center">
-                  {notificationCount}
-                </span>
-              )}
-            </Link>
-            <Link to="/profile" className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
-              <User className="w-5 h-5 text-gray-700" />
-            </Link>
-          </div>
+          <Link to="/profile" className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+            <User className="w-5 h-5 text-gray-700" />
+          </Link>
         </div>
 
         <div className="flex items-center justify-center mb-6">
