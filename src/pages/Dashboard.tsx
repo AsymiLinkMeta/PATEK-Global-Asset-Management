@@ -468,7 +468,7 @@ export default function Dashboard() {
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Ultimate Rewards®</h2>
               <div className="flex gap-8 mb-6">
                 <div className="flex-1">
-                  <div className="text-4xl font-bold text-gray-900 mb-1">2,425</div>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">204,239</div>
                   <div className="text-sm text-gray-600">Available points</div>
                 </div>
                 <div className="border-l border-gray-200"></div>
