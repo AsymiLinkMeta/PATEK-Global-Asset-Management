@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, ChevronDown, User, CreditCard, Plus, Send, Building2, PiggyBank, Users, Home as HomeIcon, Briefcase } from 'lucide-react';
+import { ChevronRight, ChevronDown, User, CreditCard, Plus, PiggyBank, Users, Briefcase, Send } from 'lucide-react';
 
 interface BusinessAccount {
   name: string;
@@ -8,34 +8,20 @@ interface BusinessAccount {
   balance: number;
 }
 
-interface Business {
-  id: string;
-  name: string;
-  accounts: BusinessAccount[];
-}
-
 export default function Business() {
   const navigate = useNavigate();
-  const [expandedBusiness, setExpandedBusiness] = useState<string | null>(null);
+  const [expandedPatek, setExpandedPatek] = useState(false);
+  const [expandedAssymilink, setExpandedAssymilink] = useState(false);
   const [accountType, setAccountType] = useState<'personal' | 'business'>('business');
 
-  const businesses: Business[] = [
-    {
-      id: '1',
-      name: 'PATEK GLOBAL ASSET MANAGEMENT LLC.',
-      accounts: [
-        { name: 'BUS COMPLETE CHK', accountNumber: '8335', balance: 0 },
-        { name: 'BUS PLATNIUM CHK', accountNumber: '2176', balance: 0 }
-      ]
-    },
-    {
-      id: '2',
-      name: 'ASSYMILINK META LLLP',
-      accounts: [
-        { name: 'BUS COMPLETE CHK', accountNumber: '3989', balance: 0 },
-        { name: 'BUS PLATNIUM CHK', accountNumber: '1557', balance: 0 }
-      ]
-    }
+  const patekAccounts = [
+    { name: 'BUS COMPLETE CHK', accountNumber: '8335', balance: 0 },
+    { name: 'BUS PLATNIUM CHK', accountNumber: '2176', balance: 0 }
+  ];
+
+  const assymilinkAccounts = [
+    { name: 'BUS COMPLETE CHK', accountNumber: '3989', balance: 0 },
+    { name: 'BUS PLATNIUM CHK', accountNumber: '1557', balance: 0 }
   ];
 
   const formatCurrency = (amount: number) => {
@@ -43,14 +29,6 @@ export default function Business() {
       style: 'currency',
       currency: 'USD',
     }).format(amount);
-  };
-
-  const toggleBusiness = (businessId: string) => {
-    setExpandedBusiness(expandedBusiness === businessId ? null : businessId);
-  };
-
-  const getTotalBalance = (business: Business) => {
-    return business.accounts.reduce((sum, acc) => sum + acc.balance, 0);
   };
 
   return (
@@ -97,137 +75,209 @@ export default function Business() {
           </div>
         </div>
 
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6">
+          <Link
+            to="/accounts"
+            className="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
+          >
+            <Plus className="w-5 h-5 text-primary-600" />
+          </Link>
+          <Link
+            to="/transfer"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <Send className="w-4 h-4 text-primary-600" />
+            <span className="text-sm font-medium text-primary-600">Wire transfer</span>
+          </Link>
+          <Link
+            to="/accounts"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <span className="text-sm font-medium text-primary-600">Deposit checks</span>
+          </Link>
+          <Link
+            to="/transactions"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
+          >
+            <span className="text-sm font-medium text-primary-600">Pay vendors</span>
+          </Link>
+        </div>
       </div>
 
       <div className="px-6 py-6">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <CreditCard className="w-6 h-6 text-blue-600" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">Snapshot</h3>
-              <p className="text-gray-600 text-sm">Your money in this month is <span className="font-semibold">$0</span></p>
-            </div>
-          </div>
-          <ChevronRight className="w-6 h-6 text-gray-400" />
-        </div>
-
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Accounts</h2>
-        {businesses.map((business) => (
-          <div key={business.id} className="mb-6">
-            <h3 className="text-base font-normal text-gray-900 mb-3">{business.name}</h3>
-
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <button
-                onClick={() => toggleBusiness(business.id)}
-                className={`w-full flex items-center justify-between p-4 transition-colors ${
-                  expandedBusiness === business.id
-                    ? 'bg-gradient-to-br from-[#005EB8] to-[#0071CE] text-white'
-                    : 'hover:bg-gray-50 bg-white'
-                }`}
-              >
-                <span className={`font-medium ${expandedBusiness === business.id ? 'text-white' : 'text-gray-900'}`}>
-                  Bank accounts ({business.accounts.length})
-                </span>
-                <span className={`text-base ${expandedBusiness === business.id ? 'text-white' : 'text-gray-900'}`}>
-                  {formatCurrency(getTotalBalance(business))}
-                </span>
-              </button>
-
-              {expandedBusiness === business.id && (
-                <div className="bg-white">
-                  {business.accounts.map((account, index) => (
-                    <Link
-                      key={account.accountNumber}
-                      to={`/account/${account.accountNumber}`}
-                      className={`flex items-center justify-between p-4 hover:bg-gray-50 transition-colors ${
-                        index < business.accounts.length - 1 ? 'border-b border-gray-100' : ''
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-900">
-                          {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
-                        </span>
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
-                      </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-normal text-gray-900">{formatCurrency(account.balance)}</p>
-                        <p className="text-xs text-gray-500 mt-1">Available balance</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-
         <Link
-          to="/accounts"
-          className="flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-200 p-4 hover:bg-gray-50 transition-colors mt-6"
+          to="/transactions"
+          className="block bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow"
         >
-          <span className="text-gray-900 font-medium">Link external accounts</span>
-          <ChevronRight className="w-5 h-5 text-gray-400" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                <CreditCard className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
+                <p className="text-sm text-gray-600">
+                  Your money in this month is {formatCurrency(0)}
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="w-5 h-5 text-gray-400" />
+          </div>
         </Link>
 
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Explore more products</h2>
-          <div className="grid grid-cols-2 gap-3">
-            <Link
-              to="/accounts"
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
-                <CreditCard className="w-8 h-8 text-blue-600" />
-              </div>
-              <span className="text-sm font-medium text-blue-600">Credit cards</span>
-            </Link>
-
-            <Link
-              to="/accounts"
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
-                <CreditCard className="w-8 h-8 text-blue-600" />
-              </div>
-              <span className="text-sm font-medium text-blue-600">Checking</span>
-            </Link>
-
-            <Link
-              to="/accounts"
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-3">
-                <PiggyBank className="w-8 h-8 text-orange-500" />
-              </div>
-              <span className="text-sm font-medium text-blue-600">Savings & CDs</span>
-            </Link>
-
-            <Link
-              to="/accounts"
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
-                <Users className="w-8 h-8 text-blue-600" />
-              </div>
-              <span className="text-sm font-medium text-blue-600">Work with our advisors</span>
-            </Link>
-
-            <Link
-              to="/business"
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:bg-gray-50 transition-colors flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
-                <Briefcase className="w-8 h-8 text-blue-600" />
-              </div>
-              <span className="text-sm font-medium text-blue-600">Business</span>
-            </Link>
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xl font-semibold text-gray-900">Accounts</h2>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <span className="text-gray-600">•••</span>
+            </button>
           </div>
 
-          <button className="w-full mt-6 py-3 bg-white border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50 transition-colors">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <button
+              onClick={() => setExpandedPatek(!expandedPatek)}
+              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+                expandedPatek
+                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
+                  : 'hover:bg-gray-50'
+              }`}
+            >
+              <span className={`font-medium ${expandedPatek ? 'text-white' : 'text-gray-900'}`}>
+                PATEK GLOBAL ASSET MANAGEMENT LLC. ({patekAccounts.length})
+              </span>
+              {expandedPatek ? (
+                <ChevronDown className="w-5 h-5 text-white" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {expandedPatek && (
+              <div className="bg-white border-b border-gray-200">
+                {patekAccounts.map((account, index) => (
+                  <Link
+                    key={account.accountNumber}
+                    to={`/account/${account.accountNumber}`}
+                    className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
+                      index < patekAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-700 mb-4">
+                        {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
+                      </p>
+                      <p className="balance-display text-right">{formatCurrency(account.balance)}</p>
+                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            <button
+              onClick={() => setExpandedAssymilink(!expandedAssymilink)}
+              className={`w-full flex items-center justify-between p-4 transition-colors border-b border-gray-200 ${
+                expandedAssymilink
+                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
+                  : 'hover:bg-gray-50'
+              }`}
+            >
+              <span className={`font-medium ${expandedAssymilink ? 'text-white' : 'text-gray-900'}`}>
+                ASSYMILINK META LLLP ({assymilinkAccounts.length})
+              </span>
+              {expandedAssymilink ? (
+                <ChevronDown className="w-5 h-5 text-white" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {expandedAssymilink && (
+              <div className="bg-white border-b border-gray-200">
+                {assymilinkAccounts.map((account, index) => (
+                  <Link
+                    key={account.accountNumber}
+                    to={`/account/${account.accountNumber}`}
+                    className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
+                      index < assymilinkAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-700 mb-4">
+                        {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
+                      </p>
+                      <p className="balance-display text-right">{formatCurrency(account.balance)}</p>
+                      <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            <Link
+              to="/accounts"
+              className="flex items-center justify-center p-4 hover:bg-gray-50 transition-colors"
+            >
+              <span className="font-medium text-gray-900">Link external accounts</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">Explore more products</h2>
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-6 px-6 mb-4">
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <CreditCard className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Credit cards</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <CreditCard className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Checking</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <PiggyBank className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Savings & CDs</p>
+            </Link>
+            <Link
+              to="/accounts"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <Users className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Work with advisors</p>
+            </Link>
+            <Link
+              to="/business"
+              className="flex-shrink-0 w-32 bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                <Briefcase className="w-6 h-6 text-primary-600" />
+              </div>
+              <p className="text-sm font-medium text-primary-600">Business</p>
+            </Link>
+          </div>
+          <Link
+            to="/accounts"
+            className="block text-center py-3 border border-primary-600 text-primary-600 rounded-full font-medium hover:bg-primary-50 transition-colors"
+          >
             Explore products
-          </button>
+          </Link>
         </div>
       </div>
     </div>
