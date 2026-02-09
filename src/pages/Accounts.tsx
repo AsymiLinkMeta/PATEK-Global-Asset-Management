@@ -123,7 +123,7 @@ export default function Accounts() {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xl font-semibold text-gray-900">{formatCurrency(Number(account.balance))}</p>
+                      <p className="balance-display">{formatCurrency(Number(account.balance))}</p>
                       <ChevronRight className="w-5 h-5 text-gray-400 ml-auto mt-1" />
                     </div>
                   </div>

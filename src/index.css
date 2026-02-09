@@ -23,8 +23,8 @@
   }
 
   .balance-display {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 200;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-weight: 100;
     font-size: 3.15rem;
     letter-spacing: -0.02em;
   }
