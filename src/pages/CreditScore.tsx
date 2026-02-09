@@ -67,7 +67,9 @@ export default function CreditScore() {
         </div>
 
         <div className="flex flex-col items-center mb-4">
-          <div className="relative w-full max-w-md h-64">
+          <p className="text-white text-xl mb-4">Excellent</p>
+
+          <div className="relative w-full max-w-md h-56">
             <svg viewBox="0 0 240 140" className="w-full h-full">
               <defs>
                 <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -97,15 +99,7 @@ export default function CreditScore() {
               />
             </svg>
 
-            <div className="absolute top-2 right-2 flex flex-col items-end gap-5 text-white/70 text-sm">
-              <div>660</div>
-              <div>720</div>
-              <div>780</div>
-              <div>850</div>
-            </div>
-
             <div className="absolute inset-0 flex flex-col items-center justify-center pt-8">
-              <p className="text-white text-xl mb-2">Excellent</p>
               <p className="text-white font-bold leading-none mb-1" style={{ fontSize: '6rem' }}>823</p>
               <p className="text-white/90 text-sm">No Change</p>
             </div>
