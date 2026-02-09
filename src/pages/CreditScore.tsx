@@ -66,7 +66,7 @@ export default function CreditScore() {
           </button>
         </div>
 
-        <div className="flex flex-col items-center mb-4">
+        <div className="flex flex-col items-center mb-4" style={{ marginTop: '20px' }}>
           <p className="text-white text-xl mb-4">Excellent</p>
 
           <div className="relative w-full max-w-md h-56">
