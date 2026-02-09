@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, User, CreditCard, Plus, Wallet, Receipt, TrendingUp, Star, Menu } from 'lucide-react';
+import { ChevronRight, User, CreditCard, Plus, Wallet, Receipt, TrendingUp, Star, Menu, BarChart3, Home, Calendar } from 'lucide-react';
 
 interface OfferCard {
   id: string;
@@ -81,6 +81,79 @@ export default function Business() {
       </div>
 
       <div className="px-6 py-6 space-y-4">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-4">Grow your business with our analytics</h2>
+          <div className="flex items-start gap-4 mb-4">
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <BarChart3 className="w-7 h-7 text-blue-600" />
+            </div>
+            <p className="text-gray-700 text-base leading-relaxed flex-1">
+              Process payments with Chase to see sales data and get actionable insights.
+            </p>
+          </div>
+          <div className="flex justify-end">
+            <button className="px-6 py-2.5 border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50 transition-colors">
+              See more
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-3">Chase MyHome</h2>
+          <div className="flex items-start gap-4 mb-4">
+            <div className="flex-1">
+              <p className="text-gray-700 text-base leading-relaxed">
+                See rates, properties and insights, and manage your mortgage
+              </p>
+            </div>
+            <div className="w-16 h-16 flex-shrink-0">
+              <div className="relative w-full h-full">
+                <div className="w-full h-full bg-blue-600 rounded-lg flex items-center justify-center">
+                  <Home className="w-8 h-8 text-white" />
+                </div>
+                <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 rounded"></div>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <button className="px-6 py-2.5 border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50 transition-colors">
+              See details
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="flex items-start gap-4 mb-4">
+            <div className="flex-1">
+              <h2 className="text-lg font-bold text-gray-900 mb-3">Earn up to $250 cash back per year</h2>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                That's $25 cash back for each friend who gets a Freedom Rise® credit card.
+              </p>
+            </div>
+            <img
+              src="/freedom_unlimited-removebg-preview_(1).png"
+              alt="Freedom Rise Card"
+              className="w-20 h-14 object-contain flex-shrink-0"
+            />
+          </div>
+          <button className="px-6 py-2.5 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 transition-colors">
+            Refer friends now
+          </button>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+          <div className="px-6 py-4">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">Visit us</h2>
+            <button className="w-full flex items-center justify-between py-3 hover:bg-gray-50 rounded-lg transition-colors px-4">
+              <div className="flex items-center gap-3">
+                <Calendar className="w-6 h-6 text-gray-700" />
+                <span className="text-base text-gray-900">Schedule a meeting</span>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
+            </button>
+          </div>
+        </div>
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Ultimate Rewards®</h2>
           <div className="flex items-center justify-between mb-6">
