@@ -70,7 +70,7 @@ export default function CreditScore() {
           <p className="text-white text-xl mb-4">Excellent</p>
 
           <div className="relative w-full max-w-md h-56">
-            <svg viewBox="0 0 240 140" className="w-full h-full">
+            <svg viewBox="0 0 240 140" className="w-full h-full -mt-8">
               <defs>
                 <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" style={{ stopColor: '#ff6b35', stopOpacity: 1 }} />
