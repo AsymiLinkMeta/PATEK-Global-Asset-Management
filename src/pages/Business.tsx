@@ -126,7 +126,12 @@ export default function Business() {
         </Link>
 
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">PATEK GLOBAL ASSET MANAGEMENT LLC.</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xl font-semibold text-gray-900">PATEK GLOBAL ASSET MANAGEMENT LLC.</h2>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <span className="text-gray-600">•••</span>
+            </button>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
             <button
@@ -170,7 +175,12 @@ export default function Business() {
             )}
           </div>
 
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">ASSYMILINK META LLLP</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xl font-semibold text-gray-900">ASSYMILINK META LLLP</h2>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <span className="text-gray-600">•••</span>
+            </button>
+          </div>
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
             <button
