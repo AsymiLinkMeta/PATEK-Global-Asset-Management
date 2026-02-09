@@ -115,15 +115,15 @@ export default function Dashboard() {
   const creditCards = accounts.filter(acc => acc.account_type === 'credit');
 
   const specificBankAccounts = [
-    { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 15234.50 },
-    { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 48752.30 },
-    { name: 'CPC CHECKING', accountNumber: '5900', balance: 3421.75 }
+    { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 204599.36 },
+    { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 3025784.20 },
+    { name: 'CPC CHECKING', accountNumber: '5900', balance: 816441.47 }
   ];
 
   const specificCreditCards = [
-    { name: 'FREEDOM UNLIMITED', accountNumber: '9933', balance: -1234.50, creditLimit: 10000 },
-    { name: 'SAPPHIRE PREFERRED', accountNumber: '2456', balance: -2567.80, creditLimit: 15000 },
-    { name: 'SAPPHIRE RESERVED', accountNumber: '2464', balance: -890.25, creditLimit: 25000 }
+    { name: 'FREEDOM UNLIMITED', accountNumber: '9933', balance: -3809.10, creditLimit: 10000 },
+    { name: 'SAPPHIRE PREFERRED', accountNumber: '2456', balance: -873.45, creditLimit: 15000 },
+    { name: 'SAPPHIRE RESERVED', accountNumber: '2464', balance: -4812.62, creditLimit: 25000 }
   ];
 
   return (
@@ -212,7 +212,7 @@ export default function Dashboard() {
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
                 <p className="text-sm text-gray-600">
-                  Your spending this week: {formatCurrency(totalBalance * 0.05)}
+                  Your spending this week: {formatCurrency(23836.72)}
                 </p>
               </div>
             </div>
