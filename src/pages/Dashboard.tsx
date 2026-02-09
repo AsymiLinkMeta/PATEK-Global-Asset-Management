@@ -117,7 +117,7 @@ export default function Dashboard() {
   const specificBankAccounts = [
     { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 204599.36 },
     { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 3025784.20 },
-    { name: 'CPC CHECKING', accountNumber: '5900', balance: 816441.47 }
+    { name: 'CPC CHECKING', accountNumber: '5900', balance: 816821.47 }
   ];
 
   const specificCreditCards = [
