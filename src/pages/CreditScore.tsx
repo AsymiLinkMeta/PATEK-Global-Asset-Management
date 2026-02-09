@@ -67,6 +67,8 @@ export default function CreditScore() {
         </div>
 
         <div className="flex flex-col items-center mb-8">
+          <p className="text-white text-lg mb-4">Excellent</p>
+
           <div className="relative w-72 h-56 mb-4">
             <svg viewBox="0 0 200 120" className="w-full h-full">
               <defs>
@@ -105,7 +107,6 @@ export default function CreditScore() {
             </div>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center pt-8">
-              <p className="text-white text-lg mb-2">Excellent</p>
               <p className="text-white text-7xl font-bold mb-1">823</p>
               <p className="text-white/80 text-sm">No Change</p>
             </div>
