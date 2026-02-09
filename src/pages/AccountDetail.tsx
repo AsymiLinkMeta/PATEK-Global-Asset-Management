@@ -358,6 +358,15 @@ export default function AccountDetail() {
                 />
               </div>
             )}
+            {account.account_number === '2464' && (
+              <div className="flex-shrink-0">
+                <img
+                  src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
+                  alt="Sapphire Reserve"
+                  className="w-12 h-12 object-contain"
+                />
+              </div>
+            )}
             <div className="flex-1">
               {account.account_type === 'credit' ? (
                 <>

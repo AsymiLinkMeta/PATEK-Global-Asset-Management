@@ -316,7 +316,7 @@ export default function Dashboard() {
                           {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                         </p>
                         <img
-                          src="/chase_sapphire_reserve_06_24_25-removebg-preview.png"
+                          src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
                           alt="Sapphire Reserve"
                           className="w-40 h-25 object-cover"
                         />
