@@ -48,8 +48,55 @@ export default function AccountDetail() {
     loadData();
   }, [accountId, user]);
 
+  const staticAccounts: Record<string, Account> = {
+    '5201': { id: '5201', account_number: '5201', account_type: 'checking', account_name: 'SAPPHIRE CHECKING', balance: 204599.36, currency: 'USD', status: 'active', credit_limit: 0, minimum_payment: 0, payment_due_date: '', apr: 0 },
+    '9030': { id: '9030', account_number: '9030', account_type: 'savings', account_name: 'PREMIER SAVINGS', balance: 3025784.20, currency: 'USD', status: 'active', credit_limit: 0, minimum_payment: 0, payment_due_date: '', apr: 0 },
+    '5900': { id: '5900', account_number: '5900', account_type: 'checking', account_name: 'CPC CHECKING', balance: 816821.47, currency: 'USD', status: 'active', credit_limit: 0, minimum_payment: 0, payment_due_date: '', apr: 0 },
+    '9933': { id: '9933', account_number: '9933', account_type: 'credit', account_name: 'FREEDOM UNLIMITED', balance: 3809.10, currency: 'USD', status: 'active', credit_limit: 10000, minimum_payment: 35, payment_due_date: new Date(Date.now() + 15 * 86400000).toISOString(), apr: 20.49 },
+    '2456': { id: '2456', account_number: '2456', account_type: 'credit', account_name: 'SAPPHIRE PREFERRED', balance: 873.45, currency: 'USD', status: 'active', credit_limit: 15000, minimum_payment: 95, payment_due_date: new Date(Date.now() + 20 * 86400000).toISOString(), apr: 21.49 },
+    '2464': { id: '2464', account_number: '2464', account_type: 'credit', account_name: 'SAPPHIRE RESERVED', balance: 4812.62, currency: 'USD', status: 'active', credit_limit: 25000, minimum_payment: 65, payment_due_date: new Date(Date.now() + 25 * 86400000).toISOString(), apr: 22.49 },
+  };
+
+  const staticTransactions: Record<string, Transaction[]> = {
+    '5201': [
+      { id: '1', transaction_type: 'debit', category: 'shopping', amount: 127.45, description: 'Purchase', merchant: 'Amazon', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '2', transaction_type: 'debit', category: 'dining', amount: 45.20, description: 'Dinner', merchant: 'Olive Garden', transaction_date: new Date(Date.now() - 86400000).toISOString(), status: 'completed' },
+      { id: '3', transaction_type: 'credit', category: 'income', amount: 2500.00, description: 'Salary', merchant: 'Employer Direct Deposit', transaction_date: new Date(Date.now() - 172800000).toISOString(), status: 'completed' },
+    ],
+    '9030': [
+      { id: '4', transaction_type: 'credit', category: 'transfer', amount: 500.00, description: 'Transfer from checking', merchant: 'Internal Transfer', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '5', transaction_type: 'credit', category: 'income', amount: 15.30, description: 'Interest', merchant: 'Interest Payment', transaction_date: new Date(Date.now() - 2592000000).toISOString(), status: 'completed' },
+    ],
+    '5900': [
+      { id: '6', transaction_type: 'debit', category: 'services', amount: 89.99, description: 'Software subscription', merchant: 'Adobe', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '7', transaction_type: 'debit', category: 'utilities', amount: 125.50, description: 'Electric bill', merchant: 'Power Company', transaction_date: new Date(Date.now() - 86400000).toISOString(), status: 'completed' },
+    ],
+    '9933': [
+      { id: '8', transaction_type: 'debit', category: 'shopping', amount: 234.99, description: 'Online purchase', merchant: 'Amazon', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '9', transaction_type: 'debit', category: 'dining', amount: 67.50, description: 'Dinner', merchant: 'Restaurant', transaction_date: new Date(Date.now() - 86400000).toISOString(), status: 'completed' },
+      { id: '10', transaction_type: 'debit', category: 'groceries', amount: 156.78, description: 'Groceries', merchant: 'Whole Foods', transaction_date: new Date(Date.now() - 172800000).toISOString(), status: 'completed' },
+    ],
+    '2456': [
+      { id: '11', transaction_type: 'debit', category: 'travel', amount: 567.00, description: 'Flight booking', merchant: 'United Airlines', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '12', transaction_type: 'debit', category: 'dining', amount: 125.30, description: 'Fine dining', merchant: 'The Capital Grille', transaction_date: new Date(Date.now() - 86400000).toISOString(), status: 'completed' },
+      { id: '13', transaction_type: 'debit', category: 'shopping', amount: 89.99, description: 'Online purchase', merchant: 'Best Buy', transaction_date: new Date(Date.now() - 172800000).toISOString(), status: 'completed' },
+    ],
+    '2464': [
+      { id: '14', transaction_type: 'debit', category: 'travel', amount: 450.00, description: 'Hotel stay', merchant: 'Marriott', transaction_date: new Date().toISOString(), status: 'completed' },
+      { id: '15', transaction_type: 'debit', category: 'dining', amount: 78.50, description: 'Lunch', merchant: 'Local Bistro', transaction_date: new Date(Date.now() - 86400000).toISOString(), status: 'completed' },
+      { id: '16', transaction_type: 'credit', category: 'refund', amount: 125.00, description: 'Purchase return', merchant: 'Nordstrom', transaction_date: new Date(Date.now() - 172800000).toISOString(), status: 'completed' },
+    ],
+  };
+
   const loadData = async () => {
     if (!accountId || !user) return;
+
+    if (staticAccounts[accountId]) {
+      setAccount(staticAccounts[accountId]);
+      setTransactions(staticTransactions[accountId] || []);
+      setLoading(false);
+      return;
+    }
 
     const { data: accountData } = await supabase
       .from('accounts')

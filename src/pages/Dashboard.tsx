@@ -123,6 +123,18 @@ export default function Dashboard() {
   const bankAccounts = accounts.filter(acc => acc.account_type === 'checking' || acc.account_type === 'savings');
   const creditCards = accounts.filter(acc => acc.account_type === 'credit');
 
+  const specificBankAccounts = [
+    { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 204599.36 },
+    { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 3025784.20 },
+    { name: 'CPC CHECKING', accountNumber: '5900', balance: 816821.47 }
+  ];
+
+  const specificCreditCards = [
+    { name: 'FREEDOM UNLIMITED', accountNumber: '9933', balance: -3809.10, creditLimit: 10000 },
+    { name: 'SAPPHIRE PREFERRED', accountNumber: '2456', balance: -873.45, creditLimit: 15000 },
+    { name: 'SAPPHIRE RESERVED', accountNumber: '2464', balance: -4812.62, creditLimit: 25000 }
+  ];
+
   const getCardImage = (name: string) => {
     if (name.includes('FREEDOM')) return '/freedom_unlimited-removebg-preview_(1).png';
     if (name.includes('PREFERRED')) return '/chase-sapphire-preferred-lead.jpg';
@@ -226,7 +238,7 @@ export default function Dashboard() {
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
                 <p className="text-sm text-gray-600">
-                  Your spending this week: {formatCurrency(recentTransactions.filter(t => t.transaction_type === 'debit').reduce((s, t) => s + t.amount, 0))}
+                  Your spending this week: {formatCurrency(23836.72)}
                 </p>
               </div>
             </div>
@@ -252,7 +264,7 @@ export default function Dashboard() {
               }`}
             >
               <span className={`font-medium ${bankAccountsExpanded ? 'text-white' : 'text-gray-900'}`}>
-                Bank accounts ({bankAccounts.length})
+                Bank accounts ({specificBankAccounts.length})
               </span>
               {bankAccountsExpanded ? (
                 <ChevronDown className="w-5 h-5 text-white" />
@@ -263,19 +275,19 @@ export default function Dashboard() {
 
             {bankAccountsExpanded && (
               <div className="bg-white">
-                {bankAccounts.map((acc, index) => (
+                {specificBankAccounts.map((account, index) => (
                   <Link
-                    key={acc.id}
-                    to={`/account/${acc.id}`}
+                    key={account.accountNumber}
+                    to={`/account/${account.accountNumber}`}
                     className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
-                      index < bankAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                      index < specificBankAccounts.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
                     <div className="flex-1">
                       <p className="text-sm text-gray-700 mb-4">
-                        {acc.account_name} <span className="text-gray-500">({acc.account_number})</span>
+                        {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
                       </p>
-                      <p className="balance-display text-right">{formatCurrency(acc.balance)}</p>
+                      <p className="balance-display text-right">{formatCurrency(account.balance)}</p>
                       <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
                   </Link>
@@ -292,7 +304,7 @@ export default function Dashboard() {
               }`}
             >
               <span className={`font-medium ${creditCardsExpanded ? 'text-white' : 'text-gray-900'}`}>
-                Credit cards ({creditCards.length})
+                Credit cards ({specificCreditCards.length})
               </span>
               {creditCardsExpanded ? (
                 <ChevronDown className="w-5 h-5 text-white" />
@@ -303,30 +315,44 @@ export default function Dashboard() {
 
             {creditCardsExpanded && (
               <div className="bg-white border-b border-gray-200">
-                {creditCards.map((card, index) => (
+                {specificCreditCards.map((card, index) => (
                   <Link
-                    key={card.id}
-                    to={`/account/${card.id}`}
+                    key={card.accountNumber}
+                    to={`/account/${card.accountNumber}`}
                     className={`block p-4 pl-8 hover:bg-gray-50 transition-colors ${
-                      index < creditCards.length - 1 ? 'border-b border-gray-200' : ''
+                      index < specificCreditCards.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
                     <div className="flex flex-col">
                       <p className="text-sm text-gray-700 mb-3">
-                        {card.account_name} <span className="text-gray-500">({card.account_number})</span>
+                        {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
                       </p>
 
                       <div className="flex items-center gap-4">
-                        {getCardImage(card.account_name) && (
+                        {card.accountNumber === '9933' && (
                           <img
-                            src={getCardImage(card.account_name)!}
-                            alt={card.account_name}
+                            src="/freedom_unlimited-removebg-preview_(1).png"
+                            alt="Freedom Unlimited"
+                            className="w-20 h-12 object-contain"
+                          />
+                        )}
+                        {card.accountNumber === '2464' && (
+                          <img
+                            src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
+                            alt="Sapphire Reserve"
+                            className="w-20 h-12 object-contain"
+                          />
+                        )}
+                        {card.accountNumber === '2456' && (
+                          <img
+                            src="/chase-sapphire-preferred-lead.jpg"
+                            alt="Sapphire Preferred"
                             className="w-20 h-12 object-contain"
                           />
                         )}
 
                         <div className="flex-1 text-right">
-                          <p className="balance-display">{formatCurrency(card.balance)}</p>
+                          <p className="balance-display">{formatCurrency(Math.abs(card.balance))}</p>
                           <p className="text-xs text-gray-500 mt-1">Current balance</p>
                         </div>
                       </div>
