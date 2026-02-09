@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Eye, EyeOff, TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, FileText, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User, Calendar } from 'lucide-react';
+import { TrendingUp, TrendingDown, CreditCard, Wallet, ArrowLeftRight, DollarSign, PiggyBank, Plus, Send, ChevronRight, ChevronDown, Briefcase, Building2, Home, User, Calendar, Bell } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 interface Account {
@@ -11,6 +11,7 @@ interface Account {
   account_name: string;
   balance: number;
   currency: string;
+  credit_limit: number;
 }
 
 interface Transaction {
@@ -33,11 +34,11 @@ export default function Dashboard() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
-  const [showBalance, setShowBalance] = useState(true);
   const [loading, setLoading] = useState(true);
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
   const [bankAccountsExpanded, setBankAccountsExpanded] = useState(false);
   const [creditCardsExpanded, setCreditCardsExpanded] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
     loadData();
@@ -72,6 +73,13 @@ export default function Dashboard() {
 
       if (transactionsData) setRecentTransactions(transactionsData);
     }
+
+    const { count } = await supabase
+      .from('notifications')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .eq('is_read', false);
+    if (count) setNotificationCount(count);
 
     setLoading(false);
   };
@@ -115,17 +123,12 @@ export default function Dashboard() {
   const bankAccounts = accounts.filter(acc => acc.account_type === 'checking' || acc.account_type === 'savings');
   const creditCards = accounts.filter(acc => acc.account_type === 'credit');
 
-  const specificBankAccounts = [
-    { name: 'SAPPHIRE CHECKING', accountNumber: '5201', balance: 204599.36 },
-    { name: 'PREMIER SAVINGS', accountNumber: '9030', balance: 3025784.20 },
-    { name: 'CPC CHECKING', accountNumber: '5900', balance: 816821.47 }
-  ];
-
-  const specificCreditCards = [
-    { name: 'FREEDOM UNLIMITED', accountNumber: '9933', balance: -3809.10, creditLimit: 10000 },
-    { name: 'SAPPHIRE PREFERRED', accountNumber: '2456', balance: -873.45, creditLimit: 15000 },
-    { name: 'SAPPHIRE RESERVED', accountNumber: '2464', balance: -4812.62, creditLimit: 25000 }
-  ];
+  const getCardImage = (name: string) => {
+    if (name.includes('FREEDOM')) return '/freedom_unlimited-removebg-preview_(1).png';
+    if (name.includes('PREFERRED')) return '/chase-sapphire-preferred-lead.jpg';
+    if (name.includes('RESERVE')) return '/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png';
+    return null;
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -135,10 +138,20 @@ export default function Dashboard() {
             <CreditCard className="w-6 h-6 text-gray-700" />
             <Plus className="w-3 h-3 text-gray-700 absolute top-1 right-1 bg-white rounded-full" />
           </Link>
-          <img src="/chase-bank.jpg" alt="Patek Global" className="h-12 w-12 rounded-lg" />
-          <Link to="/profile" className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
-            <User className="w-5 h-5 text-gray-700" />
-          </Link>
+          <img src="/chase-bank.jpg" alt="Chase" className="h-12 w-12 rounded-lg" />
+          <div className="flex items-center gap-2">
+            <Link to="/notifications" className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+              <Bell className="w-6 h-6 text-gray-700" />
+              {notificationCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] font-bold w-4.5 h-4.5 min-w-[18px] min-h-[18px] rounded-full flex items-center justify-center">
+                  {notificationCount}
+                </span>
+              )}
+            </Link>
+            <Link to="/profile" className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+              <User className="w-5 h-5 text-gray-700" />
+            </Link>
+          </div>
         </div>
 
         <div className="flex items-center justify-center mb-6">
@@ -186,13 +199,13 @@ export default function Dashboard() {
             <span className="text-sm font-medium text-primary-600">Send | Zelle®</span>
           </Link>
           <Link
-            to="/accounts"
+            to="/deposit-check"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
             <span className="text-sm font-medium text-primary-600">Deposit checks</span>
           </Link>
           <Link
-            to="/transactions"
+            to="/pay-bills"
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors whitespace-nowrap"
           >
             <span className="text-sm font-medium text-primary-600">Pay bills</span>
@@ -202,7 +215,7 @@ export default function Dashboard() {
 
       <div className="px-6 py-6">
         <Link
-          to="/transactions"
+          to="/spending-insights"
           className="block bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 hover:shadow-md transition-shadow"
         >
           <div className="flex items-center justify-between">
@@ -213,7 +226,7 @@ export default function Dashboard() {
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Snapshot</p>
                 <p className="text-sm text-gray-600">
-                  Your spending this week: {formatCurrency(23836.72)}
+                  Your spending this week: {formatCurrency(recentTransactions.filter(t => t.transaction_type === 'debit').reduce((s, t) => s + t.amount, 0))}
                 </p>
               </div>
             </div>
@@ -239,7 +252,7 @@ export default function Dashboard() {
               }`}
             >
               <span className={`font-medium ${bankAccountsExpanded ? 'text-white' : 'text-gray-900'}`}>
-                Bank accounts ({specificBankAccounts.length})
+                Bank accounts ({bankAccounts.length})
               </span>
               {bankAccountsExpanded ? (
                 <ChevronDown className="w-5 h-5 text-white" />
@@ -250,19 +263,19 @@ export default function Dashboard() {
 
             {bankAccountsExpanded && (
               <div className="bg-white">
-                {specificBankAccounts.map((account, index) => (
+                {bankAccounts.map((acc, index) => (
                   <Link
-                    key={account.accountNumber}
-                    to={`/account/${account.accountNumber}`}
+                    key={acc.id}
+                    to={`/account/${acc.id}`}
                     className={`flex items-center justify-between p-4 pl-8 hover:bg-gray-50 transition-colors ${
-                      index < specificBankAccounts.length - 1 ? 'border-b border-gray-200' : ''
+                      index < bankAccounts.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
                     <div className="flex-1">
                       <p className="text-sm text-gray-700 mb-4">
-                        {account.name} <span className="text-gray-500">(...{account.accountNumber})</span>
+                        {acc.account_name} <span className="text-gray-500">({acc.account_number})</span>
                       </p>
-                      <p className="balance-display text-right">{formatCurrency(account.balance)}</p>
+                      <p className="balance-display text-right">{formatCurrency(acc.balance)}</p>
                       <p className="text-xs text-gray-500 text-right mt-1">Available balance</p>
                     </div>
                   </Link>
@@ -279,7 +292,7 @@ export default function Dashboard() {
               }`}
             >
               <span className={`font-medium ${creditCardsExpanded ? 'text-white' : 'text-gray-900'}`}>
-                Credit cards ({specificCreditCards.length})
+                Credit cards ({creditCards.length})
               </span>
               {creditCardsExpanded ? (
                 <ChevronDown className="w-5 h-5 text-white" />
@@ -290,44 +303,30 @@ export default function Dashboard() {
 
             {creditCardsExpanded && (
               <div className="bg-white border-b border-gray-200">
-                {specificCreditCards.map((card, index) => (
+                {creditCards.map((card, index) => (
                   <Link
-                    key={card.accountNumber}
-                    to={`/account/${card.accountNumber}`}
+                    key={card.id}
+                    to={`/account/${card.id}`}
                     className={`block p-4 pl-8 hover:bg-gray-50 transition-colors ${
-                      index < specificCreditCards.length - 1 ? 'border-b border-gray-200' : ''
+                      index < creditCards.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
                     <div className="flex flex-col">
                       <p className="text-sm text-gray-700 mb-3">
-                        {card.name} <span className="text-gray-500">(...{card.accountNumber})</span>
+                        {card.account_name} <span className="text-gray-500">({card.account_number})</span>
                       </p>
 
                       <div className="flex items-center gap-4">
-                        {card.accountNumber === '9933' && (
+                        {getCardImage(card.account_name) && (
                           <img
-                            src="/freedom_unlimited-removebg-preview_(1).png"
-                            alt="Freedom Unlimited"
-                            className="w-20 h-12 object-contain"
-                          />
-                        )}
-                        {card.accountNumber === '2464' && (
-                          <img
-                            src="/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png"
-                            alt="Sapphire Reserve"
-                            className="w-20 h-12 object-contain"
-                          />
-                        )}
-                        {card.accountNumber === '2456' && (
-                          <img
-                            src="/chase-sapphire-preferred-lead.jpg"
-                            alt="Sapphire Preferred"
+                            src={getCardImage(card.account_name)!}
+                            alt={card.account_name}
                             className="w-20 h-12 object-contain"
                           />
                         )}
 
                         <div className="flex-1 text-right">
-                          <p className="balance-display">{formatCurrency(Math.abs(card.balance))}</p>
+                          <p className="balance-display">{formatCurrency(card.balance)}</p>
                           <p className="text-xs text-gray-500 mt-1">Current balance</p>
                         </div>
                       </div>
@@ -464,7 +463,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4">
+            <Link to="/rewards" className="block bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition-shadow">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Ultimate Rewards®</h2>
               <div className="flex gap-8 mb-6">
                 <div className="flex-1">
@@ -477,10 +476,10 @@ export default function Dashboard() {
                   <div className="text-sm text-gray-600">Pending points</div>
                 </div>
               </div>
-              <button className="text-primary-600 font-medium px-5 py-2.5 border-2 border-primary-600 rounded-full hover:bg-primary-50 transition-colors w-full">
+              <span className="block text-center text-primary-600 font-medium px-5 py-2.5 border-2 border-primary-600 rounded-full hover:bg-primary-50 transition-colors w-full">
                 Redeem rewards
-              </button>
-            </div>
+              </span>
+            </Link>
 
             <div className="mb-4">
               <div className="flex items-center justify-between mb-3">

@@ -10,6 +10,14 @@ import Transfer from './pages/Transfer';
 import Profile from './pages/Profile';
 import Business from './pages/Business';
 import CreditScore from './pages/CreditScore';
+import PayBills from './pages/PayBills';
+import DepositCheck from './pages/DepositCheck';
+import Notifications from './pages/Notifications';
+import Rewards from './pages/Rewards';
+import SpendingInsights from './pages/SpendingInsights';
+import CardControls from './pages/CardControls';
+import Security from './pages/Security';
+import PersonalDetails from './pages/PersonalDetails';
 import MobileLayout from './components/MobileLayout';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -73,6 +81,15 @@ function AppRoutes() {
                 <Route path="/transfer" element={<Transfer />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/credit-score" element={<CreditScore />} />
+                <Route path="/pay-bills" element={<PayBills />} />
+                <Route path="/deposit-check" element={<DepositCheck />} />
+                <Route path="/notifications" element={<Notifications />} />
+                <Route path="/rewards" element={<Rewards />} />
+                <Route path="/spending-insights" element={<SpendingInsights />} />
+                <Route path="/card-controls" element={<CardControls />} />
+                <Route path="/card-controls/:cardId" element={<CardControls />} />
+                <Route path="/security" element={<Security />} />
+                <Route path="/personal-details" element={<PersonalDetails />} />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
               </Routes>
             </MobileLayout>
