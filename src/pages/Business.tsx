@@ -15,13 +15,13 @@ export default function Business() {
   const [accountType, setAccountType] = useState<'personal' | 'business'>('business');
 
   const patekAccounts = [
-    { name: 'BUS COMPLETE CHK', accountNumber: '8335', balance: 0 },
-    { name: 'BUS PLATNIUM CHK', accountNumber: '2176', balance: 0 }
+    { name: 'BUS COMPLETE CHK', accountNumber: '8335', balance: 2872031.91 },
+    { name: 'BUS PLATNIUM CHK', accountNumber: '2176', balance: 16621074.38 }
   ];
 
   const assymilinkAccounts = [
-    { name: 'BUS COMPLETE CHK', accountNumber: '3989', balance: 0 },
-    { name: 'BUS PLATNIUM CHK', accountNumber: '1557', balance: 0 }
+    { name: 'BUS COMPLETE CHK', accountNumber: '3989', balance: 1736529.82 },
+    { name: 'BUS PLATNIUM CHK', accountNumber: '1557', balance: 6968012.82 }
   ];
 
   const formatCurrency = (amount: number) => {
