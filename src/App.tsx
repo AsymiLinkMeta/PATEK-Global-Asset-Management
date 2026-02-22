@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { DataProvider } from './contexts/DataContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -27,6 +28,11 @@ import WireTransfer from './pages/WireTransfer';
 import ZelleSend from './pages/ZelleSend';
 import ATMLocator from './pages/ATMLocator';
 import HelpSupport from './pages/HelpSupport';
+import PayTransfer from './pages/PayTransfer';
+import Discover from './pages/Discover';
+import PlanTrack from './pages/PlanTrack';
+import Secure from './pages/Secure';
+import Notifications from './pages/Notifications';
 import MobileLayout from './components/MobileLayout';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -60,22 +66,8 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/signup"
-        element={
-          <PublicRoute>
-            <Signup />
-          </PublicRoute>
-        }
-      />
+      <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+      <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
       <Route
         path="/*"
         element={
@@ -83,6 +75,11 @@ function AppRoutes() {
             <MobileLayout>
               <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pay-transfer" element={<PayTransfer />} />
+                <Route path="/discover" element={<Discover />} />
+                <Route path="/plan-track" element={<PlanTrack />} />
+                <Route path="/secure" element={<Secure />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/business" element={<Business />} />
                 <Route path="/accounts" element={<Accounts />} />
                 <Route path="/account/:accountId" element={<AccountDetail />} />
@@ -123,7 +120,9 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppRoutes />
+        <DataProvider>
+          <AppRoutes />
+        </DataProvider>
       </AuthProvider>
     </Router>
   );
