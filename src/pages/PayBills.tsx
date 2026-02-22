@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { ArrowLeft, Plus, Zap, Wifi, Shield, Tv, Music, Dumbbell, Home, CheckCircle2, Clock, ChevronRight, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Plus, Zap, Wifi, Shield, Tv, Music, Dumbbell, Home, CheckCircle2, Clock, ChevronRight, RotateCcw, Package, Server } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface Bill {
@@ -27,6 +27,8 @@ const categoryIcons: Record<string, typeof Zap> = {
   insurance: Shield,
   health: Dumbbell,
   housing: Home,
+  storage: Package,
+  services: Server,
 };
 
 export default function PayBills() {
@@ -199,6 +201,8 @@ export default function PayBills() {
               <option value="insurance">Insurance</option>
               <option value="health">Health & Fitness</option>
               <option value="housing">Housing</option>
+              <option value="storage">Storage</option>
+              <option value="services">Business Services</option>
               <option value="other">Other</option>
             </select>
             <div className="flex gap-3">

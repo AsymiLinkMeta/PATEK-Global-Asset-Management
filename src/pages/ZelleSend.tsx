@@ -14,17 +14,21 @@ interface Contact {
 }
 
 const recentContacts: Contact[] = [
-  { id: '1', name: 'Sarah Mitchell', email: 's.mitchell@email.com', initials: 'SM', color: 'bg-teal-500' },
-  { id: '2', name: 'James Rodriguez', phone: '(305) 555-0142', initials: 'JR', color: 'bg-blue-500' },
-  { id: '3', name: 'Emily Chen', email: 'emily.chen@email.com', initials: 'EC', color: 'bg-rose-500' },
-  { id: '4', name: 'Michael Brooks', phone: '(212) 555-0198', initials: 'MB', color: 'bg-amber-500' },
-  { id: '5', name: 'Lisa Patel', email: 'lisa.p@email.com', initials: 'LP', color: 'bg-emerald-500' },
+  { id: '1', name: 'Isabella Torres', phone: '(305) 555-0187', initials: 'IT', color: 'bg-teal-500' },
+  { id: '2', name: 'Carlos Medina', phone: '(954) 555-0234', initials: 'CM', color: 'bg-blue-500' },
+  { id: '3', name: 'Marco Gutierrez', email: 'marco.g@email.com', initials: 'MG', color: 'bg-rose-500' },
+  { id: '4', name: 'Sofia Ramirez', phone: '(305) 555-0312', initials: 'SR', color: 'bg-amber-500' },
+  { id: '5', name: 'Diego Fernandez', email: 'diego.f@email.com', initials: 'DF', color: 'bg-emerald-500' },
+  { id: '6', name: 'Ana Castillo', phone: '(954) 555-0478', initials: 'AC', color: 'bg-cyan-500' },
+  { id: '7', name: 'Luis Navarro', email: 'luis.navarro@email.com', initials: 'LN', color: 'bg-orange-500' },
+  { id: '8', name: 'Camila Restrepo', phone: '(786) 555-0129', initials: 'CR', color: 'bg-pink-500' },
 ];
 
 const recentTransfers = [
-  { name: 'Sarah Mitchell', amount: 250, date: 'Feb 5' },
-  { name: 'James Rodriguez', amount: 1500, date: 'Feb 2' },
-  { name: 'Emily Chen', amount: 85, date: 'Jan 28' },
+  { name: 'Isabella Torres', amount: 2000, date: 'Feb 14' },
+  { name: 'Carlos Medina', amount: 3500, date: 'Feb 12' },
+  { name: 'Marco Gutierrez', amount: 500, date: 'Feb 8' },
+  { name: 'Sofia Ramirez', amount: 150, date: 'Feb 3' },
 ];
 
 const sourceAccounts = [
