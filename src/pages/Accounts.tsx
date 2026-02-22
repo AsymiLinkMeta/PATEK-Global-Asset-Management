@@ -98,7 +98,7 @@ export default function Accounts() {
 
       <div className="px-6 py-6">
         <div className="mb-6">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Accounts</h2>
+          <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Accounts</h2>
           {accounts.length === 0 ? (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
               <p className="text-gray-500 mb-4">No accounts found</p>
@@ -135,7 +135,7 @@ export default function Accounts() {
 
         {cards.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Cards</h2>
+            <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Cards</h2>
             <div className="space-y-3">
               {cards.map((card) => (
                 <div
