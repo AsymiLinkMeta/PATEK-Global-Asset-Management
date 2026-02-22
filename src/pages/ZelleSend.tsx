@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, Send, Search, User, Phone, Mail, Check, ChevronRight, Clock, Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type Step = 'contacts' | 'amount' | 'review' | 'success';
 
@@ -33,6 +33,7 @@ const sourceAccounts = [
 ];
 
 export default function ZelleSend() {
+  const navigate = useNavigate();
   const [step, setStep] = useState<Step>('contacts');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
@@ -114,7 +115,7 @@ export default function ZelleSend() {
         <div className="flex items-center gap-3 mb-2">
           <button
             onClick={() => {
-              if (step === 'contacts') return;
+              if (step === 'contacts') { navigate(-1); return; }
               if (step === 'amount') setStep('contacts');
               if (step === 'review') setStep('amount');
             }}
