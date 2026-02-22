@@ -45,10 +45,10 @@ export default function Signup() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12 max-w-md mx-auto w-full">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <img src="/chase-bank.jpg" alt="Patek Global" className="h-20 w-20 rounded-2xl shadow-md" />
+            <img src="/chase-bank.jpg" alt="Chase" className="h-16 w-16 rounded-xl shadow-lg" />
           </div>
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">Create your account</h1>
-          <p className="text-gray-600">Join Patek Global today</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create your account</h1>
+          <p className="text-gray-600">Join Chase today</p>
         </div>
 
         <div className="space-y-6">

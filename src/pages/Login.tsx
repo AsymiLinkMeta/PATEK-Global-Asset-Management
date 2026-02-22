@@ -32,9 +32,10 @@ export default function Login() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12 max-w-md mx-auto w-full">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <img src="/chase-bank.jpg" alt="Patek Global" className="h-20 w-20 rounded-2xl shadow-md" />
+            <img src="/chase-bank.jpg" alt="Chase" className="h-16 w-16 rounded-xl shadow-lg" />
           </div>
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">Sign in to Patek Global</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign in to Chase</h1>
+          <p className="text-gray-600">Access your accounts securely</p>
         </div>
 
         <div className="space-y-6">
@@ -98,7 +99,7 @@ export default function Login() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">New to Patek Global?</span>
+              <span className="px-4 bg-white text-gray-500">New to Chase?</span>
             </div>
           </div>
 
