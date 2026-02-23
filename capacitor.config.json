@@ -1,8 +1,0 @@
-{
-  "appId": "com.patekglobal.app",
-  "appName": "Patek Global",
-  "webDir": "dist",
-  "server": {
-    "androidScheme": "https"
-  }
-}
