@@ -1,17 +1,17 @@
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, ArrowLeftRight, Search, BarChart3, Shield } from 'lucide-react';
+import { CreditCard, DollarSign, ClipboardCheck, Star, Menu } from 'lucide-react';
 
 interface MobileLayoutProps {
   children: ReactNode;
 }
 
 const tabs = [
-  { to: '/dashboard', icon: Home, label: 'Home' },
-  { to: '/pay-transfer', icon: ArrowLeftRight, label: 'Pay &\nTransfer' },
-  { to: '/discover', icon: Search, label: 'Discover' },
-  { to: '/plan-track', icon: BarChart3, label: 'Plan &\nTrack' },
-  { to: '/secure', icon: Shield, label: 'Secure' },
+  { to: '/dashboard', icon: CreditCard, label: 'Accounts' },
+  { to: '/pay-transfer', icon: DollarSign, label: 'Pay & transfer' },
+  { to: '/plan-track', icon: ClipboardCheck, label: 'Plan & track' },
+  { to: '/benefits', icon: Star, label: 'Benefits & travel' },
+  { to: '/more', icon: Menu, label: 'More' },
 ];
 
 export default function MobileLayout({ children }: MobileLayoutProps) {
@@ -29,16 +29,16 @@ export default function MobileLayout({ children }: MobileLayoutProps) {
               to={to}
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center flex-1 pt-1.5 pb-1 transition-colors ${
-                  isActive ? 'text-[#0060f0]' : 'text-gray-500'
+                  isActive ? 'text-[#005EB8]' : 'text-gray-500'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <div className={`mb-0.5 ${isActive ? 'text-[#0060f0]' : 'text-gray-500'}`}>
+                  <div className={`mb-0.5 ${isActive ? 'text-[#005EB8]' : 'text-gray-500'}`}>
                     <Icon className="w-[22px] h-[22px]" strokeWidth={isActive ? 2.2 : 1.8} />
                   </div>
-                  <span className="text-[10px] leading-tight text-center whitespace-pre-line font-medium">
+                  <span className="text-[10px] leading-tight text-center font-medium">
                     {label}
                   </span>
                 </>

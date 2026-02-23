@@ -32,6 +32,8 @@ import PayTransfer from './pages/PayTransfer';
 import Discover from './pages/Discover';
 import PlanTrack from './pages/PlanTrack';
 import Secure from './pages/Secure';
+import Benefits from './pages/Benefits';
+import More from './pages/More';
 import Notifications from './pages/Notifications';
 import MobileLayout from './components/MobileLayout';
 
@@ -79,6 +81,8 @@ function AppRoutes() {
                 <Route path="/discover" element={<Discover />} />
                 <Route path="/plan-track" element={<PlanTrack />} />
                 <Route path="/secure" element={<Secure />} />
+                <Route path="/benefits" element={<Benefits />} />
+                <Route path="/more" element={<More />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/business" element={<Business />} />
                 <Route path="/accounts" element={<Accounts />} />
