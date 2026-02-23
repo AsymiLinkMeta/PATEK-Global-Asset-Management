@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { Plus, ChevronRight, ChevronDown, X, User, AlertCircle, CreditCard, CheckCircle2, MoreHorizontal } from 'lucide-react';
+import { Plus, ChevronRight, X, User, AlertCircle, CreditCard, CheckCircle2, MoreHorizontal, PiggyBank, Users, Briefcase } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 
 const formatCurrency = (amount: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
 
+const getCardImage = (name: string) => {
+  if (name.includes('FREEDOM')) return '/freedom_unlimited-removebg-preview_(1).png';
+  if (name.includes('PREFERRED')) return '/chase-sapphire-preferred-lead-removebg-preview_(1).png';
+  if (name.includes('RESERVE')) return '/chase_sapphire_reserve_06_24_25-removebg-preview_(1).png';
+  return null;
+};
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const { accounts, profile } = useData();
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
-  const [bankAccountsExpanded, setBankAccountsExpanded] = useState(false);
-  const [creditCardsExpanded, setCreditCardsExpanded] = useState(false);
   const [showCardAlert, setShowCardAlert] = useState(true);
 
   const bankAccounts = accounts.filter(a => a.account_type === 'checking' || a.account_type === 'savings');
@@ -29,14 +34,19 @@ export default function Dashboard() {
               </div>
             </div>
           </button>
-          <ChaseLogoIcon />
+          <img src="/chase-bank.jpg" alt="Chase" className="h-12 w-12 rounded-lg" />
           <Link to="/profile" className="w-9 h-9 rounded-full border-2 border-gray-400 flex items-center justify-center">
             <User className="w-5 h-5 text-gray-500" />
           </Link>
         </div>
 
         <div className="flex items-center justify-center mb-5">
-          <div className="relative bg-gray-200 rounded-full p-0.5 flex">
+          <div className="relative bg-gray-200 rounded-full p-1">
+            <div
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full transition-all duration-300 ease-in-out shadow-sm ${
+                accountType === 'personal' ? 'left-1' : 'left-[calc(50%+2px)]'
+              }`}
+            />
             <button
               onClick={() => setAccountType('personal')}
               className={`relative z-10 px-7 py-2 rounded-full text-sm font-medium transition-colors ${
@@ -47,9 +57,7 @@ export default function Dashboard() {
             </button>
             <button
               onClick={() => navigate('/business')}
-              className={`relative z-10 px-7 py-2 rounded-full text-sm font-medium transition-colors ${
-                accountType === 'business' ? 'bg-gray-600 text-white' : 'bg-gray-500 text-white'
-              }`}
+              className="relative z-10 px-7 py-2 rounded-full text-sm font-medium transition-colors text-gray-500"
             >
               Business
             </button>
@@ -67,7 +75,7 @@ export default function Dashboard() {
             to="/zelle"
             className="flex-shrink-0 px-4 py-2 border border-gray-300 rounded-full whitespace-nowrap"
           >
-            <span className="text-sm font-medium text-[#005EB8]">Send | Zelle®</span>
+            <span className="text-sm font-medium text-[#005EB8]">Send | Zelle&reg;</span>
           </Link>
           <Link
             to="/deposit-check"
@@ -152,97 +160,76 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <button
-              onClick={() => setBankAccountsExpanded(!bankAccountsExpanded)}
-              className={`w-full flex items-center justify-between p-4 transition-colors ${
-                bankAccountsExpanded
-                  ? 'bg-[#005EB8] text-white'
-                  : ''
-              }`}
-            >
-              <span className={`font-medium ${bankAccountsExpanded ? 'text-white' : 'text-gray-900'}`}>
+            <div className="bg-[#005EB8] px-4 py-3">
+              <span className="font-medium text-white">
                 Bank accounts ({bankAccounts.length})
               </span>
-              {bankAccountsExpanded ? (
-                <ChevronDown className="w-5 h-5 text-white" />
-              ) : null}
-            </button>
+            </div>
 
-            {bankAccountsExpanded && (
-              <div>
-                {bankAccounts.map((account, index) => (
-                  <Link
-                    key={account.id}
-                    to={`/account/${account.account_number}`}
-                    className={`block p-4 hover:bg-gray-50 transition-colors ${
-                      index < bankAccounts.length - 1 ? 'border-b border-gray-100' : ''
-                    }`}
-                  >
-                    <p className="text-sm text-gray-800 mb-3">
-                      {account.account_name} (...{account.account_number}) <span className="text-gray-400">&#9654;</span>
-                    </p>
-                    <div className="text-right">
-                      <p className="balance-display">{formatCurrency(account.balance)}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">Available balance</p>
-                    </div>
-                  </Link>
-                ))}
+            {bankAccounts.map((account, index) => (
+              <Link
+                key={account.id}
+                to={`/account/${account.account_number}`}
+                className={`block p-4 hover:bg-gray-50 transition-colors ${
+                  index < bankAccounts.length - 1 ? 'border-b border-gray-100' : ''
+                }`}
+              >
+                <p className="text-sm text-gray-800 mb-3">
+                  {account.account_name} (...{account.account_number}) <span className="text-gray-400">&#9654;</span>
+                </p>
+                <div className="text-right">
+                  <p className="balance-display">{formatCurrency(account.balance)}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Available balance</p>
+                </div>
+              </Link>
+            ))}
+
+            <div className="border-t border-gray-200">
+              <div className="bg-[#005EB8] px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-amber-300" />
+                  <span className="font-medium text-white">
+                    Credit cards ({creditCards.length})
+                  </span>
+                </div>
               </div>
-            )}
 
-            <button
-              onClick={() => setCreditCardsExpanded(!creditCardsExpanded)}
-              className={`w-full flex items-center justify-between p-4 transition-colors border-t border-gray-200 ${
-                creditCardsExpanded
-                  ? 'bg-[#005EB8] text-white'
-                  : ''
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                {!creditCardsExpanded && (
-                  <AlertCircle className="w-5 h-5 text-amber-500" />
-                )}
-                <span className={`font-medium ${creditCardsExpanded ? 'text-white' : 'text-gray-900'}`}>
-                  Credit cards ({creditCards.length})
-                </span>
-              </div>
-              {creditCardsExpanded ? (
-                <ChevronDown className="w-5 h-5 text-white" />
-              ) : null}
-            </button>
-
-            {creditCardsExpanded && (
-              <div>
-                {creditCards.map((card) => (
+              {creditCards.map((card) => {
+                const cardImg = getCardImage(card.account_name);
+                return (
                   <Link
                     key={card.id}
                     to={`/account/${card.account_number}`}
-                    className="block p-4 hover:bg-gray-50 transition-colors"
+                    className="block p-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
                   >
                     <p className="text-sm text-gray-800 mb-3">
                       {card.account_name.charAt(0) + card.account_name.slice(1).toLowerCase()} (...{card.account_number}) <span className="text-gray-400">&#9654;</span>
                     </p>
                     <div className="flex items-center gap-4">
-                      <img
-                        src="/freedom_unlimited-removebg-preview_(1).png"
-                        alt={card.account_name}
-                        className="w-28 h-[70px] object-contain"
-                      />
+                      {cardImg && (
+                        <img
+                          src={cardImg}
+                          alt={card.account_name}
+                          className="w-28 h-[70px] object-contain"
+                        />
+                      )}
                       <div className="flex-1 text-right">
                         <p className="balance-display">{formatCurrency(card.balance)}</p>
                         <p className="text-xs text-gray-500 mt-0.5">Current balance</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2 mt-3">
-                      <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-sm text-teal-700">
-                        You've scheduled {formatCurrency(card.balance)} to be paid on Feb 21, 2026.
-                      </p>
-                    </div>
+                    {card.payment_due_date && (
+                      <div className="flex items-start gap-2 mt-3">
+                        <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-teal-700">
+                          You've scheduled {formatCurrency(card.minimum_payment)} to be paid on {new Date(card.payment_due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.
+                        </p>
+                      </div>
+                    )}
                   </Link>
-                ))}
-              </div>
-            )}
+                );
+              })}
+            </div>
 
             <Link
               to="/accounts"
@@ -257,11 +244,11 @@ export default function Dashboard() {
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Explore more products</h2>
           <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-3 -mx-5 px-5">
-            <ProductCard icon={<CreditCardIcon />} label="Credit cards" />
-            <ProductCard icon={<CheckingIcon />} label="Checking" />
-            <ProductCard icon={<SavingsIcon />} label="Savings & CDs" />
-            <ProductCard icon={<AdvisorsIcon />} label="Work with our advisors" />
-            <ProductCard icon={<BusinessIcon />} label="Business" />
+            <ProductCard icon={<CreditCard className="w-6 h-6 text-[#005EB8]" />} label="Credit cards" />
+            <ProductCard icon={<CreditCard className="w-6 h-6 text-[#0097a7]" />} label="Checking" />
+            <ProductCard icon={<PiggyBank className="w-6 h-6 text-[#005EB8]" />} label="Savings & CDs" />
+            <ProductCard icon={<Users className="w-6 h-6 text-[#005EB8]" />} label="Work with our advisors" />
+            <ProductCard icon={<Briefcase className="w-6 h-6 text-[#005EB8]" />} label="Business" />
           </div>
           <div className="flex justify-center mt-3">
             <Link
@@ -274,7 +261,7 @@ export default function Dashboard() {
         </div>
 
         <Link to="/rewards" className="block bg-white rounded-xl border border-gray-200 p-5 mb-6">
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Ultimate Rewards®</h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-4">Ultimate Rewards&reg;</h2>
           <div className="flex mb-5">
             <div className="flex-1">
               <p className="text-3xl font-bold text-gray-900 mb-0.5">
@@ -309,20 +296,17 @@ export default function Dashboard() {
           <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-3 -mx-5 px-5">
             <OfferCard
               image="https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=400&h=300&fit=crop"
-              logo="https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=80&h=80&fit=crop"
               name="Cumberland Farms"
               subtitle="Pay-at-Pump"
               cashBack="5% cash back"
             />
             <OfferCard
               image="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop"
-              logo="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=80&h=80&fit=crop"
               name="Lululemon"
               cashBack="10% back"
             />
             <OfferCard
               image="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop"
-              logo="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=80&h=80&fit=crop"
               name="Little Caesars"
               cashBack="10% cash back"
             />
@@ -343,7 +327,7 @@ export default function Dashboard() {
             <div className="flex-1">
               <h2 className="text-lg font-bold text-white mb-2">See your free credit score</h2>
               <p className="text-blue-100 text-sm leading-relaxed">
-                Get credit and identity monitoring with Chase Credit Journey®.
+                Get credit and identity monitoring with Chase Credit Journey&reg;.
               </p>
             </div>
             <div className="flex-shrink-0">
@@ -382,21 +366,10 @@ export default function Dashboard() {
   );
 }
 
-function ChaseLogoIcon() {
-  return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-      <path d="M20 2L8 14h10V2z" fill="#005EB8" />
-      <path d="M38 20L26 8v10h12z" fill="#005EB8" />
-      <path d="M20 38l12-12H22v12z" fill="#005EB8" />
-      <path d="M2 20l12 12V22H2z" fill="#005EB8" />
-    </svg>
-  );
-}
-
 function ProductCard({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
     <div className="flex-shrink-0 w-[100px] bg-white rounded-xl border border-gray-200 p-3 flex flex-col items-center">
-      <div className="w-12 h-12 flex items-center justify-center mb-2">
+      <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-2">
         {icon}
       </div>
       <p className="text-xs font-medium text-gray-800 text-center leading-tight">{label}</p>
@@ -404,66 +377,8 @@ function ProductCard({ icon, label }: { icon: React.ReactNode; label: string }) 
   );
 }
 
-function CreditCardIcon() {
-  return (
-    <svg width="40" height="32" viewBox="0 0 40 32" fill="none">
-      <rect x="1" y="1" width="38" height="30" rx="4" fill="#005EB8" />
-      <rect x="5" y="7" width="12" height="8" rx="1" fill="#f59e0b" />
-      <rect x="1" y="14" width="38" height="4" fill="#003d7a" />
-    </svg>
-  );
-}
-
-function CheckingIcon() {
-  return (
-    <svg width="40" height="32" viewBox="0 0 40 32" fill="none">
-      <rect x="1" y="1" width="38" height="30" rx="4" fill="#0097a7" />
-      <rect x="5" y="9" width="20" height="3" rx="1" fill="white" opacity="0.7" />
-      <rect x="5" y="15" width="15" height="3" rx="1" fill="white" opacity="0.5" />
-      <rect x="5" y="21" width="25" height="3" rx="1" fill="white" opacity="0.3" />
-    </svg>
-  );
-}
-
-function SavingsIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <ellipse cx="18" cy="24" rx="12" ry="6" fill="#f9a8d4" />
-      <ellipse cx="18" cy="18" rx="10" ry="10" fill="#f472b6" />
-      <circle cx="14" cy="16" r="1.5" fill="#be185d" />
-      <ellipse cx="22" cy="12" rx="3" ry="5" fill="#f9a8d4" transform="rotate(-20 22 12)" />
-      <circle cx="18" cy="8" r="2" fill="#fbbf24" />
-    </svg>
-  );
-}
-
-function AdvisorsIcon() {
-  return (
-    <svg width="40" height="36" viewBox="0 0 40 36" fill="none">
-      <circle cx="14" cy="12" r="5" fill="#0097a7" />
-      <circle cx="26" cy="12" r="5" fill="#005EB8" />
-      <ellipse cx="14" cy="30" rx="8" ry="6" fill="#0097a7" />
-      <ellipse cx="26" cy="30" rx="8" ry="6" fill="#005EB8" />
-      <rect x="10" y="28" width="20" height="4" fill="#4caf50" />
-    </svg>
-  );
-}
-
-function BusinessIcon() {
-  return (
-    <svg width="32" height="36" viewBox="0 0 32 36" fill="none">
-      <rect x="2" y="10" width="28" height="24" rx="2" fill="#005EB8" />
-      <rect x="8" y="4" width="16" height="8" rx="2" fill="#003d7a" />
-      <rect x="12" y="2" width="8" height="4" rx="1" fill="#005EB8" />
-      <circle cx="16" cy="22" r="3" fill="#fbbf24" />
-      <rect x="14" y="22" width="4" height="6" fill="#fbbf24" />
-    </svg>
-  );
-}
-
 interface OfferCardProps {
   image: string;
-  logo: string;
   name: string;
   subtitle?: string;
   cashBack: string;

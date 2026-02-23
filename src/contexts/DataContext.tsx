@@ -28,7 +28,7 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'chase-app-data-v2';
+const STORAGE_KEY = 'chase-app-data-v3';
 
 function loadFromStorage() {
   try {
