@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, ChevronRight, X, User, AlertCircle, CreditCard, CheckCircle2, MoreHorizontal, PiggyBank, Users, Briefcase } from 'lucide-react';
+import { Plus, ChevronRight, ChevronDown, X, User, AlertCircle, CreditCard, CheckCircle2, MoreHorizontal, PiggyBank, Users, Briefcase } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 
@@ -18,6 +18,8 @@ export default function Dashboard() {
   const { accounts, profile } = useData();
   const [accountType, setAccountType] = useState<'personal' | 'business'>('personal');
   const [showCardAlert, setShowCardAlert] = useState(true);
+  const [expandedBank, setExpandedBank] = useState(false);
+  const [expandedCredit, setExpandedCredit] = useState(false);
 
   const bankAccounts = accounts.filter(a => a.account_type === 'checking' || a.account_type === 'savings');
   const creditCards = accounts.filter(a => a.account_type === 'credit');
@@ -159,81 +161,112 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="bg-[#005EB8] px-4 py-3">
-              <span className="font-medium text-white">
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-4">
+            <button
+              onClick={() => setExpandedBank(!expandedBank)}
+              className={`w-full flex items-center justify-between px-4 py-3 transition-colors ${
+                expandedBank ? 'bg-[#005EB8]' : 'hover:bg-gray-50'
+              }`}
+            >
+              <span className={`font-medium ${expandedBank ? 'text-white' : 'text-gray-900'}`}>
                 Bank accounts ({bankAccounts.length})
               </span>
-            </div>
+              {expandedBank ? (
+                <ChevronDown className="w-5 h-5 text-white" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
 
-            {bankAccounts.map((account, index) => (
-              <Link
-                key={account.id}
-                to={`/account/${account.account_number}`}
-                className={`block p-4 hover:bg-gray-50 transition-colors ${
-                  index < bankAccounts.length - 1 ? 'border-b border-gray-100' : ''
-                }`}
-              >
-                <p className="text-sm text-gray-800 mb-3">
-                  {account.account_name} (...{account.account_number}) <span className="text-gray-400">&#9654;</span>
-                </p>
-                <div className="text-right">
-                  <p className="balance-display">{formatCurrency(account.balance)}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">Available balance</p>
-                </div>
-              </Link>
-            ))}
-
-            <div className="border-t border-gray-200">
-              <div className="bg-[#005EB8] px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5 text-amber-300" />
-                  <span className="font-medium text-white">
-                    Credit cards ({creditCards.length})
-                  </span>
-                </div>
-              </div>
-
-              {creditCards.map((card) => {
-                const cardImg = getCardImage(card.account_name);
-                return (
+            {expandedBank && (
+              <div className="border-t border-gray-200">
+                {bankAccounts.map((account, index) => (
                   <Link
-                    key={card.id}
-                    to={`/account/${card.account_number}`}
-                    className="block p-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                    key={account.id}
+                    to={`/account/${account.account_number}`}
+                    className={`block p-4 hover:bg-gray-50 transition-colors ${
+                      index < bankAccounts.length - 1 ? 'border-b border-gray-100' : ''
+                    }`}
                   >
                     <p className="text-sm text-gray-800 mb-3">
-                      {card.account_name.charAt(0) + card.account_name.slice(1).toLowerCase()} (...{card.account_number}) <span className="text-gray-400">&#9654;</span>
+                      {account.account_name} (...{account.account_number}) <span className="text-gray-400">&#9654;</span>
                     </p>
-                    <div className="flex items-center gap-4">
-                      {cardImg && (
-                        <img
-                          src={cardImg}
-                          alt={card.account_name}
-                          className="w-28 h-[70px] object-contain"
-                        />
-                      )}
-                      <div className="flex-1 text-right">
-                        <p className="balance-display">{formatCurrency(card.balance)}</p>
-                        <p className="text-xs text-gray-500 mt-0.5">Current balance</p>
-                      </div>
+                    <div className="text-right">
+                      <p className="balance-display">{formatCurrency(account.balance)}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">Available balance</p>
                     </div>
-                    {card.payment_due_date && (
-                      <div className="flex items-start gap-2 mt-3">
-                        <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" />
-                        <p className="text-sm text-teal-700">
-                          You've scheduled {formatCurrency(card.minimum_payment)} to be paid on {new Date(card.payment_due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.
-                        </p>
-                      </div>
-                    )}
                   </Link>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            )}
+          </div>
 
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-4">
+            <button
+              onClick={() => setExpandedCredit(!expandedCredit)}
+              className={`w-full flex items-center justify-between px-4 py-3 transition-colors ${
+                expandedCredit ? 'bg-[#005EB8]' : 'hover:bg-gray-50'
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                {!expandedCredit && <AlertCircle className="w-5 h-5 text-amber-500" />}
+                {expandedCredit && <AlertCircle className="w-5 h-5 text-amber-300" />}
+                <span className={`font-medium ${expandedCredit ? 'text-white' : 'text-gray-900'}`}>
+                  Credit cards ({creditCards.length})
+                </span>
+              </div>
+              {expandedCredit ? (
+                <ChevronDown className="w-5 h-5 text-white" />
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
+            </button>
+
+            {expandedCredit && (
+              <div className="border-t border-gray-200">
+                {creditCards.map((card) => {
+                  const cardImg = getCardImage(card.account_name);
+                  return (
+                    <Link
+                      key={card.id}
+                      to={`/account/${card.account_number}`}
+                      className="block p-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                    >
+                      <p className="text-sm text-gray-800 mb-3">
+                        {card.account_name.charAt(0) + card.account_name.slice(1).toLowerCase()} (...{card.account_number}) <span className="text-gray-400">&#9654;</span>
+                      </p>
+                      <div className="flex items-center gap-4">
+                        {cardImg && (
+                          <img
+                            src={cardImg}
+                            alt={card.account_name}
+                            className="w-28 h-[70px] object-contain"
+                          />
+                        )}
+                        <div className="flex-1 text-right">
+                          <p className="balance-display">{formatCurrency(card.balance)}</p>
+                          <p className="text-xs text-gray-500 mt-0.5">Current balance</p>
+                        </div>
+                      </div>
+                      {card.payment_due_date && (
+                        <div className="flex items-start gap-2 mt-3">
+                          <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" />
+                          <p className="text-sm text-teal-700">
+                            You've scheduled {formatCurrency(card.minimum_payment)} to be paid on {new Date(card.payment_due_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.
+                          </p>
+                        </div>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
             <Link
               to="/accounts"
-              className="flex items-center justify-between p-4 border-t border-gray-200 hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
             >
               <span className="text-gray-900 font-medium">Link external accounts</span>
               <ChevronRight className="w-5 h-5 text-gray-400" />

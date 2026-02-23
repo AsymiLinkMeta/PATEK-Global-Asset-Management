@@ -138,7 +138,7 @@ export default function Business() {
               onClick={() => setExpandedPatek(!expandedPatek)}
               className={`w-full flex items-center justify-between p-4 transition-colors ${
                 expandedPatek
-                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
+                  ? 'bg-[#005EB8] text-white'
                   : 'hover:bg-gray-50'
               }`}
             >
@@ -187,7 +187,7 @@ export default function Business() {
               onClick={() => setExpandedAssymilink(!expandedAssymilink)}
               className={`w-full flex items-center justify-between p-4 transition-colors ${
                 expandedAssymilink
-                  ? 'bg-gradient-to-br from-[#005EB8] to-primary-500 text-white'
+                  ? 'bg-[#005EB8] text-white'
                   : 'hover:bg-gray-50'
               }`}
             >
